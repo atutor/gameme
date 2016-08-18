@@ -42,6 +42,7 @@ https://github.com/atutor/gamify
 * 10+ blog posts
 * Complete(ish) Profile
 * Photo album (10+ photos)
+
 #### Advance through levels with course participation
 * logins
 * forum views
@@ -65,8 +66,10 @@ https://github.com/atutor/gamify
 * files downloaded from file storage
 * files uploaded to file storage
 * new file created with file storage
+
 #### See who are the most active, and most accomplished
 * leaderboard showing the top contributors (sidemenu)
+
 #### Monitor personal activity and accomplishments (sidemenu)
 * numbers displayed the available activities and accomplishments (profile page)
 * badges collected.
