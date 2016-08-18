@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<module version="0.1"> 
+    <name lang="en">Gamify</name> 
+    <description lang="en">Integrates PHPGamification into ATutor, to add various gamification tools.</description> 
+    <maintainers>
+        <maintainer> 
+            <name>ATutor Team</name> 
+            <email>info@atutor.ca</email> 
+        </maintainer>
+    </maintainers> 
+    <url>http://atutor.ca</url> 
+    <license>BSD</license> 
+	<release> 
+        <version>0.9</version> 
+        <date>2016-28-08</date> 
+        <state>development</state> 
+        <notes>Requires Composer: https://getcomposer.org/download/</notes> 
+    </release> 
+</module>
