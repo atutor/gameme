@@ -13,6 +13,7 @@ class UserEvent extends Entity
 {
     protected $idUser;
     protected $idEvent;
+    protected $courseId;
     protected $eventCounter = 0;
     protected $pointsCounter = 0;
 
@@ -47,7 +48,10 @@ class UserEvent extends Entity
     {
         return $this->idEvent;
     }
-
+     public function getCourseId()
+    {
+        return $this->courseId;
+    }
     public function getIdUser()
     {
         return $this->idUser;

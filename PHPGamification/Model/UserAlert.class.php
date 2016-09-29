@@ -16,6 +16,7 @@ class UserAlert extends Entity
     protected $idUser;
     protected $idBadge;
     protected $idLevel;
+    protected $courseId;
 
     function __construct($stdClass = null)
     {
@@ -41,7 +42,11 @@ class UserAlert extends Entity
     {
         return $this->idBadge;
     }
-
+    
+     public function getCourseId()
+    {
+        return $this->courseId;
+    }
     /**
      * @return Badge
      * @throws \Exception

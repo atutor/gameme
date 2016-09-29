@@ -12,6 +12,7 @@ namespace gamify\PHPGamification\Model;
 class UserScore extends Entity
 {
     protected $idUser;
+    protected $courseId;
     protected $points = 0;
     protected $idLevel = 1;
     protected $progress;
@@ -41,7 +42,10 @@ class UserScore extends Entity
     {
         return $this->idLevel;
     }
-
+     public function getCourseId()
+    {
+        return $this->courseId;
+    }
     function __construct($stdClass = null)
     {
         if ($stdClass)

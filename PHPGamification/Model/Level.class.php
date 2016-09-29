@@ -14,6 +14,7 @@ class Level extends Entity
     protected $points;
     protected $title;
     protected $description;
+    protected $icon;
 
     public function getPoints()
     {
@@ -34,5 +35,9 @@ class Level extends Entity
     public function getTitle()
     {
         return $this->title;
+    }
+    public function getIcon()
+    {
+        return $this->icon;
     }
 }

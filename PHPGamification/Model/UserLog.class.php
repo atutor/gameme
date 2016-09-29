@@ -14,6 +14,7 @@ use gamify\PHPGamification;
 class UserLog extends Entity
 {
     protected $idUser;
+    protected $courseId;
     protected $idEvent;
     protected $eventDate;
     protected $idBadge;
@@ -59,7 +60,10 @@ class UserLog extends Entity
     {
         return $this->idBadge;
     }
-
+     public function getCourseId()
+    {
+        return $this->courseId;
+    }
     public function getBadge()
     {
         return PHPGamification::getInstance()->getBadge($this->idBadge);

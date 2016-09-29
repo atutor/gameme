@@ -53,7 +53,7 @@ class DAO implements DAOInterface
     {
 //        echo "<br><b>$sql</b><br>";echo print_r($params);
         /** @var PDOStatement $stmt */
-        print_r($params);
+        //print_r($params);
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute($params);
     }
@@ -255,11 +255,12 @@ class DAO implements DAOInterface
      */
     public function saveEvent(Event $event)
     {
-        $sql = 'INSERT INTO '.TABLE_PREFIX.'gm_events
-                (alias, description, allow_repetitions, reach_required_repetitions, id_each_badge, id_reach_badge, each_points, max_points, each_callback, reach_callback)
+        $sql = 'REPLACE INTO '.TABLE_PREFIX.'gm_events
+                (id, alias, description, allow_repetitions, reach_required_repetitions, id_each_badge, id_reach_badge, each_points, max_points, each_callback, reach_callback)
                 VALUES
-                (:alias, :description, :allow_repetitions, :reach_required_repetitions, :id_each_badge, :id_reach_badge, :each_points, :max_points, :each_callback, :reach_callback)';
+                (:id, :alias, :description, :allow_repetitions, :reach_required_repetitions, :id_each_badge, :id_reach_badge, :each_points, :max_points, :each_callback, :reach_callback)';
         $params = array(
+            ':id' => $event->getId(),
             ':alias' => $event->getAlias(),
             ':description' => $event->getDescription(),
             ':allow_repetitions' => $event->getAllowRepetitions(),
@@ -307,22 +308,24 @@ class DAO implements DAOInterface
     public function getEvents()
     {
         $sql = 'SELECT * FROM '.TABLE_PREFIX.'gm_events ';
-        $result = $this->query($sql);
+        $result = $this->query($sql, $param);
         if ($result)
             return $this->toArrayObject($result, 'Event', 'alias');
     }
 
     public function getUserAlerts($userId, $resetAlerts = false)
     {
-        $sql = 'SELECT id_user, id_badge, id_level FROM '.TABLE_PREFIX.'gm_user_alerts WHERE id_user = :uid';
+        $sql = 'SELECT id_user, id_badge, id_level FROM '.TABLE_PREFIX.'gm_user_alerts WHERE id_user = :uid AND course_id = :cid';
         $params = array(
-            ':uid' => $userId
+            ':uid' => $userId,
+            ':cid' => $_SESSION['course_id']
         );
         $result = $this->query($sql, $params);
         if ($result && $resetAlerts) {
-            $sql = 'DELETE FROM '.TABLE_PREFIX.'gm_user_alerts WHERE id_user = :uid';
+            $sql = 'DELETE FROM '.TABLE_PREFIX.'gm_user_alerts WHERE id_user = :uid AND course_id = :cid';
             $params = array(
-                ':uid' => $userId
+                ':uid' => $userId,
+                ':cid' => $_SESSION['course_id']
             );
             $this->execute($sql, $params);
         }
@@ -333,9 +336,10 @@ class DAO implements DAOInterface
 
     public function getUserBadges($userId)
     {
-        $sql = 'SELECT * FROM '.TABLE_PREFIX.'gm_user_badges WHERE id_user = :uid';
+        $sql = 'SELECT * FROM '.TABLE_PREFIX.'gm_user_badges WHERE id_user = :uid AND course_id = :cid';
         $params = array(
-            ':uid' => $userId
+            ':uid' => $userId,
+            ':cid' => $_SESSION['course_id']
         );
         $result = $this->query($sql, $params);
 
@@ -345,9 +349,10 @@ class DAO implements DAOInterface
 
     public function getUserEvents($userId)
     {
-        $sql = 'SELECT * FROM '.TABLE_PREFIX.'gm_user_events WHERE id_user = :uid ';
+        $sql = 'SELECT * FROM '.TABLE_PREFIX.'gm_user_events WHERE id_user = :uid AND course_id = :cid';
         $params = array(
-            ':uid' => $userId
+            ':uid' => $userId,
+            ':cid' => $_SESSION['course_id']
         );
         $result = $this->query($sql, $params);
         if ($result)
@@ -356,9 +361,15 @@ class DAO implements DAOInterface
 
     public function getUserLog($userId)
     {
-        $sql = 'SELECT * FROM '.TABLE_PREFIX.'gm_user_logs WHERE id_user = :uid ORDER BY event_date DESC';
+        $sql = 'SELECT * FROM '.TABLE_PREFIX.'gm_user_logs WHERE id_user = :uid AND course_id = :cid ORDER BY event_date DESC';
+        if($_SESSION['course_id'] == 0){
+            $this_cid = 0;
+        }else{
+            $this_cid = $_SESSION['course_id'];
+        }
         $params = array(
-            ':uid' => $userId
+            ':uid' => $userId,
+            ':cid' => $this_cid
         );
         $result = $this->query($sql, $params);
         if ($result)
@@ -367,10 +378,11 @@ class DAO implements DAOInterface
 
     public function getUserEvent($userId, $eventId)
     {
-        $sql = 'SELECT * FROM '.TABLE_PREFIX.'gm_user_events WHERE id_user = :uid AND id_event = :eid LIMIT 1';
+        $sql = 'SELECT * FROM '.TABLE_PREFIX.'gm_user_events WHERE id_user = :uid AND id_event = :eid  AND course_id = :cid LIMIT 1';
         $params = array(
             ':uid' => $userId,
-            ':eid' => $eventId
+            ':eid' => $eventId,
+            ':cid' => $_SESSION['course_id']
         );
         $result = $this->query($sql, $params);
         if ($result)
@@ -389,14 +401,12 @@ class DAO implements DAOInterface
     {
         $sql = 'SELECT *
                 FROM '.TABLE_PREFIX.'gm_user_scores
-                WHERE id_user = :uid';
+                WHERE id_user = :uid and course_id = :cid';
         $params = array(
-            ':uid' => $userId
+            ':uid' => $userId,
+            ':cid' => $_SESSION['course_id']
         );
         $result = $this->query($sql, $params);
-//        echo "GetUserScore:<br>";var_dump($result);
-//        echo "<br><br>";
-//        die();
         if ($result)
             return new UserScore($result[0]);
         else {
@@ -414,19 +424,25 @@ class DAO implements DAOInterface
     {
         $sql = 'SELECT *
                 FROM '.TABLE_PREFIX.'gm_user_scores
-                ORDER BY points DESC, id_user ASC
-                LIMIT ' . $limit;
-        $result = $this->query($sql);
+                WHERE course_id = :cid ORDER BY points DESC, id_user ASC
+                LIMIT ' . $limit;         
+        $params = array(
+            ':cid' => $_SESSION['course_id']
+        );
+        $result = $this->query($sql, $params);
+        //debug();
         if ($result)
-            return $this->toArrayObject($result, 'UserScore');
+            return $result;
+            //return $this->toArrayObject($result, 'UserScore');
     }
 
     public function grantBadgeToUser($userId, $badgeId)
     {
-        $sql = 'INSERT INTO '.TABLE_PREFIX.'gm_user_badges (id_user, id_badge, badges_counter, grant_date) VALUES (:uid, :bid, 1, UTC_TIMESTAMP()) ON DUPLICATE KEY UPDATE badges_counter = badges_counter + 1';
+        $sql = 'INSERT INTO '.TABLE_PREFIX.'gm_user_badges (id_user, id_badge, badges_counter, grant_date, course_id) VALUES (:uid, :bid, 1, UTC_TIMESTAMP(), :cid) ON DUPLICATE KEY UPDATE badges_counter = badges_counter + 1';
         $params = array(
             ':uid' => $userId,
-            ':bid' => $badgeId
+            ':bid' => $badgeId,
+            ':cid' => $_SESSION['course_id']
         );
         $this->execute($sql, $params);
         return true;
@@ -436,10 +452,11 @@ class DAO implements DAOInterface
     {
         $sql = 'SELECT coalesce(count(*),0) AS count
                 FROM '.TABLE_PREFIX.'gm_user_badges
-                WHERE id_user=:uid AND id_badge=:bid';
+                WHERE id_user=:uid AND id_badge=:bid AND course_id=:cid' ;
         $params = array(
             ':uid' => $userId,
-            ':bid' => $badgeId
+            ':bid' => $badgeId,
+            ':cid' => $_SESSION['course_id']
         );
         $r = $this->query($sql, $params);
         return $r[0]->count > 0;
@@ -449,10 +466,11 @@ class DAO implements DAOInterface
     {
         $sql = 'UPDATE '.TABLE_PREFIX.'gm_user_scores
                 SET id_level = :lid
-                WHERE id_user = :uid';
+                WHERE id_user = :uid AND course_id = :cid';
         $params = array(
             ':uid' => $userId,
-            ':lid' => $levelId
+            ':lid' => $levelId,
+            ':cid' => $_SESSION['course_id']
         );
         if ($levelId == 0) die ("00");
         return $this->execute($sql, $params);
@@ -461,14 +479,15 @@ class DAO implements DAOInterface
     public function grantPointsToUser($userId, $points)
     {
         $sql = 'INSERT INTO '.TABLE_PREFIX.'gm_user_scores
-                (id_user, points, id_level)
+                (id_user, points, id_level, course_id)
                 VALUES
-                (:uid, :p, :firstlevel)
+                (:uid, :p, :firstlevel, :cid)
                 ON DUPLICATE KEY UPDATE points = points + :p';
         $params = array(
             ':uid' => $userId,
             ':p' => $points,
-            ':firstlevel' => 1
+            ':firstlevel' => 1,
+            ':cid' => $_SESSION['course_id']
         );
         return $this->execute($sql, $params);
     }
@@ -476,16 +495,17 @@ class DAO implements DAOInterface
     public function logUserEvent($userId, $eventId, $points = null, $badgeId = null, $levelId = null, $eventDate = null)
     {
         $sql = 'INSERT INTO '.TABLE_PREFIX.'gm_user_logs
-                (id_user, id_event, event_date, points, id_badge, id_level)
+                (id_user, id_event, event_date, points, id_badge, id_level, course_id)
                 VALUES
-                (:uid, :eid, :edate, :p, :bid, :lid)';
+                (:uid, :eid, :edate, :p, :bid, :lid, :cid)';
         $params = array(
             ':uid' => $userId,
             ':eid' => $eventId,
             ':p' => $points,
             ':bid' => $badgeId,
             ':lid' => $levelId,
-            ':edate' => ($eventDate ? $eventDate : date("Y-m-d H:i:s",time()))
+            ':edate' => ($eventDate ? $eventDate : date("Y-m-d H:i:s",time())),
+            ':cid' => $_SESSION['course_id']
         );
         return $this->execute($sql, $params);
     }
@@ -499,13 +519,14 @@ class DAO implements DAOInterface
     public function increaseEventCounter($userId, $eventId)
     {
         $sql = 'INSERT INTO '.TABLE_PREFIX.'gm_user_events
-                (id_user, id_event, event_counter)
+                (id_user, id_event, event_counter, course_id)
                 VALUES
-                (:uid, :eid, 1)
+                (:uid, :eid, 1, :cid)
                 ON DUPLICATE KEY UPDATE event_counter = event_counter + 1';
         $params = array(
             ':uid' => $userId,
-            ':eid' => $eventId
+            ':eid' => $eventId,
+            ':cid' => $_SESSION['course_id']
         );
         return $this->execute($sql, $params);
     }
@@ -514,11 +535,12 @@ class DAO implements DAOInterface
     {
         $sql = 'UPDATE '.TABLE_PREFIX.'gm_user_events
                 SET points_counter = points_counter + :c
-                WHERE id_user = :uid AND id_event = :eid';
+                WHERE id_user = :uid AND id_event = :eid AND course_id = :cid';
         $params = array(
             ':c' => $points,
             ':uid' => $userId,
-            ':eid' => $eventId
+            ':eid' => $eventId,
+            ':cid' => $_SESSION['course_id']
         );
         return $this->execute($sql, $params);
     }
@@ -528,12 +550,13 @@ class DAO implements DAOInterface
     {
         // echo "User: $userId - badge: $badgeId<br>";
         $sql = 'INSERT INTO '.TABLE_PREFIX.'gm_user_alerts
-                (id_user, id_badge, id_level)
+                (id_user, id_badge, id_level, course_id)
                 VALUES
-                (:uid, :bid, NULL)';
+                (:uid, :bid, NULL, :cid)';
         $params = array(
             ':uid' => $userId,
-            ':bid' => $badgeId
+            ':bid' => $badgeId,
+            ':cid' => $badgeId
         );
         $this->execute($sql, $params);
         return true;
@@ -542,12 +565,13 @@ class DAO implements DAOInterface
     public function saveLevelAlert($userId, $levelId)
     {
         $sql = 'INSERT INTO '.TABLE_PREFIX.'gm_user_alerts
-                (id_user, id_badge, id_level)
+                (id_user, id_badge, id_level, course_id)
                 VALUES
-                (:uid, NULL, :lid)';
+                (:uid, NULL, :lid, :cid)';
         $params = array(
             ':uid' => $userId,
-            ':lid' => $levelId
+            ':lid' => $levelId,
+            ':cid' => $_SESSION['course_id']
         );
         return $this->execute($sql, $params);
     }

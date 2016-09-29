@@ -14,6 +14,7 @@ use gamify\PHPGamification;
 class UserBadge extends Entity
 {
     protected $idUser;
+    protected $courseId;
     protected $idBadge;
     protected $badgesCounter = 0;
     protected $grantDate;
@@ -43,7 +44,10 @@ class UserBadge extends Entity
     {
         return $this->idBadge;
     }
-
+     public function getCourseId()
+    {
+        return $this->courseId;
+    }
     public function getDescription()
     {
     }
