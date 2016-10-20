@@ -88,13 +88,29 @@ class PHPGamification
 
         // Save badge
         $badge = $this->dao->saveBadge($alias, $title, $description, $imageURL);
-
         // Add badge to gamification engine
         $this->badges[$badge->getId()] = $badge;
 
         return $badge;
     }
+    /**
+     * Add badge to gamification database
+     * @param $alias
+     * @param $title
+     * @param $description
+     * @param null $imageURL
+     * @throws Exception
+     * @return Badge
+     */
+    public function copyBadge($id, $alias, $title, $description, $imageURL = null)
+    {
+        if (empty($alias) || empty($title)) throw new Exception(__METHOD__ . ': Invalid parameters');
 
+        // Save badge
+        $badge = $this->dao->copyBadge($id, $alias, $title, $description, $imageURL);
+
+        return $badge;
+    }
     /**
      * Add badge to gamification database
      * @param      $points
@@ -111,7 +127,24 @@ class PHPGamification
         $this->levels[$level->id] = $level;
         return $level;
     }
-
+    
+    /**
+     * Add level to gamification database
+     * @param $id
+     * @param $title
+     * @param $description
+     * @param $points
+     * @param null $icon
+     * @throws Exception
+     * @return level
+     */
+    public function copyLevel($id, $title, $description, $points, $icon = null)
+    {
+        if (empty($id) || empty($title)) throw new Exception(__METHOD__ . ': Invalid parameters');
+        // SaveLevel
+        $level = $this->dao->copyLevel($id, $title, $description, $points, $icon);
+        return $level;
+    }
     /**
      * Add event to gamification database
      * @param $event Event
@@ -510,7 +543,7 @@ class PHPGamification
         $this->dao->grantBadgeToUser($this->getUserId(), $badge->getId());
 
         // Log event
-        $this->dao->logUserEvent($this->getUserId(), $eventId, null, $badge->getId(), null, $eventDate);
+        $this->dao->logUserEvent($this->getUserId(), $eventId,  null, $badge->getId(), null, $eventDate);
 
         // Gamification alert
         $this->alertBadge($badge->getId());

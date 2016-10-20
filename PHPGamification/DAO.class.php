@@ -93,9 +93,10 @@ class DAO implements DAOInterface
      */
     private function getById($tableName, $id)
     {
-        $sql = "SELECT * FROM $tableName WHERE id = :id";
+        $sql = "SELECT * FROM $tableName WHERE id = :id AND course_id = :cid";
         $params = array(
-            ':id' => $id
+            ':id' => $id,
+            ':cid' => $_SESSION['course_id']
         );
         $results = $this->query($sql, $params);
         if ($results)
@@ -110,9 +111,11 @@ class DAO implements DAOInterface
      */
     private function getByAlias($tableName, $alias)
     {
-        $sql = "SELECT * FROM $tableName WHERE alias = :alias";
+        $sql = "SELECT * FROM $tableName WHERE alias = :alias AND course_id = :cid";
         $params = array(
-            ':alias' => $alias
+            ':alias' => $alias,
+            ':cid' => $_SESSION['course_id']
+            
         );
         $results = $this->query($sql, $params);
         if ($results)
@@ -155,17 +158,18 @@ class DAO implements DAOInterface
      * @return Badge
      * @throws Exception
      */
-    public function saveBadge($alias, $title, $description, $imageURL = null)
+    public function saveBadge($alias,$title, $description, $imageURL = null)
     {
         // Already exists?
         if ($this->getByAlias(TABLE_PREFIX.'gm_badges', $alias))
             throw new Exception(__METHOD__ . ': Alias ' . $alias . ' already exists');
 
         $sql = 'INSERT INTO '.TABLE_PREFIX.'gm_badges
-                (alias,title, description,image_url)
+                (course_id, alias, title, description,image_url)
                 VALUES
-                (:alias, :title, :description,:image_url)';
+                (:cid, :alias, :title, :description,:image_url)';
         $params = array(
+            ':cid' => $_SESSION['course_id'],
             ':alias' => $alias,
             ':title' => $title,
             ':description' => $description,
@@ -175,7 +179,39 @@ class DAO implements DAOInterface
         $this->execute($sql, $params);
         return $this->getBadgeById($this->lastInsertId());
     }
+    /**
+     * Save a new badge on database table "_badges
+     * @param $id
+     * @param $alias
+     * @param $title
+     * @param $description
+     * @param $imageURL
+     * @return Badge
+     * @throws Exception
+     */
+    public function copyBadge($id,$alias,$title, $description, $imageURL = null)
+    {
+        // Already exists?
+       // if ($this->getByAlias(TABLE_PREFIX.'gm_badges', $alias, $course_id))
+       //     throw new Exception(__METHOD__ . ': Alias ' . $alias . ' already exists');
 
+        $sql = 'REPLACE INTO '.TABLE_PREFIX.'gm_badges
+                (id,course_id, alias, title, description,image_url)
+                VALUES
+                (:id, :cid, :alias, :title, :description,:image_url)';
+        $params = array(
+            ':id'=>$id,
+            ':cid' => $_SESSION['course_id'],
+            ':alias' => $alias,
+            ':title' => $title,
+            ':description' => $description,
+            ':image_url' => $imageURL
+        );
+
+        $this->execute($sql, $params);
+        return true;
+       // return $this->getBadgeById($this->lastInsertId(), $course_id);
+    }
     /**
      * Get a Badge by Id
      * @param $id
@@ -207,12 +243,15 @@ class DAO implements DAOInterface
      * @return array
      */
     public function saveLevel($points, $title, $description)
-    {
-        $sql = 'INSERT INTO '.TABLE_PREFIX.'gm_levels
-                (points, title, description)
+    {   
+        $course_id = 0;
+        $sql = 'REPLACE INTO '.TABLE_PREFIX.'gm_levels
+                (id, course_id, points, title, description)
                 VALUES
-                (:points, :title, :description)';
+                (:id, :cid, :points, :title, :description)';
         $params = array(
+            ':id'=>'',
+            'cid'=> $course_id,
             ':points' => $points,
             ':title' => $title,
             ':description' => $description
@@ -221,7 +260,24 @@ class DAO implements DAOInterface
         $this->execute($sql, $params);
         return $this->getLevelById($this->lastInsertId());
     }
+    public function copyLevel($id, $title, $description, $points, $icon)
+    {
+        $sql = 'REPLACE INTO '.TABLE_PREFIX.'gm_levels
+                (id, course_id,  title, description, points, icon)
+                VALUES
+                (:id, :cid, :title, :description, :points, :icon)';
+        $params = array(
+            ':id'=>$id,
+            ':cid'=>$_SESSION['course_id'],
+            ':title' => $title,
+            ':description' => $description,
+            ':points' => $points,
+            ':icon' => $icon
+        );
 
+        $this->execute($sql, $params);
+        return $this->getLevelById($this->lastInsertId());
+    }
     /**
      * Get a Event by Id
      * @param $id
@@ -255,12 +311,18 @@ class DAO implements DAOInterface
      */
     public function saveEvent(Event $event)
     {
+        if($_SESSION['course_id'] > 0){
+            $course_id = $_SESSION['course_id'];
+        } else {
+            $course_id = 0;
+        }
         $sql = 'REPLACE INTO '.TABLE_PREFIX.'gm_events
-                (id, alias, description, allow_repetitions, reach_required_repetitions, id_each_badge, id_reach_badge, each_points, max_points, each_callback, reach_callback)
+                (id, course_id, alias, description, allow_repetitions, reach_required_repetitions, max_points, id_each_badge, id_reach_badge, each_points, reach_points, each_callback, reach_callback)
                 VALUES
-                (:id, :alias, :description, :allow_repetitions, :reach_required_repetitions, :id_each_badge, :id_reach_badge, :each_points, :max_points, :each_callback, :reach_callback)';
+                (:id, :cid,:alias, :description, :allow_repetitions, :reach_required_repetitions, :max_points, :id_each_badge, :id_reach_badge, :each_points, :reach_points, :each_callback, :reach_callback)';
         $params = array(
             ':id' => $event->getId(),
+            ':cid' => $course_id,
             ':alias' => $event->getAlias(),
             ':description' => $event->getDescription(),
             ':allow_repetitions' => $event->getAllowRepetitions(),
@@ -268,11 +330,12 @@ class DAO implements DAOInterface
             ':id_each_badge' => $event->getIdEachBadge(),
             ':id_reach_badge' => $event->getIdReachBadge(),
             ':each_points' => $event->getEachPoints(),
+            ':reach_points' => $event->getReachPoints(),
             ':max_points' => $event->getMaxPoints(),
             ':each_callback' => $event->getEachCallback(),
             ':reach_callback' => $event->getReachCallback()
         );
-
+        
         $this->execute($sql, $params);
         return $this->getEventById($this->lastInsertId());
     }
@@ -430,7 +493,7 @@ class DAO implements DAOInterface
             ':cid' => $_SESSION['course_id']
         );
         $result = $this->query($sql, $params);
-        //debug();
+
         if ($result)
             return $result;
             //return $this->toArrayObject($result, 'UserScore');

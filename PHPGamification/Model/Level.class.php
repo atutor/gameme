@@ -11,6 +11,7 @@ namespace gamify\PHPGamification\Model;
 class Level extends Entity
 {
     protected $id;
+    protected $courseId;
     protected $points;
     protected $title;
     protected $description;
@@ -25,7 +26,10 @@ class Level extends Entity
     {
         return $this->id;
     }
-
+    public function getCourseId()
+    {
+        return $this->courseId;
+    }
     function __construct($stdClass = null)
     {
         if ($stdClass)

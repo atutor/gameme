@@ -13,6 +13,7 @@ use Exception;
 class Event extends Entity
 {
     protected $id = null;
+    protected $courseId = 0;
     protected $alias = null;              /* Event alias */
     protected $description = null;        /* Event description */
 
@@ -42,7 +43,10 @@ class Event extends Entity
     {
         return $this->description;
     }
-
+    public function getCourseId()
+    {
+        return $this->courseId;
+    }
     public function getAlias()
     {
         return $this->alias;
@@ -105,6 +109,11 @@ class Event extends Entity
      */
     public function setAllowRepetitions($bool)
     {
+        if($bool == 0){ 
+         $bool = FALSE;
+        } else{
+         $bool = TRUE;
+        }
         if (!is_bool($bool)) throw new Exception(__METHOD__ . ': Invalid AllowRepetitions');
         $this->allowRepetitions = $bool;
         return $this;
@@ -119,7 +128,13 @@ class Event extends Entity
         $this->idEachBadge = $badge->getId();
         return $this;
     }
-
+    public function copyEachBadgeGranted($id)
+    {
+        $sql = "SELECT id_each_badge FROM %sgm_events WHERE id =%d AND course_id = %d";
+        $this_badge_granted = queryDB($sql, array(TABLE_PREFIX, $id, 0), TRUE);
+        $this->idEachBadge = $this_badge_granted['id_each_badge'];
+        return $this;
+    }
     /**
      * @param Badge $badge
      * @return Event
@@ -129,7 +144,13 @@ class Event extends Entity
         $this->idReachBadge = $badge->getId();
         return $this;
     }
-
+    public function copyReachBadgeGranted($id)
+    {
+        $sql = "SELECT id_reach_badge FROM %sgm_events WHERE id =%d AND course_id = %d";
+        $this_badge_granted = queryDB($sql, array(TABLE_PREFIX, $id, 0), TRUE);
+        $this->idReachBadge = $this_badge_granted['id_reach_badge'];
+        return $this;
+    }
     /**
      * @param int $id_badge
      * @return Event
@@ -199,7 +220,16 @@ class Event extends Entity
 
         return $this;
     }
-
+    /**
+     * @param $c
+     * @return Event
+     * @throws Exception
+     */
+    public function setCourseId($c)
+    {
+        $this->courseId = $c;
+        return $this;
+    }
     /**
      * @param $n
      * @return Event
@@ -230,7 +260,19 @@ class Event extends Entity
         $this->reachPoints = $n;
         return $this;
     }
+    public function copyEachPointsGranted($n)
+    {
+        if (!is_numeric($n)) throw new Exception(__METHOD__ . ': Invalid points');
+        $this->eachPoints = $n;
+        return $this;
+    }
 
+    public function copyReachPointsGranted($n)
+    {
+        if (!is_numeric($n)) throw new Exception(__METHOD__ . ': Invalid points');
+        $this->reachPoints = $n;
+        return $this;
+    }
     /**
      * @param $n
      * @return Event

@@ -11,6 +11,7 @@ namespace gamify\PHPGamification\Model;
 class Badge extends Entity
 {
     protected $id;
+    protected $courseId;
     protected $alias;
     protected $title;
     protected $description;
@@ -24,8 +25,13 @@ class Badge extends Entity
     public function getId()
     {
         return $this->id;
+        $this->courseId = $_SESSION['course_id'];
+        return $this;
     }
-
+    public function getCourseId()
+    {
+        return $this->courseId;
+    }
     public function getAlias()
     {
         return $this->alias;

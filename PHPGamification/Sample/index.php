@@ -21,14 +21,15 @@ use gamify\PHPGamification\Model\Event;
 //ini_set('display_errors', 'On');
 
 // PHP Gamification require
-require_once('../PHPGamification.class.php');
+//require_once('../PHPGamification.class.php');
 
 // Some other class used to callback sample
 require_once('MyOtherClass.php');
 
 // Creation of gamification engine and DAO
-$gamification = new PHPGamification();
-$gamification->setDAO(new DAO('localhost', 'atutorgit', 'root', 'root'));
+//$gamification = new PHPGamification();
+//debug($dbname);
+//$gamification->setDAO(new DAO('localhost', 'atutorgit', 'root', 'root'));
 
 // Reser all data (be careful, only to test purpose)
 $truncateDatabaseFull = false; // Will truncate "levels" and "badges" tables, and ALL data (config+user data)
