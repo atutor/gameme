@@ -8,7 +8,7 @@
             <email>info@atutor.ca</email> 
         </maintainer>
     </maintainers> 
-    <url>http://atutor.ca</url> 
+    <url>https://atsp.atutorspaces.com</url>  
     <license>BSD</license> 
 	<release> 
         <version>0.9</version> 
