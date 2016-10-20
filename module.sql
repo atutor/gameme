@@ -1,10 +1,3 @@
--- phpMyAdmin SQL Dump
--- --------------------------------------------------------
-
---
--- Table structure for table `gm_badges`
---
-
 CREATE TABLE `gm_badges` (
 `id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL DEFAULT '0',
