@@ -140,7 +140,7 @@ $this->_content_tools[] = array("id"=>"helloworld_tool",
  * This class must be defined in "ModuleCallbacks.class.php".
  * This class is an API that contains the static methods to act on core functions.
  */
-$this->_callbacks['gamify'] = 'GamifyCallbacks';
+//$this->_callbacks['gamify'] = 'GmCallbacks';
 
 function gamify_get_group_url($group_id) {
 	return 'mods/gamify/index.php';
@@ -148,8 +148,9 @@ function gamify_get_group_url($group_id) {
 if($_SESSION['valid_user'] == 1){
 global $_base_path;
 // Hack to fix the get.php appending issue
-$this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$_base_path);
+$this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].'/');
 require($this_path.'mods/gamify/events.php');
+
 }
 
 ?>
