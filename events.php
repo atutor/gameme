@@ -21,16 +21,19 @@ if(isset($_SESSION['member_id'])){
     }else{
         $course_id = 0;
     } 
+    require_once($this_path.'/mods/gamify/GmCallbacksClass.php');
     require_once($this_path.'/mods/gamify/PHPGamification/PHPGamification.class.php');
     $gamification = new PHPGamification();
     $gamification->setDAO(new DAO(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD));
     $gamification->setUserId($_SESSION['member_id'], $course_id);
+    $sql = "SELECT email FROM %smembers WHERE member_id =%d";
+    $gm_member = queryDB($sql, array(TABLE_PREFIX, $_SESSION['member_id']), TRUE);
     
      ////////
     // LOGIN TO OR ENTER COURSE
     if(strpos($_SERVER['PHP_SELF'], "bounce.php")&& isset($_REQUEST['course'])){
         $_SESSION['course_id'] = $_REQUEST['course'];
-        $gamification->executeEvent('login');
+        $gamification->executeEvent('login', array('user_id'=>$_SESSION['member_id']));
     }
     if(strpos($_SERVER['PHP_SELF'], "bounce.php")&& isset($_REQUEST['course'])){
         $_SESSION['course_id'] = $_REQUEST['course'];
@@ -50,7 +53,9 @@ if(isset($_SESSION['member_id'])){
         // Prevent points by page reloading
         if($_SESSION['content_id'] != $_REQUEST['cid']){
             $_SESSION['content_id'] = $_REQUEST['cid'];
-            $gamification->executeEvent('read_page');
+            $gamification->executeEvent('read_page', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member ['email']));
         }
         // Time on page
         if(isset($_SESSION['timer'])){
