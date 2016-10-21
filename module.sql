@@ -7,10 +7,6 @@ CREATE TABLE `gm_badges` (
   `image_url` varchar(96) CHARACTER SET latin1 DEFAULT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `gm_badges`
---
-
 INSERT INTO `gm_badges` (`id`, `course_id`, `alias`, `title`, `description`, `image_url`) VALUES
 (7, 0, 'upload_file_badge', 'Good use of File Storage', 'You have figured out how to upload files into the course.', 'mods/gamify/images/badges/arrow.png'),
 (8, 0, 'create_file_badge', 'Create your own files', 'You learned how to create new files in File Storage.', 'mods/gamify/images/badges/doc.png'),
@@ -40,12 +36,6 @@ INSERT INTO `gm_badges` (`id`, `course_id`, `alias`, `title`, `description`, `im
 (26, 0, 'welcome_badge', 'Welcome', 'Welcome to the course. Finding your way here earned you your first badge. Get busy with the course to earn points and collect more badges.', 'mods/gamify/images/badges/acorn.png'),
 (7, 26, 'upload_file_badge', 'Good use of File Storage', 'You have figured out how to upload files into the course.', 'mods/gamify/images/badges/arrow.png');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `gm_events`
---
-
 CREATE TABLE `gm_events` (
 `id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL DEFAULT '0',
@@ -61,10 +51,6 @@ CREATE TABLE `gm_events` (
   `each_callback` varchar(64) DEFAULT NULL,
   `reach_callback` varchar(64) DEFAULT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `gm_events`
---
 
 INSERT INTO `gm_events` (`id`, `course_id`, `alias`, `description`, `allow_repetitions`, `reach_required_repetitions`, `max_points`, `id_each_badge`, `id_reach_badge`, `each_points`, `reach_points`, `each_callback`, `reach_callback`) VALUES
 (1, 0, 'login', 'Login', 0, NULL, NULL, 1, 2, 10, 25, NULL, NULL),
@@ -105,12 +91,6 @@ INSERT INTO `gm_events` (`id`, `course_id`, `alias`, `description`, `allow_repet
 (38, 0, 'logout', 'Logout (not timeout)', 0, 5, 250, NULL, 25, 10, 25, NULL, NULL),
 (39, 0, 'welcome', 'First course login', 1, 1, NULL, NULL, 26, 250, NULL, NULL, NULL);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `gm_levels`
---
-
 CREATE TABLE `gm_levels` (
 `id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL DEFAULT '0',
@@ -119,10 +99,6 @@ CREATE TABLE `gm_levels` (
   `points` int(11) NOT NULL,
   `icon` varchar(25) CHARACTER SET latin1 DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `gm_levels`
---
 
 INSERT INTO `gm_levels` (`id`, `course_id`, `title`, `description`, `points`, `icon`) VALUES
 (1, 0, 'Level 0', 'Welcome to the course', 0, 'star_empty_lg.png'),
@@ -137,12 +113,6 @@ INSERT INTO `gm_levels` (`id`, `course_id`, `title`, `description`, `points`, `i
 (10, 0, 'Level 9', '10000 points passed: Advanced status: Gold Badge', 10000, 'star_gold_lg.png'),
 (11, 0, 'Level 10', '15000 point passed: Highest Honor: Platinum Badge', 15000, 'star_platinum_lg.png');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `gm_options`
---
-
 CREATE TABLE `gm_options` (
 `id` int(11) unsigned NOT NULL,
   `course_id` int(11) unsigned NOT NULL,
@@ -150,22 +120,12 @@ CREATE TABLE `gm_options` (
   `value` int(11) unsigned DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-
---
--- Table structure for table `gm_user_alerts`
---
-
 CREATE TABLE `gm_user_alerts` (
   `id_user` int(10) unsigned NOT NULL,
   `course_id` int(10) unsigned DEFAULT NULL,
   `id_badge` int(10) unsigned DEFAULT NULL,
   `id_level` int(10) unsigned DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-
---
--- Table structure for table `gm_user_badges`
---
 
 CREATE TABLE `gm_user_badges` (
   `id_user` int(10) unsigned NOT NULL,
@@ -175,10 +135,6 @@ CREATE TABLE `gm_user_badges` (
   `course_id` int(10) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Table structure for table `gm_user_events`
---
-
 CREATE TABLE `gm_user_events` (
   `id_user` int(10) unsigned NOT NULL,
   `id_event` int(10) unsigned NOT NULL,
@@ -186,11 +142,6 @@ CREATE TABLE `gm_user_events` (
   `points_counter` int(10) unsigned NOT NULL,
   `course_id` int(10) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-
---
--- Table structure for table `gm_user_logs`
---
 
 CREATE TABLE `gm_user_logs` (
   `id_user` int(10) unsigned NOT NULL,
@@ -202,11 +153,6 @@ CREATE TABLE `gm_user_logs` (
   `points` int(10) unsigned DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-
---
--- Table structure for table `gm_user_scores`
---
-
 CREATE TABLE `gm_user_scores` (
   `id_user` int(10) unsigned NOT NULL,
   `points` int(10) unsigned NOT NULL,
@@ -214,80 +160,38 @@ CREATE TABLE `gm_user_scores` (
   `course_id` int(10) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `gm_badges`
---
 ALTER TABLE `gm_badges`
  ADD PRIMARY KEY (`id`,`course_id`);
 
---
--- Indexes for table `gm_events`
---
 ALTER TABLE `gm_events`
  ADD PRIMARY KEY (`id`,`course_id`);
 
---
--- Indexes for table `gm_levels`
---
 ALTER TABLE `gm_levels`
  ADD PRIMARY KEY (`id`,`course_id`);
 
---
--- Indexes for table `gm_options`
---
 ALTER TABLE `gm_options`
  ADD PRIMARY KEY (`course_id`,`option`), ADD KEY `id` (`id`);
 
---
--- Indexes for table `gm_user_badges`
---
 ALTER TABLE `gm_user_badges`
  ADD PRIMARY KEY (`id_user`,`id_badge`,`course_id`);
 
---
--- Indexes for table `gm_user_events`
---
 ALTER TABLE `gm_user_events`
  ADD PRIMARY KEY (`id_user`,`id_event`,`course_id`);
 
---
--- Indexes for table `gm_user_logs`
---
 ALTER TABLE `gm_user_logs`
  ADD KEY `id_user` (`id_user`);
 
---
--- Indexes for table `gm_user_scores`
---
 ALTER TABLE `gm_user_scores`
  ADD PRIMARY KEY (`id_user`,`course_id`);
 
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `gm_badges`
---
 ALTER TABLE `gm_badges`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
---
--- AUTO_INCREMENT for table `gm_events`
---
+
 ALTER TABLE `gm_events`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
---
--- AUTO_INCREMENT for table `gm_levels`
---
+
 ALTER TABLE `gm_levels`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT for table `gm_options`
---
+
 ALTER TABLE `gm_options`
 MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=410;
