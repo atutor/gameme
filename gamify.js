@@ -1,4 +1,4 @@
-$(document).ready(function(){
+jQuery(document).ready(function(){
         if($("div[role='tabpanel'], panel1").attr("aria-hidden") == "false"){
             $("#tab1").addClass("active");
             $("#panel1").attr("aria-hidden", "false");
