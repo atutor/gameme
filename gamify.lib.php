@@ -235,7 +235,7 @@ global $_base_href;
     $level = queryDB($sql, array(TABLE_PREFIX, 0, $points), TRUE);
     
     $sql = "SELECT id FROM %sgm_levels WHERE course_id = %d AND points = %d";
-    $course_level = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id'], $points), TRUE);
+    $course_levels = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id'], $points), TRUE);
     
     //$this_levels = array();
     //foreach($course_levels as $course_level){
