@@ -101,6 +101,9 @@ function showUserScores(PHPGamification $gamification){
 function showUserScore(PHPGamification $gamification, $courseId){
     //echo "<h3>Your Scores</h3>";
     $score = $gamification->getUserScores();
+    if($score->getPoints() == 0){
+        echo '<div style="text-align:center;">Login to collect points</div>';
+    }
     echo "<div style=' 
     width:80%;
     font-size:2em;
