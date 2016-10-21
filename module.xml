@@ -9,6 +9,9 @@
         </maintainer>
     </maintainers> 
     <url>https://atsp.atutorspaces.com</url>  
+    <private>
+        <subsite>atsp.atutorspaces.com</subsite>
+    </private>
     <license>BSD</license> 
 	<release> 
         <version>0.9</version> 
