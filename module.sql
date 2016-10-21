@@ -35,8 +35,7 @@ INSERT INTO `gm_badges` (`id`, `course_id`, `alias`, `title`, `description`, `im
 (23, 0, 'photo_alt_text', 'Accessibility Aware', 'Its great you are providing Alt text for you image, to make them accessible to people with disabilities. Secret bonus points if you continue adding Alt text to new images in you gallery.', 'mods/gamify/images/badges/heart.png'),
 (24, 0, 'login_badge reach', 'Returning Visitor', 'You come back quite a few times now. Keep on visiting the course for bonus points.', 'mods/gamify/images/badges/hot.png'),
 (25, 0, 'logout_badge', 'Security Conscious', 'You have been loggin out, rather than leaving or allowing your session to time out. This helps improve security.', 'mods/gamify/images/badges/lock.png'),
-(26, 0, 'welcome_badge', 'Welcome', 'Welcome to the course. Finding your way here earned you your first badge. Get busy with the course to earn points and collect more badges.', 'mods/gamify/images/badges/acorn.png'),
-(7, 26, 'upload_file_badge', 'Good use of File Storage', 'You have figured out how to upload files into the course.', 'mods/gamify/images/badges/arrow.png');
+(26, 0, 'welcome_badge', 'Welcome', 'Welcome to the course. Finding your way here earned you your first badge. Get busy with the course to earn points and collect more badges.', 'mods/gamify/images/badges/acorn.png');
 
 CREATE TABLE `gm_events` (
 `id` int(11) NOT NULL,
@@ -55,7 +54,7 @@ CREATE TABLE `gm_events` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 INSERT INTO `gm_events` (`id`, `course_id`, `alias`, `description`, `allow_repetitions`, `reach_required_repetitions`, `max_points`, `id_each_badge`, `id_reach_badge`, `each_points`, `reach_points`, `each_callback`, `reach_callback`) VALUES
-(1, 0, 'login', 'Login', 0, NULL, NULL, 1, 2, 10, 25, NULL, NULL),
+(1, 0, 'login', 'Login', 0, NULL, NULL, 1, NULL, 10, 25, NULL, NULL),
 (2, 0, 'profile_view', 'Profile view other''s', 0, 10, NULL, NULL, 1, 10, 25, NULL, NULL),
 (3, 0, 'profile_viewed', 'Profile viewed by others', 0, 25, NULL, NULL, 2, 25, 50, NULL, NULL),
 (4, 0, 'sent_message', 'Send a private message', 0, 10, NULL, NULL, NULL, 25, 50, NULL, NULL),
