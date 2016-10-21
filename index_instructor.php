@@ -414,6 +414,7 @@ foreach($all_levels as $level){
 
 <div id="panel4" class="panel" aria-labelledby="tab4" role="tabpanel" aria-hidden="true">
     <div id="info">Set game elements to display to students. </div> 
+    <br style="clear:both;">
     <form action="<?php echo  $_base_href; ?>mods/gamify/game_options.php" method="post">
         <input type="checkbox" name="showpoints" id="showpoints" <?php if(get_option('showpoints', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
         <label for="showpoints">Points</label><br />
