@@ -1,3 +1,5 @@
+REPLACE INTO `language_text` VALUES ('en', '_module', 'gamify', 'Gamify', '2016-09-25 15:59:56', 'gamification mod');
+
 CREATE TABLE `gm_badges` (
 `id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL DEFAULT '0',
