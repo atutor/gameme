@@ -145,10 +145,11 @@ $this->_callbacks['gamify'] = 'GamifyCallbacks';
 function gamify_get_group_url($group_id) {
 	return 'mods/gamify/index.php';
 }
-    global $_base_path;
-    // Hack to fix the get.php appending issue
-    $this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$_base_path);
+if($_SESSION['valid_user'] == 1){
+global $_base_path;
+// Hack to fix the get.php appending issue
+$this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$_base_path);
 require($this_path.'mods/gamify/events.php');
-
+}
 
 ?>
