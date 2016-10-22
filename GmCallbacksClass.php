@@ -3,6 +3,7 @@ class GmCallbacksClass
 {
     static function ReadPageCallback($params)
     {
+        global $config;
         $to_email = $params['email'];
         if ($to_email != '') {
                 $tmp_message  = get_display_name($params['user_id']);",\n\n";
@@ -11,7 +12,7 @@ class GmCallbacksClass
 
 				$mail = new ATutorMailer;
 
-				$mail->From     = $_config['contact_email'];
+				$mail->From = $_config['contact_email'];
 				$mail->AddAddress($to_email);
 				$mail->Subject = "Gamify Notification";
 				$mail->Body    = $tmp_message;
@@ -26,12 +27,7 @@ class GmCallbacksClass
 			} else {
 			    $msg->addError('no email provided');
 			}
-        
-        
-        //debug($params['user_id']);
-        // IT MUST RETURN TRUE to gamification continue to flow.
-        // Returning true it will give the points and badges like setup
-        // Returning false it will don't give any points of badges for that event
+
         return true;
     }
 
