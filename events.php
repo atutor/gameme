@@ -56,7 +56,9 @@ if(isset($_SESSION['member_id'])){
             $_SESSION['content_id'] = $_REQUEST['cid'];
             $gamification->executeEvent('read_page', 
                     array('user_id'=>$_SESSION['member_id'], 
-                    'email'=>$gm_member ['email']));
+                    'email'=>$gm_member ['email'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
         }
         // Time on page
         if(isset($_SESSION['timer'])){
