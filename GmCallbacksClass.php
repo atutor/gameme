@@ -3,16 +3,16 @@ class GmCallbacksClass
 {
     static function ReadPageCallback($params)
     {
-        global $config;
+        global $_config;
         $to_email = $params['email'];
         if ($to_email != '') {
                 $tmp_message  = get_display_name($params['user_id']);",\n\n";
-			    $tmp_message .= "...this email is from gamify.";
+			    $tmp_message .= "...this email is from gamify.". $params['contact_email'];
 				require(AT_INCLUDE_PATH . 'classes/phpmailer/atutormailer.class.php');
 
 				$mail = new ATutorMailer;
 
-				$mail->From = $_config['contact_email'];
+				$mail->From = $params['contact_email'];
 				$mail->AddAddress($to_email);
 				$mail->Subject = "Gamify Notification";
 				$mail->Body    = $tmp_message;

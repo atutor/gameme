@@ -12,6 +12,7 @@ use gamify\PHPGamification\Model\Event;
 
 if(isset($_SESSION['member_id'])){
     global $_base_path;
+    global $_config;
     // Hack to fix the get.php appending issue
     $this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$_base_path);
     if($_SESSION['course_id'] > 0){
@@ -33,7 +34,7 @@ if(isset($_SESSION['member_id'])){
     // LOGIN TO OR ENTER COURSE
     if(strpos($_SERVER['PHP_SELF'], "bounce.php")&& isset($_REQUEST['course'])){
         $_SESSION['course_id'] = $_REQUEST['course'];
-        $gamification->executeEvent('login', array('user_id'=>$_SESSION['member_id']));
+        $gamification->executeEvent('login', array('user_id'=>$_SESSION['member_id'], 'contact_email'=>$_config['contact_email']));
     }
     if(strpos($_SERVER['PHP_SELF'], "bounce.php")&& isset($_REQUEST['course'])){
         $_SESSION['course_id'] = $_REQUEST['course'];
