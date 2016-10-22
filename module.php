@@ -148,8 +148,8 @@ function gamify_get_group_url($group_id) {
 if($_SESSION['valid_user'] == 1){
 global $_base_path;
 // Hack to fix the get.php appending issue
-$this_path =  preg_replace ('#/get.php#','',$_base_path);
-require($_SERVER['DOCUMENT_ROOT'].$this_path.'mods/gamify/events.php');
+$root_path =  preg_replace ('#/get.php#','',$_base_path);
+include($_SERVER['DOCUMENT_ROOT'].$root_path.'/mods/gamify/events.php');
 
 }
 
