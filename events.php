@@ -27,18 +27,28 @@ if(isset($_SESSION['member_id'])){
     $gamification = new PHPGamification();
     $gamification->setDAO(new DAO(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD));
     $gamification->setUserId($_SESSION['member_id'], $course_id);
-    $sql = "SELECT email FROM %smembers WHERE member_id =%d";
+    $sql = "SELECT email, first_name FROM %smembers WHERE member_id =%d";
     $gm_member = queryDB($sql, array(TABLE_PREFIX, $_SESSION['member_id']), TRUE);
     
      ////////
     // LOGIN TO OR ENTER COURSE
-    if(strpos($_SERVER['PHP_SELF'], "bounce.php")&& isset($_REQUEST['course'])){
+    if(strpos($_SERVER['PHP_SELF'], "bounce.php") && $_REQUEST['course'] >0){
+    //if(strpos($_SERVER['PHP_SELF'], "index.php") && !strpos($_SERVER['PHP_SELF'], "users/index.php") && $_REQUEST['course'] >0){
         $_SESSION['course_id'] = $_REQUEST['course'];
-        $gamification->executeEvent('login', array('user_id'=>$_SESSION['member_id'], 'contact_email'=>$_config['contact_email']));
+        $gamification->executeEvent('login', array(
+                    'user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member ['email'],
+                    'firstname'=>$gm_member ['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
     }
-    if(strpos($_SERVER['PHP_SELF'], "bounce.php")&& isset($_REQUEST['course'])){
+    if(strpos($_SERVER['PHP_SELF'], "bounce.php")&& $_REQUEST['course'] > 0){
         $_SESSION['course_id'] = $_REQUEST['course'];
-        $gamification->executeEvent('welcome');
+        $gamification->executeEvent('welcome', array(
+                    'user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member ['email'],
+                    'firstname'=>$gm_member ['first_name'],
+                    'contact_email'=>$_config['contact_email']));
     }    
     
     ////////
@@ -57,6 +67,7 @@ if(isset($_SESSION['member_id'])){
             $gamification->executeEvent('read_page', 
                     array('user_id'=>$_SESSION['member_id'], 
                     'email'=>$gm_member ['email'],
+                    'firstname'=>$gm_member ['first_name'],
                     'contact_email'=>$_config['contact_email'],
                     'badges'=>$gamification->getUserBadges()));
         }
@@ -156,8 +167,14 @@ if(isset($_SESSION['member_id'])){
     // PHOTO GALLERY
     // Create Album
    if(strpos($_SERVER['PHP_SELF'], "photos/create_album.php") && isset($_POST['album_name']) && isset($_POST['album_type'])){
-        $gamification->executeEvent('photo_create_album');
+        $gamification->executeEvent('photo_create_album', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member ['email'],
+                    'firstname'=>$gm_member ['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
     } 
+    //var_dump($gamification->getUserBadges());
     // Upload photo, does not consider multiple files can be uploaded at a time. 
     // Should link into the ajax doing the uploading
     if(strpos($_SERVER['PHP_SELF'], "photos/albums.php") && isset($_POST['upload'])){
