@@ -142,15 +142,36 @@ $this->_content_tools[] = array("id"=>"helloworld_tool",
  */
 //$this->_callbacks['gamify'] = 'GmCallbacks';
 
-function gamify_get_group_url($group_id) {
-	return 'mods/gamify/index.php';
+//function gamify_get_group_url($group_id) {
+//	return 'mods/gamify/index.php';
+//}
+// Run gamify events if a valid user is logged in
+if($_SESSION['valid_user'] == 1 && $_SESSION['valid_user'] >0){
+    global $_base_path;
+    // Hack to fix the get.php appending issue
+    $root_path =  preg_replace ('#/get.php#','',$_base_path);
+    include($_SERVER['DOCUMENT_ROOT'].$root_path.'/mods/gamify/events.php');
 }
-if($_SESSION['valid_user'] == 1){
-global $_base_path;
-// Hack to fix the get.php appending issue
-$root_path =  preg_replace ('#/get.php#','',$_base_path);
-include($_SERVER['DOCUMENT_ROOT'].$root_path.'/mods/gamify/events.php');
-
+// Check course gamify options, and warn if not set
+if($_SESSION['is_admin'] == 1){
+    //check if gamify is enabled
+    $sql = "SELECT home_links, main_links, side_menu FROM %scourses WHERE course_id = %d";
+    $gamify_elements = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']), TRUE);
+    
+    foreach($gamify_elements as $gamify_element){
+        if(preg_match('/gamify/',$gamify_element)){
+            $gamify_enabled = TRUE;
+            //var_dump($gamify_enabled);
+            
+        }
+    }
+    if($_SESSION['course_id']>0 && $gamify_enabled === TRUE){
+        $sql = "SELECT * from %sgm_options WHERE course_id=%d";
+        $has_options = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']));
+        if(empty($has_options[0])){
+            global $msg;
+            $msg->addWarning("Gamify options must be set in this course. Under the Manage tab, open Gamify and select the Option tab.");
+        }
+    }
 }
-
 ?>
