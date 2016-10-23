@@ -619,7 +619,7 @@ class DAO implements DAOInterface
         $params = array(
             ':uid' => $userId,
             ':bid' => $badgeId,
-            ':cid' => $badgeId
+            ':cid' => $_SESSION['course_id']
         );
         $this->execute($sql, $params);
         return true;
