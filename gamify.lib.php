@@ -318,14 +318,14 @@ function showUserBadgesStudents(PHPGamification $gamification)
         echo "<table class='data'>
         <tr>
         <th>&nbsp;</th>
-        <th>Counter</th>
+        <!--<th>Counter</th>-->
         <th>Title</th>
         <th>Description</th>
         </tr>";
         foreach ($badges as $badge) {
             echo "<tr>";
             echo "<td>".getBadgeImage( $gamification, $badge->getIdBadge())."</td>";;
-            echo "<td>".$badge->getBadgeCounter()."</td>";
+           // echo "<td>".$badge->getBadgeCounter()."</td>";
             echo "<td>".$badge->getBadge()->getTitle()."</td>";
             echo "<td>".$badge->getBadge()->getDescription()."</td>";            
             echo "</tr>"."\n";
