@@ -54,7 +54,11 @@ if(isset($_SESSION['member_id'])){
     ////////
     // LOGOUT PROPERLY
     if(strpos($_SERVER['PHP_SELF'], "logout.php")){
-        $gamification->executeEvent('logout');
+        $gamification->executeEvent('logout', array(
+                    'user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member ['email'],
+                    'firstname'=>$gm_member ['first_name'],
+                    'contact_email'=>$_config['contact_email']));
     }
     
     ////////

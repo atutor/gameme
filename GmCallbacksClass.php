@@ -1,5 +1,6 @@
 <?php
-//namespace gamify;
+namespace gamify;
+use gamify\PHPGamification\DAO;
 
 class GmCallbacksClass
 {
@@ -37,6 +38,24 @@ class GmCallbacksClass
             $message .='<div style="width:97%;padding-left: 2em;border:1px solid #cccccc;background-color:#f6f4da;"><h2>'.$_SESSION['course_title'].'</h2></div>';
             $message .= '<p> Hi '.$params['firstname']."!</p>\n\n";
             $message .= "<p>Congratulations, you have received a new badge for logging into the course many times. Here are the badges you have earned in this course so far.<br /></p>" ;
+            $message .= '<table style="border:1px solid #eeeeee;">';
+            foreach ($params['badges'] as $badge) {
+                $sql = "SELECT image_url FROM %sgm_badges WHERE id =%d";
+                $badge_image = queryDB($sql, array(TABLE_PREFIX, $badge->getIdBadge()), TRUE);
+                $message .=  '<tr><td style="background-color:#eeeee;"><img src="'.AT_BASE_HREF.$badge_image['image_url'].'" alt="" style="vertical-align:top"/></td>';
+                $message .=  '<td style="background-color:#efefef; padding:.3em;"><strong>'.$badge->getBadge()->getTitle()."</strong><br/>".$badge->getBadge()->getDescription()."</td></tr>";
+            }
+            $message .= "<table>";
+        } 
+        self::SendMail($params, $message);
+        return true;
+    }
+    static function LogoutReachCallback($params)
+    {
+        if ($params['badges']){                       
+            $message .='<div style="width:97%;padding-left: 2em;border:1px solid #cccccc;background-color:#f6f4da;"><h2>'.$_SESSION['course_title'].'</h2></div>';
+            $message .= '<p> Hi '.$params['firstname']."!</p>\n\n";
+            $message .= "<p>Congratulations, you have received a new badge for logging out properly, instead of leaving or letting your session timeout, maintaining your privacy and security. Here are the badges you have earned in this course so far.<br /></p>" ;
             $message .= '<table style="border:1px solid #eeeeee;">';
             foreach ($params['badges'] as $badge) {
                 $sql = "SELECT image_url FROM %sgm_badges WHERE id =%d";
