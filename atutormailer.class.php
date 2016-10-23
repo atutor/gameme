@@ -12,8 +12,9 @@
 // $Id$
 
 if (!defined('AT_INCLUDE_PATH')) { exit; }
-
-require(dirname(__FILE__) . '/class.phpmailer.php');
+        $root_path =  preg_replace ('#/get.php#','',$_base_path);
+        $this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$root_path);
+        require($this_path.'include/classes/phpmailer/class.phpmailer.php');
 
 /**
 * ATutorMailer extends PHPMailer and sets all the default values
@@ -65,13 +66,13 @@ class ATutorMailer extends PHPMailer {
 		global $_config;
 
 		// attach the ATutor footer to the body first:
-		$this->Body .= 	"\n\n".'----------------------------------------------'."\n";
-		$this->Body .= _AT('sent_via_atutor', AT_BASE_HREF);
+		$this->Body .= 	"<br/><hr /><br />";
+		$this->Body .= "<p>"._AT('sent_via_atutor', AT_BASE_HREF);
 		if ($_SESSION['course_id'] > 0) {
-			$this->Body .= 'login.php?course='.$_SESSION['course_id'].' | ' . $_SESSION['course_title'];
+			$this->Body .= 'login.php?course='.$_SESSION['course_id'].' | <a href="'.AT_BASE_HREF.'login.php?course='.$_SESSION['course_id'].'">' . $_SESSION['course_title'].'</a>';
 		}
 
-		$this->Body .= "\n"._AT('atutor_home').': http://atutor.ca';
+		//$this->Body .= "<br />"._AT('atutor_home').': http://atutor.ca</p>';
 
 		// if this email has been queued then don't send it. instead insert it in the db
 		// for each bcc or to or cc
