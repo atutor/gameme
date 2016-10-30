@@ -6,7 +6,7 @@ global $_base_path;
 define('AT_INCLUDE_PATH', '../../include/');
 require (AT_INCLUDE_PATH.'vitals.inc.php');
 $_custom_css = $_base_path . 'mods/gamify/module.css'; // use a custom stylesheet
-//$_custom_head ='<script type="text/javascript" src="'.$_base_path .'jscripts/lib/jquery.1.10.1.min.js"></script>'."\n";
+$_custom_head ='<script type="text/javascript" src="'.$_base_path .'jscripts/lib/jquery.1.10.1.min.js"></script>'."\n";
 $_custom_head.='<script type="text/javascript" src="'.$_base_path .'mods/gamify/gamify.js"></script>'."\n";
 $_custom_head .= '<script type="text/javascript" src="'.$_base_path.'mods/gamify/jquery/js.cookie-min.js"></script>'."\n";
 require (AT_INCLUDE_PATH.'header.inc.php');

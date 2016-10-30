@@ -37,8 +37,9 @@ if(isset($_SESSION['member_id'])){
         $_SESSION['course_id'] = $_REQUEST['course'];
         $gamification->executeEvent('login', array(
                     'user_id'=>$_SESSION['member_id'], 
-                    'email'=>$gm_member ['email'],
-                    'firstname'=>$gm_member ['first_name'],
+                    'alias'=>'login_badge',
+                    'email'=>$gm_member['email'],
+                    'firstname'=>$gm_member['first_name'],
                     'contact_email'=>$_config['contact_email'],
                     'badges'=>$gamification->getUserBadges()));
     }
@@ -46,9 +47,11 @@ if(isset($_SESSION['member_id'])){
         $_SESSION['course_id'] = $_REQUEST['course'];
         $gamification->executeEvent('welcome', array(
                     'user_id'=>$_SESSION['member_id'], 
-                    'email'=>$gm_member ['email'],
-                    'firstname'=>$gm_member ['first_name'],
-                    'contact_email'=>$_config['contact_email']));
+                    'alias'=>'welcome_badge',
+                    'email'=>$gm_member['email'],
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
     }    
     
     ////////
@@ -56,9 +59,11 @@ if(isset($_SESSION['member_id'])){
     if(strpos($_SERVER['PHP_SELF'], "logout.php")){
         $gamification->executeEvent('logout', array(
                     'user_id'=>$_SESSION['member_id'], 
-                    'email'=>$gm_member ['email'],
-                    'firstname'=>$gm_member ['first_name'],
-                    'contact_email'=>$_config['contact_email']));
+                    'alias'=>'logout_badge',
+                    'email'=>$gm_member['email'],
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'], 
+                    'course_id'=>$_SESSION['course_id']));
     }
     
     ////////
@@ -70,8 +75,9 @@ if(isset($_SESSION['member_id'])){
             $_SESSION['content_id'] = $_REQUEST['cid'];
             $gamification->executeEvent('read_page', 
                     array('user_id'=>$_SESSION['member_id'], 
-                    'email'=>$gm_member ['email'],
-                    'firstname'=>$gm_member ['first_name'],
+                    'email'=>$gm_member['email'],
+                    'alias'=>'read_page_badge',
+                    'firstname'=>$gm_member['first_name'],
                     'contact_email'=>$_config['contact_email'],
                     'badges'=>$gamification->getUserBadges()));
         }
@@ -100,15 +106,33 @@ if(isset($_SESSION['member_id'])){
     // Reply to thread
      if(strpos($_SERVER['PHP_SELF'], "forum")){
         if(strpos($_SERVER['PHP_SELF'], "forum/new_thread.php") && isset($_POST['body']) && isset($_POST['subject']) && (isset($_POST['parent_id']) && $_POST['parent_id'] > 0)){     
-            $gamification->executeEvent('forum_reply');
+            $gamification->executeEvent('forum_reply', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=>'forum_reply_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
     // Post new thread
         }else if(strpos($_SERVER['PHP_SELF'], "forum/new_thread.php") && isset($_POST['body']) && isset($_POST['subject'])){     
-            $gamification->executeEvent('forum_post');
+            $gamification->executeEvent('forum_post', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=>'forum_post_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
     // View forum post
         }else  if(strpos($_SERVER['PHP_SELF'], "forum/view.php") && isset($_REQUEST['fid'])){
             if($_SESSION['forum_view'] != $_REQUEST['fid']){
                 $_SESSION['forum_view'] = $_REQUEST['fid'];
-                $gamification->executeEvent('forum_view');
+                $gamification->executeEvent('forum_view', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=>'forum_view_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
             }
         }
         
@@ -121,10 +145,33 @@ if(isset($_SESSION['member_id'])){
     // BLOG
     // Blog posts and comments
     if(strpos($_SERVER['PHP_SELF'], "blogs/add_post.php") && isset($_POST['body']) && isset($_POST['title'])){
-            $gamification->executeEvent('blog_add');
+            $gamification->executeEvent('blog_add', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=>'blog_add_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
     // Comment on a blog post        
     } else if(strpos($_SERVER['PHP_SELF'], "blogs/post.php") && isset($_POST['body']) && isset($_POST['id'])){
-        $gamification->executeEvent('blog_comment');
+    //} else if(strpos($_SERVER['PHP_SELF'], "blogs/post.php") && isset($_POST['ot']) && isset($_POST['oid']) && isset($_POST['id'])){
+        $gamification->executeEvent('blog_comment', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=>'blog_comment_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
+        
+        
+       /* , array(
+                    'user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=>'blog_comment_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges())
+                    */
     // View a single blog posts
     } else if(strpos($_SERVER['PHP_SELF'], "blogs/post.php") && isset($_REQUEST['oid']) && isset($_REQUEST['id'])){
         $gamification->executeEvent('blog_post_view');
@@ -144,20 +191,44 @@ if(isset($_SESSION['member_id'])){
     // CHAT
     // Login to the chat
     if(strpos($_SERVER['PHP_SELF'], "chat/chat.php") && isset($_REQUEST['firstLoginFlag'])){
-        $gamification->executeEvent('chat_login');
+        $gamification->executeEvent('chat_login', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=>'chat_login_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
     //Post to chat
     } else if(isset($_REQUEST['tempField'])){
-        $gamification->executeEvent('chat_post');
+        $gamification->executeEvent('chat_post', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=>'chat_post_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
     }
     
     /////////
     // LINKS
     // Add link
    if(strpos($_SERVER['PHP_SELF'], "links/add.php") && isset($_POST['title']) && isset($_POST['cat']) && isset($_POST['url']) && isset($_POST['description'])){
-        $gamification->executeEvent('link_add');
+        $gamification->executeEvent('link_add', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=>'link_add_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
     // View Link
     } else if(strpos($_SERVER['PHP_SELF'], "links/index.php") && isset($_REQUEST['view'])){
-        $gamification->executeEvent('link_view');
+        $gamification->executeEvent('link_view', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=>'link_view_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
     }
     
     ////////
@@ -173,19 +244,41 @@ if(isset($_SESSION['member_id'])){
    if(strpos($_SERVER['PHP_SELF'], "photos/create_album.php") && isset($_POST['album_name']) && isset($_POST['album_type'])){
         $gamification->executeEvent('photo_create_album', 
                     array('user_id'=>$_SESSION['member_id'], 
-                    'email'=>$gm_member ['email'],
-                    'firstname'=>$gm_member ['first_name'],
+                    'email'=>$gm_member['email'],
+                    'alias'=> 'photo_create_album_badge',
+                    'firstname'=>$gm_member['first_name'],
                     'contact_email'=>$_config['contact_email'],
                     'badges'=>$gamification->getUserBadges()));
     } 
-    //var_dump($gamification->getUserBadges());
+    // Create multiple albums
+    if(strpos($_SERVER['PHP_SELF'], "photos/create_album.php") && isset($_POST['album_name']) && isset($_POST['album_type'])){
+        $gamification->executeEvent('photo_create_albums', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=> 'photo_create_albums_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
+    } 
     // Upload photo, does not consider multiple files can be uploaded at a time. 
     // Should link into the ajax doing the uploading
     if(strpos($_SERVER['PHP_SELF'], "photos/albums.php") && isset($_POST['upload'])){
-        $gamification->executeEvent('photo_upload');
+        $gamification->executeEvent('photo_upload', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=>'photo_upload_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
     // Comment on Album
     } else if(strpos($_SERVER['HTTP_REFERER'], "photos/albums.php") && strpos($_SERVER['PHP_SELF'], "photos/addComment.php") && isset($_REQUEST['comment'])){
-        $gamification->executeEvent('photo_album_comment');
+        $gamification->executeEvent('photo_album_comment', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=>'photo_album_comment_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
     // View Album
     }else if(strpos($_SERVER['PHP_SELF'], "photos/albums.php") && isset($_REQUEST['id'])){
         // This does not work as expected. unset() below kills the album_viewed session var,
@@ -203,7 +296,13 @@ if(isset($_SESSION['member_id'])){
     }
     // Comment on Photo
     if(strpos($_SERVER['HTTP_REFERER'], "photos/photo.php") && strpos($_SERVER['PHP_SELF'], "photos/addComment.php") && isset($_REQUEST['comment'])){
-        $gamification->executeEvent('photo_comment');
+        $gamification->executeEvent('photo_comment', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=>'photo_comment_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
     } 
      // View Photo
     if(strpos($_SERVER['PHP_SELF'], "photos/photo.php") && isset($_REQUEST['pid']) && isset($_REQUEST['aid'])){
@@ -227,18 +326,31 @@ if(isset($_SESSION['member_id'])){
                     $sql = "SELECT description from %spa_photos WHERE id = %d";
                     $desc_exists = queryDB($sql, array(TABLE_PREFIX, $this_description[1]), TRUE);
                     if($desc_exists['description'] == ''){
-                        $gamification->executeEvent('photo_description');
+                        $gamification->executeEvent('photo_description', 
+                            array('user_id'=>$_SESSION['member_id'], 
+                            'email'=>$gm_member['email'],
+                            'alias'=>'photo_description_badge',
+                            'firstname'=>$gm_member['first_name'],
+                            'contact_email'=>$_config['contact_email'],
+                            'badges'=>$gamification->getUserBadges()));
                     }
                 }
             }
-            // For each new description, give points
+            // For each new alt text, give points
             if(strstr($key, 'alt_text')){
+                $this_alt = explode("_",$key);
                 if(strlen($value) >9){
                      // Check for existing alt text, points only for new
                     $sql = "SELECT alt_text from %spa_photos WHERE id = %d";
-                    $alt_exists = queryDB($sql, array(TABLE_PREFIX, $this_description[1]), TRUE);
+                    $alt_exists = queryDB($sql, array(TABLE_PREFIX, $this_alt[1]), TRUE);
                     if($alt_exists['alt_text'] == ''){
-                        $gamification->executeEvent('photo_alt_text');
+                        $gamification->executeEvent('photo_alt_text', 
+                            array('user_id'=>$_SESSION['member_id'], 
+                            'email'=>$gm_member['email'],
+                            'alias'=>'photo_alt_text_badge',
+                            'firstname'=>$gm_member['first_name'],
+                            'contact_email'=>$_config['contact_email'],
+                            'badges'=>$gamification->getUserBadges()));
                     }
                 }        
             }
@@ -252,7 +364,13 @@ if(isset($_SESSION['member_id'])){
         if($_REQUEST['id'] != $_SESSION['member_id']){
             if($_SESSION['view_profile'] != $_REQUEST['id']){
                 $_SESSION['view_profile'] = $_REQUEST['id'];
-                $gamification->executeEvent('profile_view');
+                $gamification->executeEvent('profile_view', 
+                    array('user_id'=>$_SESSION['member_id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=> 'profile_view_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
             }
         }
     }
@@ -261,9 +379,17 @@ if(isset($_SESSION['member_id'])){
         if($_REQUEST['id'] != $_SESSION['member_id']){
             if($_SESSION['profile_viewed'] != $_REQUEST['id']){
                 $_SESSION['profile_viewed'] = $_REQUEST['id'];
+                $sql = "SELECT email, first_name FROM %smembers WHERE member_id =%d";
+                $gm_member = queryDB($sql, array(TABLE_PREFIX, $_REQUEST['id']), TRUE);
                 // temporarily set user id to that of the profile being viewed
                 $gamification->setUserId($_REQUEST['id']);
-                $gamification->executeEvent('profile_viewed');
+                $gamification->executeEvent('profile_viewed' ,                    
+                    array('user_id'=>$_REQUEST['id'], 
+                    'email'=>$gm_member['email'],
+                    'alias'=> 'profile_viewed_badge',
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
                 // Switch back to the session's owner
                 $gamification->setUserId($_SESSION['member_id']);
             }
@@ -271,7 +397,13 @@ if(isset($_SESSION['member_id'])){
     }
     // Upload a profile picture
      if(!strpos($_SERVER['PHP_SELF'], "profile.php") && !empty($_POST['id']) && !empty($_POST['upload'])){
-        $gamification->executeEvent('profile_pic_upload');
+        $gamification->executeEvent('profile_pic_upload', array(
+                    'user_id'=>$_SESSION['member_id'], 
+                    'alias'=> 'profile_pic_upload_badge',
+                    'email'=>$gm_member['email'],
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
      }
     
     // Prevent profile reloading for points
@@ -305,22 +437,46 @@ if(isset($_SESSION['member_id'])){
     ///////////
     // PERSONAL PREFERENCES
      if(strpos($_SERVER['PHP_SELF'], "pref_wizard/index.php") && !empty($_POST['done'])){
-        $gamification->executeEvent('prefs_update'); 
+        $gamification->executeEvent('prefs_update', array(
+                    'user_id'=>$_SESSION['member_id'], 
+                    'alias'=> 'prefs_update_badge',
+                    'email'=>$gm_member['email'],
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges())); 
      }
      
      /////////
      // FILE STORAGE
      // Create folder
      if(strpos($_SERVER['PHP_SELF'], "file_storage/index.php") && !empty($_POST['new_folder_name'])){
-        $gamification->executeEvent('new_folder'); 
+        $gamification->executeEvent('new_folder', array(
+                    'user_id'=>$_SESSION['member_id'], 
+                    'alias'=> 'new_folder_badge',
+                    'email'=>$gm_member['email'],
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges()));
      }
     // Upload file
      if(strpos($_SERVER['PHP_SELF'], "file_storage/index.php") && !empty($_POST['upload'])){
-        $gamification->executeEvent('upload_file'); 
+        $gamification->executeEvent('upload_file', array(
+                    'user_id'=>$_SESSION['member_id'], 
+                    'alias'=> 'upload_file_badge',
+                    'email'=>$gm_member['email'],
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges())); 
      }
     // Create new file
     if(strpos($_SERVER['PHP_SELF'], "file_storage/new.php") && !empty($_POST['body'])){
-        $gamification->executeEvent('create_file'); 
+        $gamification->executeEvent('create_file', array(
+                    'user_id'=>$_SESSION['member_id'], 
+                    'alias'=> 'create_file_badge',
+                    'email'=>$gm_member['email'],
+                    'firstname'=>$gm_member['first_name'],
+                    'contact_email'=>$_config['contact_email'],
+                    'badges'=>$gamification->getUserBadges())); 
     }
     // Download file NOT WORKING, NO PAGE RELOAD TO TRIGGER
     //if(strpos($_SERVER['PHP_SELF'], "file_storage/index.php") && !empty($_POST['download'])){

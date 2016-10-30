@@ -325,7 +325,7 @@ function showUserBadgesStudents(PHPGamification $gamification)
         foreach ($badges as $badge) {
             echo "<tr>";
             echo "<td>".getBadgeImage( $gamification, $badge->getIdBadge())."</td>";;
-           // echo "<td>".$badge->getBadgeCounter()."</td>";
+            //echo "<td>".$badge->getBadgeCounter()."</td>";
             echo "<td>".$badge->getBadge()->getTitle()."</td>";
             echo "<td>".$badge->getBadge()->getDescription()."</td>";            
             echo "</tr>"."\n";
@@ -455,4 +455,5 @@ function show_instructor(){
     $show_instructor = queryDB($sql, array(TABLE_PREFIX, 'showinstructor', $_SESSION['course_id']), TRUE);
     return $show_instructor['value'];
 }  
+
 ?>

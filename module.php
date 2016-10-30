@@ -66,8 +66,6 @@ if (admin_authenticate(AT_ADMIN_PRIV_GAMIFY, TRUE)) {
     $this->_pages['mods/gamify/delete_badget.php']['parent']   = 'mods/gamify/index_admin.php';    
 	$this->_pages['mods/gamify/delete_level.php']['title_var'] = 'delete_level';
     $this->_pages['mods/gamify/delete_level.php']['parent']   = 'mods/gamify/index_admin.php';
-	//$this->_pages['mods/gamify/PHPGamification/Sample/index.php']['title_var'] = 'gamify_sample';
-
 }
 
 /*******
@@ -95,15 +93,18 @@ $this->_pages['mods/gamify/game_options.php']['title_var'] = 'game_options';
 $this->_pages['mods/gamify/game_options.php']['parent']   = 'mods/gamify/index_instructor.php';
 $this->_pages['mods/gamify/index_instructor.php']['img']    = 'mods/gamify/images/gamify.png';
 }
-// ** possible alternative: **
-// $this->pages['./index_instructor.php']['title_var'] = 'gamify';
-// $this->pages['./index_instructor.php']['parent']    = 'tools/index.php';
 
 /*******
  * student page.
  */
 $this->_pages['mods/gamify/index.php']['title_var'] = 'gamify';
 $this->_pages['mods/gamify/index.php']['img']       = 'mods/gamify/gamify.png';
+
+/* Add GameMe tab to Course Networking */
+$this->_pages['mods/gamify/my_progress.php']['title_var']   = 'gameme';
+$this->_pages['mods/gamify/my_progress.php']['parent']   = 'mods/_standard/social/index.php';
+$this->_pages['mods/_standard/social/index.php']['children'] = array_merge(
+array('mods/gamify/my_progress.php'));
 
 /* public pages */
 //$this->_pages[AT_NAV_PUBLIC] = array('mods/gamify/index_public.php');
@@ -114,6 +115,13 @@ $this->_pages['mods/gamify/index.php']['img']       = 'mods/gamify/gamify.png';
 $this->_pages[AT_NAV_START]  = array('mods/gamify/index_mystart.php');
 $this->_pages['mods/gamify/index_mystart.php']['title_var'] = 'gamify';
 $this->_pages['mods/gamify/index_mystart.php']['parent'] = AT_NAV_START;
+
+
+/* Add GameMe tab to MyStart Networking */
+//$this->_pages['mods/gamify/my_progress.php']['title_var']   = 'gameme';
+//$this->_pages['mods/gamify/my_progress.php']['parent']   = 'mods/_standard/social/index_mystart.php';
+//$this->_pages['mods/_standard/social/index_mystart.php']['children'] = array_merge(
+//array('mods/gamify/my_progress.php'));
 
 /*******
  * Use the following array to define a tool to be added to the Content Editor's icon toolbar. 
@@ -170,7 +178,7 @@ if($_SESSION['is_admin'] == 1){
         $has_options = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']));
         if(empty($has_options[0])){
             global $msg;
-            $msg->addWarning("Gamify options must be set in this course. Under the Manage tab, open Gamify and select the Option tab.");
+            $msg->addWarning("GameMe options must be set in this course. Under the Manage tab, open GameMe and select the Option tab.");
         }
     }
 }
