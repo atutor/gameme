@@ -239,19 +239,11 @@ global $_base_href;
     
     $sql = "SELECT id FROM %sgm_levels WHERE course_id = %d AND points = %d";
     $course_levels = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id'], $points), TRUE);
-    
-    //$this_levels = array();
-    //foreach($course_levels as $course_level){
-    //    array_push($this_levels, $course_level['id']);
-    //}
     $content_dir = explode('/',AT_CONTENT_DIR);
     array_pop($content_dir);
-
-   // foreach($levels as $level){
-        
         $sql = "SELECT icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
         $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],$_SESSION['course_id']), TRUE);
-
+        // this chunk doubles the page load time
         if(!empty($level_image['icon'])){
             if(file_get_contents($_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gamify/levels/'.$level_image['icon'])){
                 $level_file =  $_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gamify/levels/'.$level_image['icon'];
