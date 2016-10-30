@@ -1,9 +1,9 @@
 <?php
-namespace gamify\PHPGamification;
+namespace gameme\PHPGamification;
 use Exception;
-use gamify\PHPGamification;
-use gamify\PHPGamification\Model;
-use gamify\PHPGamification\Model\Event;
+use gameme\PHPGamification;
+use gameme\PHPGamification\Model;
+use gameme\PHPGamification\Model\Event;
 
 define('AT_INCLUDE_PATH', '../../include/');
 require (AT_INCLUDE_PATH.'vitals.inc.php');
@@ -33,8 +33,8 @@ if($_SESSION['course_id'] > 0){
         } else {
             $sql = "SELECT * from %sgm_events WHERE  id=%d AND course_id = 0";
             $default_event = queryDB($sql, array(TABLE_PREFIX, $_POST["id"]), TRUE);
-            require_once($this_path.'mods/gamify/gamify.lib.php');
-            require_once($this_path.'mods/gamify/PHPGamification/PHPGamification.class.php');
+            require_once($this_path.'mods/gameme/gamify.lib.php');
+            require_once($this_path.'mods/gameme/PHPGamification/PHPGamification.class.php');
             $gamification = new PHPGamification();
             $gamification->setDAO(new DAO(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD));
             $event = new Event();

@@ -6,10 +6,10 @@
  * Time: 11:13
  */
 
-namespace gamify\PHPGamification\Model;
+namespace gameme\PHPGamification\Model;
 
 
-use gamify\PHPGamification;
+use gameme\PHPGamification;
 
 class UserAlert extends Entity
 {

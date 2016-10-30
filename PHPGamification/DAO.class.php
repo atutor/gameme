@@ -5,22 +5,22 @@
  * Data Access Object for gamification persistent data layer
  */
 
-namespace gamify\PHPGamification;
+namespace gameme\PHPGamification;
 
 use Exception;
 use PDO;
 use PDOException;
 use PDOStatement;
 use ReflectionClass;
-use gamify\PHPGamification\Model\DAOInterface;
-use gamify\PHPGamification\Model\Badge;
-use gamify\PHPGamification\Model\Event;
-use gamify\PHPGamification\Model\Level;
-use gamify\PHPGamification\Model\UserAlert;
-use gamify\PHPGamification\Model\UserBadge;
-use gamify\PHPGamification\Model\UserEvent;
-use gamify\PHPGamification\Model\UserLog;
-use gamify\PHPGamification\Model\UserScore;
+use gameme\PHPGamification\Model\DAOInterface;
+use gameme\PHPGamification\Model\Badge;
+use gameme\PHPGamification\Model\Event;
+use gameme\PHPGamification\Model\Level;
+use gameme\PHPGamification\Model\UserAlert;
+use gameme\PHPGamification\Model\UserBadge;
+use gameme\PHPGamification\Model\UserEvent;
+use gameme\PHPGamification\Model\UserLog;
+use gameme\PHPGamification\Model\UserScore;
 
 class DAO implements DAOInterface
 {
@@ -134,7 +134,7 @@ class DAO implements DAOInterface
     {
         $return = array();
         foreach ($dataArray as $data) {
-            $reflection = new ReflectionClass("gamify\\PHPGamification\\Model\\" . $targetClass);
+            $reflection = new ReflectionClass("gameme\\PHPGamification\\Model\\" . $targetClass);
             $objInstance = $reflection->newInstanceArgs(array('StdClass' => $data));
             if ($keyField != null)
                 $return[$objInstance->get($keyField)] = $objInstance;

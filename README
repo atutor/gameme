@@ -9,9 +9,9 @@ Cloned from: https://github.com/TiagoGouvea/PHPGamification.git
 
 ## Module Code
 
-ATutor module repository: gamify
+ATutor module repository: gameme
 
-https://github.com/atutor/gamify
+https://github.com/atutor/gameme
 ## Features
 ### Admin
 
@@ -65,8 +65,10 @@ https://github.com/atutor/gamify
 * files downloaded from file storage
 * files uploaded to file storage
 * new file created with file storage
+
 #### See who are the most active, and most accomplished
 * leaderboard showing the top contributors (sidemenu)
+
 #### Monitor personal activity and accomplishments (sidemenu)
 * numbers displayed the available activities and accomplishments (profile page)
 * badges collected.

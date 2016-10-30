@@ -1,4 +1,4 @@
 <?php
 
-echo "This is a handbook page for Gamify";
+echo "This is a handbook page for GameMe";
 ?>

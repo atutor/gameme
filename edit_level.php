@@ -1,16 +1,16 @@
 <?php
-namespace gamify\PHPGamification;
+namespace gameme\PHPGamification;
 use Exception;
-use gamify\PHPGamification;
-use gamify\PHPGamification\Model;
-use gamify\PHPGamification\Model\Level;
+use gameme\PHPGamification;
+use gameme\PHPGamification\Model;
+use gameme\PHPGamification\Model\Level;
 
 define('AT_INCLUDE_PATH', '../../include/');
 require (AT_INCLUDE_PATH.'vitals.inc.php');
-admin_authenticate(AT_ADMIN_PRIV_GAMIFY);
-$_custom_css = $_base_path . 'mods/gamify/module.css'; // use a custom stylesheet
+admin_authenticate(AT_ADMIN_PRIV_GAMEME);
+$_custom_css = $_base_path . 'mods/gameme/module.css'; // use a custom stylesheet
 $_custom_head ='<script type="text/javascript" src="'.$_base_path .'jscripts/lib/jquery.1.10.1.min.js"></script>'."\n";
-$_custom_head.='<script type="text/javascript" src="'.$_base_path .'mods/gamify/gamify.js"></script>'."\n";
+$_custom_head.='<script type="text/javascript" src="'.$_base_path .'mods/gameme/gamify.js"></script>'."\n";
  $_custom_head.='  
 	<script type="text/javascript">
 	//<!--
@@ -20,22 +20,22 @@ $_custom_head.='<script type="text/javascript" src="'.$_base_path .'mods/gamify/
 	
 if($_POST['cancel']){
 $msg->addFeedback('cancelled');
-header('Location:'.$_base_href.'mods/gamify/index_admin.php?tab=3');
+header('Location:'.$_base_href.'mods/gameme/index_admin.php?tab=3');
 exit;
 }
 if($_POST['submit']){
     global $_base_path;
     // this line is a hack
     $this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$_base_path);
-    require_once($this_path.'mods/gamify/gamify.lib.php');
-    require_once($this_path.'mods/gamify/PHPGamification/PHPGamification.class.php');
+    require_once($this_path.'mods/gameme/gamify.lib.php');
+    require_once($this_path.'mods/gameme/PHPGamification/PHPGamification.class.php');
     $gamification = new PHPGamification();
     $gamification->setDAO(new DAO(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD));
     
     if(!empty($_POST['title']) && !empty($_POST['points'])){
         $gamification->addLevel($_POST['points'], $_POST['title'], $_POST['description']);
         $msg->addFeedback('success');
-        header('Location:'.$_base_href.'mods/gamify/index_admin.php?tab=3');
+        header('Location:'.$_base_href.'mods/gameme/index_admin.php?tab=3');
         exit;
     } else {
         $msg->addError("LEVEL_REQUIREMENTS");

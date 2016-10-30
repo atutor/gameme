@@ -1,6 +1,5 @@
 <?php
-// gamify;
-//use gamify\PHPGamification\DAO;
+
 
 class GmCallbacksClass
 {
@@ -383,18 +382,18 @@ class GmCallbacksClass
             
             $root_path =  preg_replace ('#/get.php#','',$_base_path);
             $this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$root_path);
-            require_once($this_path.'mods/gamify/gamify.lib.php');
+            require_once($this_path.'mods/gameme/gamify.lib.php');
             $from_email = $_config['contact_email'];
         
         if ($to_email != '') {
 				$tmp_message = $message;
-				require($this_path.'mods/gamify/atutormailer.class.php');
+				require($this_path.'mods/gameme/atutormailer.class.php');
 
 				$mail = new ATutorMailer;
                 $mail->IsHTML(true);
 				$mail->From = $from_email;
 				$mail->AddAddress($to_email);
-				$mail->Subject = "ATutor Gamify Notification";
+				$mail->Subject = "ATutor GameMe Notification";
 				$mail->Body    = $tmp_message;
 
 				if(!$mail->Send()) {
@@ -480,7 +479,7 @@ class GmCallbacksClass
             $content_dir = explode('/',AT_CONTENT_DIR);
             array_pop($content_dir);
             $badge_file_name = explode("/",$badge['image_url']);
-            $badge_file = end($content_dir).'/0/gamify/badges/'.end($badge_file_name);
+            $badge_file = end($content_dir).'/0/gameme/badges/'.end($badge_file_name);
         } else{
             $badge_file = $_base_href.$badge['image_url'];
         }

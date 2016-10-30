@@ -1,4 +1,4 @@
-REPLACE INTO `language_text` VALUES ('en', '_module', 'gamify', 'Gamify', '2016-09-25 15:59:56', 'gamification mod');
+REPLACE INTO `language_text` VALUES ('en', '_module', 'gameme', 'GameMe', '2016-09-25 15:59:56', 'gamification mod');
 
 CREATE TABLE `gm_badges` (
 `id` int(11) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE `gm_badges` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 INSERT INTO `gm_badges` (`id`, `course_id`, `alias`, `title`, `description`, `image_url`) VALUES
-(7, 0, 'upload_file_badge', 'Good use of File Storage', 'You have figured out how to upload files into the course.', 'mods/gamify/images/badges/arrow.png'),
+(7, 0, 'upload_file_badge', 'Good use of File Storage', 'You have figured out how to upload files into the course.', 'mods/gameme/images/badges/arrow.png'),
 (8, 0, 'create_file_badge', 'Create your own files', 'You learned how to create new files in File Storage.', 'mods/gamify/images/badges/doc.png'),
 (2, 0, 'profile_viewed_badge', 'You''re getting noticed', '25 people have viewed your profile', 'mods/gamify/images/badges/eye.png'),
 (1, 0, 'profile_view_badge', 'You know your classmates', 'You have viewed 25 of your classmates'' profiles', 'mods/gamify/images/badges/id.png'),

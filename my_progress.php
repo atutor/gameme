@@ -1,6 +1,6 @@
 <?php
-namespace gamify;
-use gamify\PHPGamification\DAO;
+namespace gameme;
+use gameme\PHPGamification\DAO;
 
 global $_base_path;
 define('AT_INCLUDE_PATH', '../../include/');
@@ -17,15 +17,15 @@ $sql="SELECT course_id FROM %scourse_enrollment WHERE member_id =%d";
 $enrolled_courses = queryDB($sql, array(TABLE_PREFIX, $this_member));
 
 
-$_custom_css = $_base_path . 'mods/gamify/module.css'; // use a custom stylesheet
+$_custom_css = $_base_path . 'mods/gameme/module.css'; // use a custom stylesheet
 //$_custom_head ='<script type="text/javascript" src="'.$_base_path .'jscripts/lib/jquery.1.10.1.min.js"></script>'."\n";
-$_custom_head.='<script type="text/javascript" src="'.$_base_path .'mods/gamify/gamify.js"></script>'."\n";
-$_custom_head .= '<script type="text/javascript" src="'.$_base_path.'mods/gamify/jquery/js.cookie-min.js"></script>'."\n";
+$_custom_head.='<script type="text/javascript" src="'.$_base_path .'mods/gameme/gamify.js"></script>'."\n";
+$_custom_head .= '<script type="text/javascript" src="'.$_base_path.'mods/gameme/jquery/js.cookie-min.js"></script>'."\n";
 require (AT_INCLUDE_PATH.'header.inc.php');
 
 $this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$_base_path);
-require_once($this_path.'mods/gamify/gamify.lib.php');
-require_once($this_path.'mods/gamify/PHPGamification/PHPGamification.class.php');
+require_once($this_path.'mods/gameme/gamify.lib.php');
+require_once($this_path.'mods/gameme/PHPGamification/PHPGamification.class.php');
 $gamification = new PHPGamification();
 $gamification->setDAO(new DAO(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD));
 $gamification->setUserId($_SESSION['member_id']);

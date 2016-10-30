@@ -1,6 +1,6 @@
 <?php
 
-namespace gamify\PHPGamification\Model;
+namespace gameme\PHPGamification\Model;
 
 /**
  * Interface PHPGamificationDAOint

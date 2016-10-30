@@ -1,26 +1,17 @@
 <?php
-namespace gamify;
-use gamify\PHPGamification\DAO;
+namespace gameme;
+use gameme\PHPGamification\DAO;
 
 define('AT_INCLUDE_PATH', '../../include/');
 require (AT_INCLUDE_PATH.'vitals.inc.php');
 authenticate(AT_PRIV_HELLO_WORLD);
 global $_base_path;
-$_custom_css = $_base_path . 'mods/gamify/module.css'; // use a custom stylesheet
-/*
-$_custom_head = '<script type="text/javascript" src="'.$_base_path .'mods/gamify/jquery/1.11.1/jquery.min.js"></script>'."\n";
- $_custom_head.='  
-	<script type="text/javascript">
-	//<!--
-	jQuery.noConflict();
-	//-->
-	<script>';
-	*/
-$_custom_head.= '<script type="text/javascript" src="'.$_base_path .'mods/gamify/gamify.js"></script>'."\n";
-$_custom_head .= '<script type="text/javascript" src="'.$_base_path.'mods/gamify/inline_edit/jquery-quickedit.js"></script>'."\n";
-$_custom_head .= '<script type="text/javascript" src="'.$_base_path.'mods/gamify/jquery/js.cookie-min.js"></script>'."\n";
-$_custom_head .= '<script type="text/javascript" src="'.$_base_path.'mods/gamify/dropzone.js"></script>'."\n";
-$_custom_head .= '<script type="text/javascript" src="'. $_base_path.'mods/gamify/inline_edit/jquery-quickedit.js"></script>'."\n";
+$_custom_css = $_base_path . 'mods/gameme/module.css'; // use a custom stylesheet
+$_custom_head.= '<script type="text/javascript" src="'.$_base_path .'mods/gameme/gamify.js"></script>'."\n";
+$_custom_head .= '<script type="text/javascript" src="'.$_base_path.'mods/gameme/inline_edit/jquery-quickedit.js"></script>'."\n";
+$_custom_head .= '<script type="text/javascript" src="'.$_base_path.'mods/gameme/jquery/js.cookie-min.js"></script>'."\n";
+$_custom_head .= '<script type="text/javascript" src="'.$_base_path.'mods/gameme/dropzone.js"></script>'."\n";
+$_custom_head .= '<script type="text/javascript" src="'. $_base_path.'mods/gameme/inline_edit/jquery-quickedit.js"></script>'."\n";
 
  $_custom_head.='  
 	<script type="text/javascript">
@@ -31,9 +22,9 @@ $_custom_head .= '<script type="text/javascript" src="'. $_base_path.'mods/gamif
 		function saveEvent(editableObj,column,id) {
 		cellvalue = editableObj.innerText;
 		cellvalue = cellvalue.replace(/<br>/g,"");
-			//$(editableObj).css("background","#FFF url('.$_base_path.'mods/gamify/images/loaderIcon.gif) no-repeat right");
+			//$(editableObj).css("background","#FFF url('.$_base_path.'mods/gameme/images/loaderIcon.gif) no-repeat right");
 			$.ajax({
-				url: "'.$_base_path.'mods/gamify/save_event.php",
+				url: "'.$_base_path.'mods/gameme/save_event.php",
 				type: "POST",
 				data:"column="+column+"&editval="+cellvalue+"&id="+id,
 				success: function(data){
@@ -47,9 +38,9 @@ $_custom_head .= '<script type="text/javascript" src="'. $_base_path.'mods/gamif
 		function saveBadge(editableObj,column,id) {
 		cellvalue = editableObj.innerText;
 		cellvalue = cellvalue.replace(/<br>/g,"");
-			$(editableObj).css("background","#FFF url('.$_base_path.'mods/gamify/images/loaderIcon.gif) no-repeat right");
+			$(editableObj).css("background","#FFF url('.$_base_path.'mods/gameme/images/loaderIcon.gif) no-repeat right");
 			$.ajax({
-				url: "'.$_base_path.'mods/gamify/save_badge.php",
+				url: "'.$_base_path.'mods/gameme/save_badge.php",
 				type: "POST",
 				data:"column="+column+"&editval="+cellvalue+"&id="+id,
 				success: function(data){
@@ -63,9 +54,9 @@ $_custom_head .= '<script type="text/javascript" src="'. $_base_path.'mods/gamif
         function saveLevel(editableObj,column,id) {
 		cellvalue = editableObj.innerText;
 		cellvalue = cellvalue.replace(/<br>/g,"");
-			$(editableObj).css("background","#FFF url('.$_base_path.'mods/gamify/images/loaderIcon.gif) no-repeat right");
+			$(editableObj).css("background","#FFF url('.$_base_path.'mods/gameme/images/loaderIcon.gif) no-repeat right");
 			$.ajax({
-				url: "'.$_base_path.'mods/gamify/save_level.php",
+				url: "'.$_base_path.'mods/gameme/save_level.php",
 				type: "POST",
 				data:"column="+column+"&editval="+cellvalue+"&id="+id,
 				success: function(data){
@@ -144,8 +135,8 @@ foreach($all_crs_events as $key=>$event){
     <td style="text-align:center;" contenteditable="true" onBlur="saveEvent(this,\'reach_points\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['reach_points'].'</td>
     <!--<td  contenteditable="true" onBlur="saveEvent(this,\'each_callback\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['each_callback'].'</td>
     <td contenteditable="true" onBlur="saveEvent(this,\'reach_callback\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['reach_callback'].'</td>-->
-    <td><!--<a href="mods/gamify/edit_event.php?id='.$event['id'].SEP.'course_id = '.$_SESSION['course_id'].'">edit</a>--> 
-    <a href="mods/gamify/delete_event.php?id='.$event['id'].SEP.'course_id='.$_SESSION['course_id'].'">remove</a></td>
+    <td><!--<a href="mods/gameme/edit_event.php?id='.$event['id'].SEP.'course_id = '.$_SESSION['course_id'].'">edit</a>--> 
+    <a href="mods/gameme/delete_event.php?id='.$event['id'].SEP.'course_id='.$_SESSION['course_id'].'">remove</a></td>
     </tr>'."\n";
     }
 ?>
@@ -178,7 +169,6 @@ $sql = "SELECT * from %sgm_events WHERE course_id=0";
 $all_events = queryDB($sql, array(TABLE_PREFIX));
 $count = 0;
 foreach($all_events as $key=>$event){
-  //  if(!isset($_SESSION['gamify_edit'])){
     $sql = "SELECT * from %sgm_events WHERE id = %d AND course_id=%d";
     $events_crs_exists = queryDB($sql, array(TABLE_PREFIX, $event['id'], $_SESSION['course_id']));
     if(empty($events_crs_exists)){
@@ -193,29 +183,10 @@ foreach($all_events as $key=>$event){
         <td style="text-align:center;">'.$event['each_points'].'</td>
         <td style="text-align:center;">'.$event['reach_points'].'</td>';
          if(!$_config['instructor_edit']){ 
-        echo '<td><a href="mods/gamify/copy_event.php?id='.$event['id'].SEP.'course_id = '.$_SESSION['course_id'].'">copy</a></td>'."\n";
+        echo '<td><a href="mods/gameme/copy_event.php?id='.$event['id'].SEP.'course_id = '.$_SESSION['course_id'].'">copy</a></td>'."\n";
         }
     }
     echo'    </tr>';    
-    /*else{
-        echo '<tr>
-    <td>'.$event['alias'].'</td>
-    <td>'.$event['description'].'</td>
-    
-    <td style="text-align:center;">'.$event['allow_repetitions'].'</td>
-    <td style="text-align:center;">'.$event['reach_required_repetitions'].'</td>
-    <td style="text-align:center;">'.$event['max_points'].'</td>
-    <td style="text-align:center;">'.$event['id_each_badge'].'</td>
-    <td style="text-align:center;">'.$event['id_reach_badge'].'</td>
-    <td style="text-align:center;">'.$event['each_points'].'</td>
-    <td style="text-align:center;">'.$event['reach_points'].'</td>
-    <td>'.$event['each_callback'].'</td>
-    <td>'.$event['reach_callback'].'</td>
-    <td><a href="mods/gamify/edit_event.php?id='.$event['id'].'">edit</a> <a href="">delete</a></td>
-    </tr>';
-    }
-  
-}  */
 }
 ?>
 </table>
@@ -245,12 +216,12 @@ foreach($all_badges as $badge){
         $content_dir = explode('/',AT_CONTENT_DIR);
         array_pop($content_dir);
         $badge_file_name = explode("/",$badge['image_url']);
-        $badge_file = end($content_dir).'/0/gamify/badges/'.end($badge_file_name);
+        $badge_file = end($content_dir).'/0/gameme/badges/'.end($badge_file_name);
     } else{
         $badge_file = $_base_href.$badge['image_url'];
     }
     echo '<tr>
-    <td contenteditable="true" onClick="showEdit(this);"><form action="'.$_base_href.'mods/gamify/upload_badge.php"
+    <td contenteditable="true" onClick="showEdit(this);"><form action="'.$_base_href.'mods/gameme/upload_badge.php"
       class="dropzone"
       id="badge'.$badge['id'].'"  style="background-image:url('.$badge_file.');background-repeat:no-repeat;" method="post" tabindex="0">
       <input type="hidden" name="course_id" value="'.$_SESSION['course_id'].'" /> 
@@ -264,7 +235,7 @@ foreach($all_badges as $badge){
     <td contenteditable="true" onBlur="saveBadge(this,\'title\',\''.$badge['id'].' \')" onClick="showEdit(this);">'.$badge['title'].'</td>
     <td contenteditable="true" onBlur="saveBadge(this,\'description\',\''.$badge['id'].' \')" onClick="showEdit(this);">'.$badge['description'].'</td>
 
-    <td> <a href="mods/gamify/delete_badge.php?id='.$badge['id'].SEP.'course_id='.$_SESSION['course_id'].'">remove</a></td></td>
+    <td> <a href="mods/gameme/delete_badge.php?id='.$badge['id'].SEP.'course_id='.$_SESSION['course_id'].'">remove</a></td></td>
     </tr>'."\n";
 }
 ?>
@@ -295,7 +266,7 @@ foreach($all_badges as $badge){
         $content_dir = explode('/',AT_CONTENT_DIR);
         array_pop($content_dir);
         $badge_file_name = explode("/",$badge['image_url']);
-        $badge_file = end($content_dir).'/0/gamify/badges/'.end($badge_file_name);
+        $badge_file = end($content_dir).'/0/gameme/badges/'.end($badge_file_name);
     } else{
         $badge_file = $_base_href.$badge['image_url'];
     }
@@ -309,7 +280,7 @@ foreach($all_badges as $badge){
         <td>'.$badge['title'].'</td>
         <td>'.$badge['description'].'</td>';
          if(!$_config['instructor_edit']){ 
-        echo '<td><a href="mods/gamify/copy_badge.php?id='.$badge['id'].SEP.'course_id = '.$_SESSION['course_id'].'">copy</a></td>';
+        echo '<td><a href="mods/gameme/copy_badge.php?id='.$badge['id'].SEP.'course_id = '.$_SESSION['course_id'].'">copy</a></td>';
         }
         echo '</tr>'."\n";
     }
@@ -333,12 +304,12 @@ if(!$_config['instructor_edit']){ ?>
 
 </tr>
 <?php
-require_once($this_path.'mods/gamify/gamify.lib.php');
+require_once($this_path.'mods/gameme/gamify.lib.php');
 $sql = "SELECT * from %sgm_levels WHERE course_id=%d";
 $all_levels = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']));
 foreach($all_levels as $level){
     echo '<tr>
-    <td><form action="'.$_base_href.'mods/gamify/upload_level_icon.php"
+    <td><form action="'.$_base_href.'mods/gameme/upload_level_icon.php"
           class="dropzone"
           id="level'.$level['id'].'"  style="background-image:url('.star_file($level['id']).');background-repeat:no-repeat;background-position: center; " method="post"  tabindex="0">
         <input type="hidden" name="course_id" value="'.$_SESSION['course_id'].'" /> 
@@ -351,7 +322,7 @@ foreach($all_levels as $level){
     <td contenteditable="true" onBlur="saveLevel(this,\'title\',\''.$level['id'].' \')" onClick="showEdit(this);">'.$level['title'].'</td>
     <td contenteditable="true" onBlur="saveLevel(this,\'description\',\''.$level['id'].' \')" onClick="showEdit(this);">'.$level['description'].'</td>
     <td contenteditable="true" onBlur="saveLevel(this,\'points\',\''.$level['id'].' \')" onClick="showEdit(this);">'.$level['points'].'</td>
-    <td><a href="mods/gamify/delete_level.php?id='.$level['id'].SEP.'course_id = '.$_SESSION['course_id'].'">remove</a></td>
+    <td><a href="mods/gameme/delete_level.php?id='.$level['id'].SEP.'course_id = '.$_SESSION['course_id'].'">remove</a></td>
     </tr>'."\n";
 }
 ?>
@@ -372,7 +343,7 @@ foreach($all_levels as $level){
 
 </tr>
 <?php
-require_once($this_path.'mods/gamify/gamify.lib.php');
+require_once($this_path.'mods/gameme/gamify.lib.php');
 $sql = "SELECT `value` from %sgm_options WHERE `course_id`=%d AND `option`='%s'";
 if($level_max = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id'], "level_count"),TRUE)){
     if($level_max['value']  >0){
@@ -385,13 +356,13 @@ $all_levels = queryDB($sql, array(TABLE_PREFIX, 0));
 
 foreach($all_levels as $level){
     $levels_crs_exists ='';
-    if(!file_get_contents($_base_href.'mods/gamify/image/'.$level['icon'])){
+    if(!file_get_contents($_base_href.'mods/gameme/image/'.$level['icon'])){
         $content_dir = explode('/',AT_CONTENT_DIR);
         array_pop($content_dir);
         $level_file_name = explode("/",$level['icon']);
-        $level_file = end($content_dir).'/0/gamify/levels/'.end($level_file_name);
+        $level_file = end($content_dir).'/0/gameme/levels/'.end($level_file_name);
     } else{
-        $level_file = $_base_href.'mods/gamify/image/'.$level['icon'];
+        $level_file = $_base_href.'mods/gameme/image/'.$level['icon'];
     }
     $sql = "SELECT * from %sgm_levels WHERE id = %d AND course_id=%d";
     $level_crs_exists = queryDB($sql, array(TABLE_PREFIX, $level['id'], $_SESSION['course_id']), TRUE);
@@ -403,7 +374,7 @@ foreach($all_levels as $level){
         <td>'.$level['description'].'</td>
         <td>'.$level['points'].'</td>';
     if(!$_config['instructor_edit']){ ?>
-        <td><a href="mods/gamify/copy_level.php?id=<?php echo $level['id'].SEP;?>course_id =<?php echo $_SESSION['course_id']; ?>">copy</a></td>
+        <td><a href="mods/gameme/copy_level.php?id=<?php echo $level['id'].SEP;?>course_id =<?php echo $_SESSION['course_id']; ?>">copy</a></td>
     <?php }
         echo '</tr>'."\n";
     }
@@ -415,9 +386,11 @@ foreach($all_levels as $level){
 <div id="panel4" class="panel" aria-labelledby="tab4" role="tabpanel" aria-hidden="true">
     <div id="info">Set game elements to display to students. </div> 
     <br style="clear:both;">
-    <form action="<?php echo  $_base_href; ?>mods/gamify/game_options.php" method="post">
+    <form action="<?php echo  $_base_href; ?>mods/gameme/game_options.php" method="post">
         <input type="checkbox" name="showpoints" id="showpoints" <?php if(get_option('showpoints', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
         <label for="showpoints">Points</label><br />
+        <input type="checkbox" name="showlog" id="showlog" <?php if(get_option('showlog', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
+        <label for="showlog">Log</label><br />
         <input type="checkbox" name="showlevels" id="showlevels" <?php if(get_option('showlevels', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
         <label for="showlevels">Levels</label><br />
         <input type="checkbox" name="showprogress" id="showprogress" <?php if(get_option('showprogress', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
@@ -533,8 +506,8 @@ if(!empty($_POST['member_id'])){
         $count++;
     }
     $this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$_base_path);
-    require_once($this_path.'mods/gamify/gamify.lib.php');
-    require_once($this_path.'mods/gamify/PHPGamification/PHPGamification.class.php');
+    require_once($this_path.'mods/gameme/gamify.lib.php');
+    require_once($this_path.'mods/gameme/PHPGamification/PHPGamification.class.php');
     $course_game = new PHPGamification();
     $course_game->setDAO(new DAO(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD));
     $course_game->setUserId($_POST['member_id']);
@@ -584,12 +557,12 @@ function showstars_lg($points){
     
     $lg_star = str_replace(".", "_lg.", $level['icon']);
     
-    if(!file_get_contents($_base_href.'mods/gamify/images/'.$level['icon'] )){
+    if(!file_get_contents($_base_href.'mods/gameme/images/'.$level['icon'] )){
         $content_dir = explode('/',AT_CONTENT_DIR);
         array_pop($content_dir);
-        $level_file = end($content_dir).'/0/gamify/levels/'.$level['icon'] ;
+        $level_file = end($content_dir).'/0/gameme/levels/'.$level['icon'] ;
     } else{
-        $level_file = $_base_href.'mods/gamify/images/'.$level['icon'] ;
+        $level_file = $_base_href.'mods/gameme/images/'.$level['icon'] ;
     }
     $stars .= '<img src="'.$level_file.'" alt="'.$level['title'].': '.$level['description'].'" title="'.$level['title'].': '.$level['description'].'" style="vertical-align:middle;margin-left:.2em;"/>'; 
     return $stars;
@@ -610,26 +583,21 @@ function star_file($id){
         $level = queryDB($sql, array(TABLE_PREFIX, $points, 0), TRUE);
     }
     
-    if(!file_get_contents($_base_href.'mods/gamify/images/'.$level['icon'] )){
+    if(!file_get_contents($_base_href.'mods/gameme/images/'.$level['icon'] )){
             $content_dir = explode('/',AT_CONTENT_DIR);
             array_pop($content_dir);
-            if(!file_get_contents(end($content_dir).'/0/gamify/levels/'.$level['icon'])){
-                $level_file = end($content_dir).'/'.$_SESSION['course_id'].'/gamify/levels/'.$level['icon'] ;
+            if(!file_get_contents(end($content_dir).'/0/gameme/levels/'.$level['icon'])){
+                $level_file = end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level['icon'] ;
             }else{
-                $level_file = end($content_dir).'/0/gamify/levels/'.$level['icon'] ;
+                $level_file = end($content_dir).'/0/gameme/levels/'.$level['icon'] ;
             }
         } else{
-            $level_file = $_base_href.'mods/gamify/images/'.$level['icon'] ;
+            $level_file = $_base_href.'mods/gameme/images/'.$level['icon'] ;
         }
     return $level_file;
     //return $stars;
 }
-?>
 
-<!--
-<script src="<?php echo $_base_href; ?>mods/gamify/jquery/1.11.1/jquery.min.js" type="text/javascript"></script> 
-<script type="text/javascript" src="<?php echo $_base_path; ?>mods/gamify/inline_edit/jquery-quickedit.js"></script> -->
-<?php
 if(!empty($_POST)){
     $json = json_encode($_POST);
 }

@@ -1,14 +1,13 @@
 <?php
-namespace gamify\PHPGamification;
+namespace gameme\PHPGamification;
 
 // PHP Gamification Block
 // Set enviroment
 
 use Exception;
-use gamify\PHPGamification;
-use gamify\atutorGamify;
-use gamify\PHPGamification\Model;
-use gamify\PHPGamification\Model\Event;
+use gameme\PHPGamification;
+use gameme\PHPGamification\Model;
+use gameme\PHPGamification\Model\Event;
 
 if(isset($_SESSION['member_id'])){
     global $_base_path;
@@ -22,8 +21,8 @@ if(isset($_SESSION['member_id'])){
     }else{
         $course_id = 0;
     } 
-    require_once($this_path.'/mods/gamify/GmCallbacksClass.php');
-    require_once($this_path.'/mods/gamify/PHPGamification/PHPGamification.class.php');
+    require_once($this_path.'/mods/gameme/GmCallbacksClass.php');
+    require_once($this_path.'/mods/gameme/PHPGamification/PHPGamification.class.php');
     $gamification = new PHPGamification();
     $gamification->setDAO(new DAO(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD));
     $gamification->setUserId($_SESSION['member_id'], $course_id);

@@ -82,7 +82,7 @@ div[aria-hidden='false'] {
 }
 .editable{
     background-color:#FDFDFD;
-    background: url('mods/gamify/images/loaderIcon.gif') no-repeat right; 
+    background: url('mods/gameme/images/loaderIcon.gif') no-repeat right; 
 }
 .tabactive{
     background-color: #f3f3f3;

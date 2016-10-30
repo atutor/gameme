@@ -9,9 +9,9 @@ Cloned from: https://github.com/TiagoGouvea/PHPGamification.git
 
 ## Module Code
 
-ATutor module repository: gamify
+ATutor module repository: gameme
 
-https://github.com/atutor/gamify
+https://github.com/atutor/gameme
 ## Features
 ### Admin
 

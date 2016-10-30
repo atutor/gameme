@@ -10,19 +10,19 @@
  * @license http://opensource.org/licenses/MIT MIT License
  */
 
-namespace gamify;
+namespace gameme;
 
 use Exception;
-use gamify\PHPGamification\DAO;
-use gamify\PHPGamification\Model;
-use gamify\PHPGamification\Model\Badge;
-use gamify\PHPGamification\Model\Event;
-use gamify\PHPGamification\Model\Level;
-use gamify\PHPGamification\Model\UserAlert;
-use gamify\PHPGamification\Model\UserBadge;
-use gamify\PHPGamification\Model\UserEvent;
-use gamify\PHPGamification\Model\UserLog;
-use gamify\PHPGamification\Model\UserScore;
+use gameme\PHPGamification\DAO;
+use gameme\PHPGamification\Model;
+use gameme\PHPGamification\Model\Badge;
+use gameme\PHPGamification\Model\Event;
+use gameme\PHPGamification\Model\Level;
+use gameme\PHPGamification\Model\UserAlert;
+use gameme\PHPGamification\Model\UserBadge;
+use gameme\PHPGamification\Model\UserEvent;
+use gameme\PHPGamification\Model\UserLog;
+use gameme\PHPGamification\Model\UserScore;
 
 require_once 'Autoload.php';
 

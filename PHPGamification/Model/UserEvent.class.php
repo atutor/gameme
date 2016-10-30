@@ -6,7 +6,7 @@
  * Time: 11:13
  */
 
-namespace gamify\PHPGamification\Model;
+namespace gameme\PHPGamification\Model;
 
 
 class UserEvent extends Entity

@@ -6,7 +6,7 @@
  * Time: 13:32
  */
 
-namespace gamify\PHPGamification\Model;
+namespace gameme\PHPGamification\Model;
 
 
 use Exception;

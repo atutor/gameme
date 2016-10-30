@@ -1,11 +1,11 @@
 <?php
-namespace gamify\PHPGamification;
+namespace gameme\PHPGamification;
 
 /*
 use Exception;
-use gamify\PHPGamification;
-use gamify\PHPGamification\Model;
-use gamify\PHPGamification\Model\Event;
+use gameme\PHPGamification;
+use gameme\PHPGamification\Model;
+use gameme\PHPGamification\Model\Event;
 */
 define('AT_INCLUDE_PATH', '../../include/');
 require (AT_INCLUDE_PATH.'vitals.inc.php');

@@ -1,23 +1,23 @@
 <?php
-namespace gamify\PHPGamification;
+namespace gameme\PHPGamification;
 use Exception;
-use gamify\PHPGamification;
-use gamify\PHPGamification\Model;
-use gamify\PHPGamification\Model\Event;
+use gameme\PHPGamification;
+use gameme\PHPGamification\Model;
+use gameme\PHPGamification\Model\Event;
 
 define('AT_INCLUDE_PATH', '../../include/');
 require (AT_INCLUDE_PATH.'vitals.inc.php');
 if($_SESSION['course_id'] >0){
-    authenticate(AT_PRIV_GAMIFY);
+    authenticate(AT_PRIV_GAMEME);
     $course_id = $_SESSION['course_id'];
 } else {
-    admin_authenticate(AT_ADMIN_PRIV_GAMIFY);
+    admin_authenticate(AT_ADMIN_PRIV_GAMEME);
     $course_id = 0;
 }
 
-$_custom_css = $_base_path . 'mods/gamify/module.css'; // use a custom stylesheet
+$_custom_css = $_base_path . 'mods/gameme/module.css'; // use a custom stylesheet
 //$_custom_head ='<script type="text/javascript" src="'.$_base_path .'jscripts/lib/jquery.1.10.1.min.js"></script>'."\n";
-$_custom_head.='<script type="text/javascript" src="'.$_base_path .'mods/gamify/gamify.js"></script>'."\n";
+$_custom_head.='<script type="text/javascript" src="'.$_base_path .'mods/gameme/gamify.js"></script>'."\n";
 $_custom_head.='  
 	<script type="text/javascript">
 	//<!--
@@ -28,19 +28,19 @@ $_custom_head.='
 
 if($_POST['cancel'] && $course_id >0){
     $msg->addFeedback('cancelled');
-    header('Location:'.$_base_href.'mods/gamify/index_instructor.php');
+    header('Location:'.$_base_href.'mods/gameme/index_instructor.php');
     exit;
 }else if ($_POST['cancel'] && $course_id ==0){
     $msg->addFeedback('cancelled');
-    header('Location:'.$_base_href.'mods/gamify/index_admin.php');
+    header('Location:'.$_base_href.'mods/gameme/index_admin.php');
     exit;
 }
 if($_POST['submit']){
     global $_base_path;
     // this line is a hack
     $this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$_base_path);
-    require_once($this_path.'mods/gamify/gamify.lib.php');
-    require_once($this_path.'mods/gamify/PHPGamification/PHPGamification.class.php');
+    require_once($this_path.'mods/gameme/gamify.lib.php');
+    require_once($this_path.'mods/gameme/PHPGamification/PHPGamification.class.php');
     $gamification = new PHPGamification();
     $gamification->setDAO(new DAO(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD));
     $event = new Event();
@@ -91,9 +91,9 @@ if($_POST['submit']){
     $gamification->addEvent($event, $course_id);
     $msg->addFeedback('success');
     if($course_id >0){
-        header('Location:'.$_base_href.'mods/gamify/index_instructor.php');
+        header('Location:'.$_base_href.'mods/gameme/index_instructor.php');
     }else{
-        header('Location:'.$_base_href.'mods/gamify/index_admin.php');
+        header('Location:'.$_base_href.'mods/gameme/index_admin.php');
     }
     exit;
 }

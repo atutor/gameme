@@ -1,11 +1,9 @@
 <?php 
-namespace gamify;
-use gamify\PHPGamification\DAO;
+namespace gameme;
+use gameme\PHPGamification\DAO;
 /* start output buffering: */
 global $savant;
-ob_start(); ?>
-
-<?php
+ob_start(); 
 global $_base_path;
 $sql = "SELECT * FROM %sgm_options WHERE course_id=%d";
 $gm_options = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']));
@@ -16,10 +14,10 @@ foreach($gm_options as $option => $value){
     $count++;
 }
 
-// this line is a hack
+// this next line is a hack
 $this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$_base_path);
-require_once($this_path.'mods/gamify/gamify.lib.php');
-require_once($this_path.'mods/gamify/PHPGamification/PHPGamification.class.php');
+require_once($this_path.'mods/gameme/gamify.lib.php');
+require_once($this_path.'mods/gameme/PHPGamification/PHPGamification.class.php');
 
 $gamification = new PHPGamification();
 $gamification->setDAO(new DAO(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD));
@@ -47,6 +45,6 @@ if(in_array('showposition',$enabled_options)){
 $savant->assign('dropdown_contents', ob_get_contents());
 ob_end_clean();
 
-$savant->assign('title', _AT('gamify')); // the box title
+$savant->assign('title', _AT('gameme')); // the box title
 $savant->display('include/box.tmpl.php');
 ?>

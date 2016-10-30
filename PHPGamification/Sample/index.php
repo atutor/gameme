@@ -2,7 +2,7 @@
 /**
  * Sample file showing how to use PHPGamification
  */
-namespace gamify\PHPGamification;
+namespace gameme\PHPGamification;
 
 define('AT_INCLUDE_PATH', '../../../../include/');
 require (AT_INCLUDE_PATH.'vitals.inc.php');
@@ -13,9 +13,9 @@ require (AT_INCLUDE_PATH.'header.inc.php');
 
 // Set enviroment
 use Exception;
-use gamify\PHPGamification;
-use gamify\PHPGamification\Model;
-use gamify\PHPGamification\Model\Event;
+use gameme\PHPGamification;
+use gameme\PHPGamification\Model;
+use gameme\PHPGamification\Model\Event;
 
 //error_reporting(E_ALL ^ E_NOTICE);
 //ini_set('display_errors', 'On');

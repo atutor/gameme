@@ -1,9 +1,9 @@
 <?php
-namespace gamify\PHPGamification;
+namespace gameme\PHPGamification;
 use Exception;
-use gamify\PHPGamification;
-use gamify\PHPGamification\Model;
-use gamify\PHPGamification\Model\Level;
+use gameme\PHPGamification;
+use gameme\PHPGamification\Model;
+use gameme\PHPGamification\Model\Level;
 
 define('AT_INCLUDE_PATH', '../../include/');
 require (AT_INCLUDE_PATH.'vitals.inc.php');
@@ -16,16 +16,16 @@ $ds = DIRECTORY_SEPARATOR;
  } else{
     $course_id = $_SESSION['course_id'];
  }
-$base_gamify_dir = AT_CONTENT_DIR.$course_id;
-$gamify_course_dir = $base_gamify_dir.'/gamify';
-$storeFolder = $gamify_course_dir.'/levels';  
-$base_store_folder = "content/".$course_id."/gamify/levels"; 
+$base_gameme_dir = AT_CONTENT_DIR.$course_id;
+$gameme_course_dir = $base_gameme_dir.'/gameme';
+$storeFolder = $gameme_course_dir.'/levels';  
+$base_store_folder = "content/".$course_id."/gameme/levels"; 
 
-if(!is_dir($base_gamify_dir )){
-    mkdir($base_gamify_dir);
+if(!is_dir($base_gameme_dir )){
+    mkdir($base_gameme_dir);
 }
-if(!is_dir($gamify_course_dir)){
-    mkdir($gamify_course_dir);
+if(!is_dir($gameme_course_dir)){
+    mkdir($gameme_course_dir);
 }
 if(!is_dir($storeFolder)){
     mkdir($storeFolder);

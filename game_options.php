@@ -1,5 +1,5 @@
 <?php
-namespace gamify\PHPGamification;
+namespace gameme\PHPGamification;
 
 define('AT_INCLUDE_PATH', '../../include/');
 require (AT_INCLUDE_PATH.'vitals.inc.php');
@@ -21,7 +21,7 @@ foreach($_POST as $option=>$value){
 }
 
 $msg->addFeedback('UPDATED_OPTIONS');
-header('Location: '.$_base_href.'mods/gamify/index_instructor.php');
+header('Location: '.$_base_href.'mods/gameme/index_instructor.php');
 exit;
 
 ?>
