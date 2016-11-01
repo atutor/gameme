@@ -4,7 +4,7 @@ use gameme\PHPGamification\DAO;
 
 define('AT_INCLUDE_PATH', '../../include/');
 require (AT_INCLUDE_PATH.'vitals.inc.php');
-authenticate(AT_PRIV_HELLO_WORLD);
+authenticate(AT_PRIV_GAMEME);
 global $_base_path;
 $_custom_css = $_base_path . 'mods/gameme/module.css'; // use a custom stylesheet
 $_custom_head.= '<script type="text/javascript" src="'.$_base_path .'mods/gameme/gamify.js"></script>'."\n";
@@ -292,7 +292,7 @@ foreach($all_badges as $badge){
 <div id="panel3" class="panel" aria-labelledby="tab3" role="tabpanel" aria-hidden="true">
 <?php
 if(!$_config['instructor_edit']){ ?>
-<div id="info">Copy Default Levels to modify them. Set the number of levels under the Options tab. </div>
+<div id="info">Copy Default Levels to modify them. </div>
 <h3>Course Levels</h3>
 <table class="table table-hover table-bordered col-sm-12 data">
 <tr>
@@ -388,23 +388,23 @@ foreach($all_levels as $level){
     <br style="clear:both;">
     <form action="<?php echo  $_base_href; ?>mods/gameme/game_options.php" method="post">
         <input type="checkbox" name="showpoints" id="showpoints" <?php if(get_option('showpoints', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showpoints">Points</label><br />
+        <label for="showpoints">Show Points</label><br />
         <input type="checkbox" name="showlog" id="showlog" <?php if(get_option('showlog', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showlog">Log</label><br />
+        <label for="showlog">Show Log</label><br />
         <input type="checkbox" name="showlevels" id="showlevels" <?php if(get_option('showlevels', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showlevels">Levels</label><br />
+        <label for="showlevels">Show Levels</label><br />
         <input type="checkbox" name="showprogress" id="showprogress" <?php if(get_option('showprogress', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showprogress">Progress to next level</label><br />
+        <label for="showprogress">Show progress to next level</label><br />
         <input type="checkbox" name="showposition" id="showposition" <?php if(get_option('showposition', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showposition">Position relative to others</label><br />
+        <label for="showposition">Show position relative to others</label><br />
         <input type="checkbox" name="showbadges" id="showbadges" <?php if(get_option('showbadges', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showbadges">Badges</label><br />
+        <label for="showbadges">Show Badges</label><br />
+        <input type="checkbox" name="showleaders" id="showleaders" <?php if(get_option('showleaders', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
+        <label for="showleaders">Show Leader Board</label><br />
         <input type="checkbox" name="showinstructor" id="showinstructor" <?php if(get_option('showinstructor', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
         <label for="showinstructor">Show instructor in leader board</label><br />
-        <input type="checkbox" name="showleaders" id="showleaders" <?php if(get_option('showleaders', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showleaders">Leader Board</label><br />
         <input type="checkbox" name="showalerts" id="showalerts" <?php if(get_option('showalerts', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showalerts">Alerts</label><br />
+        <label for="showalerts">Show Alerts</label><br />
         <select name="showleader_count" id="showleader_count">
         <?php
             // create an array with possible leader board lengths
@@ -448,7 +448,7 @@ foreach($all_levels as $level){
         ?>
         </select>
         
-        <label for="level_count">Number of levels (max 10)</label></br />
+        <label for="level_count">Number of levels (max 11)</label></br />
         <input type="submit" name="submit" value="Update Options">
     </form>
     </div>
@@ -474,7 +474,7 @@ $sql = "SELECT %scourse_enrollment.member_id, %smembers.login
 $students = queryDB($sql, array(TABLE_PREFIX, TABLE_PREFIX, TABLE_PREFIX, TABLE_PREFIX, TABLE_PREFIX,TABLE_PREFIX,TABLE_PREFIX,$_SESSION['course_id']));
 
 ?>
-<!--<div id="info">Select a user from the menu below to view that person's progress. </div> -->
+<div id="info">Select a user from the menu below to view that person's progress. </div>     
 <hr style="clear:both; width:99%;" />
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="input-form">
 <select name="member_id">
