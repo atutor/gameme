@@ -86,35 +86,33 @@ $this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$_base_pat
 
 <ul class="tablist " role="tablist" id="subnavlist">
 <li id="tab1" class="tab" aria-controls="panel1" aria-selected="true" tabindex="0" role="tab"  onclick="javascript:Cookies.set('activetab', 'tab1');">
-Events</li>
+<?php echo _AT('gm_events'); ?></li>
 <li id="tab2" class="tab" aria-controls="panel2" role="tab"  tabindex="0" aria-selected="false" onclick="javascript:Cookies.set('activetab', 'tab2');">
-Badges </li>
+<?php echo _AT('gm_badges'); ?></li>
 <li id="tab3" class="tab" aria-controls="panel3" role="tab"  tabindex="0" aria-selected="false"  onclick="javascript:Cookies.set('activetab', 'tab3');">
-Levels </li>
+<?php echo _AT('gm_levels'); ?></li>
 <li id="tab4" class="tab" aria-controls="panel4" role="tab"  tabindex="0" aria-selected="false"  onclick="javascript:Cookies.set('activetab', 'tab4');">
-Options </li>
+<?php echo _AT('gm_options'); ?></li>
 <li id="tab5" class="tab" aria-controls="panel5" role="tab"  tabindex="0" aria-selected="false"  onclick="javascript:Cookies.set('activetab', 'tab5');">
-Progress </li>
+<?php echo _AT('gm_progress'); ?></li>
 </ul>
 
 
 <div id="panel1" class="panel" aria-labelledby="tab1" role="tabpanel" aria-hidden="false">
 <?php  if(!$_config['instructor_edit']){ ?>
-<div id="info">Copy Default Events to modify them. </div>
-<h3>Course Events</h3>
+<?php $msg->printInfos('GM_COPY_EVENT'); ?>
+<h3><?php echo _AT('gm_course_events'); ?></h3>
 <table class="table table-hover table-bordered col-sm-12 data">
 <tr>
-<th>Alias</th>
-<th>Description</th>
-<th>Repetition</th>
-<th>Reach Reps</th>
-<th>Max Points</th>
-<th>Each Badge</th>
-<th>Reach Badge</th>
-<th>Each Point</th>
-<th>Reach Points</th>
-<!--<th>Each Callback</th>
-<th>Reach Callback</th> -->
+<th><?php echo _AT('gm_alias'); ?></th>
+<th><?php echo _AT('gm_description'); ?></th>
+<th><?php echo _AT('gm_repetition'); ?></th>
+<th><?php echo _AT('gm_reach_reps'); ?></th>
+<th><?php echo _AT('gm_max_points'); ?></th>
+<th><?php echo _AT('gm_each_badge'); ?></th>
+<th><?php echo _AT('gm_reach_badge'); ?></th>
+<th><?php echo _AT('gm_each_points'); ?></th>
+<th><?php echo _AT('gm_reach_points'); ?></th>
 <th></th>
 </tr>
 <?php
@@ -135,30 +133,29 @@ foreach($all_crs_events as $key=>$event){
     <td style="text-align:center;" contenteditable="true" onBlur="saveEvent(this,\'reach_points\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['reach_points'].'</td>
     <!--<td  contenteditable="true" onBlur="saveEvent(this,\'each_callback\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['each_callback'].'</td>
     <td contenteditable="true" onBlur="saveEvent(this,\'reach_callback\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['reach_callback'].'</td>-->
-    <td><!--<a href="mods/gameme/edit_event.php?id='.$event['id'].SEP.'course_id = '.$_SESSION['course_id'].'">edit</a>--> 
-    <a href="mods/gameme/delete_event.php?id='.$event['id'].SEP.'course_id='.$_SESSION['course_id'].'">remove</a></td>
+    <td><!--<a href="mods/gameme/edit_event.php?id='.$event['id'].SEP.'course_id = '.$_SESSION['course_id'].'">'._AT('gm_edit').'</a>--> 
+    <a href="mods/gameme/delete_event.php?id='.$event['id'].SEP.'course_id='.$_SESSION['course_id'].'">'._AT('gm_remove').'</a></td>
     </tr>'."\n";
     }
 ?>
 </table>
 <?php } else {
-    echo '<div id="info">Editing has been disabled. Contact your administrator to have editing turned on.</div>';
+
+    $msg->printInfos('GM_EDITING_DISABLED');
     
 }?>
-<h3>Default Events</h3>
+<h3><?php echo _AT('gm_default_events'); ?></h3>
 <table class="table table-hover table-bordered col-sm-12 data">
 <tr>
-<th>Alias</th>
-<th>Description</th>
-<th>Repetition</th>
-<th>Reach Reps</th>
-<th>Max Points</th>
-<th>Each Badge</th>
-<th>Reach Badge</th>
-<th>Each Point</th>
-<th>Reach Points</th>
-<!-- <th>Each Callback</th>
-<th>Reach Callback</th> -->
+<th><?php echo _AT('gm_alias'); ?></th>
+<th><?php echo _AT('gm_description'); ?></th>
+<th><?php echo _AT('gm_repetition'); ?></th>
+<th><?php echo _AT('gm_reach_reps'); ?></th>
+<th><?php echo _AT('gm_max_points'); ?></th>
+<th><?php echo _AT('gm_each_badge'); ?></th>
+<th><?php echo _AT('gm_reach_badge'); ?></th>
+<th><?php echo _AT('gm_each_points'); ?></th>
+<th><?php echo _AT('gm_reach_points'); ?></th>
 <?php  if(!$_config['instructor_edit']){ ?>
 <th></th>
 <?php } ?>
@@ -183,7 +180,7 @@ foreach($all_events as $key=>$event){
         <td style="text-align:center;">'.$event['each_points'].'</td>
         <td style="text-align:center;">'.$event['reach_points'].'</td>';
          if(!$_config['instructor_edit']){ 
-        echo '<td><a href="mods/gameme/copy_event.php?id='.$event['id'].SEP.'course_id = '.$_SESSION['course_id'].'">copy</a></td>'."\n";
+        echo '<td><a href="mods/gameme/copy_event.php?id='.$event['id'].SEP.'course_id = '.$_SESSION['course_id'].'">'._AT('gm_copy').'</a></td>'."\n";
         }
     }
     echo'    </tr>';    
@@ -195,16 +192,16 @@ foreach($all_events as $key=>$event){
 <div id="panel2" class="panel" aria-labelledby="tab2" role="tabpanel" aria-hidden="true">
 <?php
 if(!$_config['instructor_edit']){
+$msg->printInfos('GM_COPY_BADGE');
 ?>
-<div id="info">Copy Default Badges to modify them. </div>
-<h3>Course Badges</h3>
+<h3><?php echo _AT('gm_course_badges'); ?></h3>
 <table class="table table-hover table-bordered col-sm-12 data" style="max-width:100%;">
 <tr>
-<th>Badge</th>
-<th>ID</th>
-<th>Alias</th>
-<th>Title</th>
-<th>Description</th>
+<th><?php echo _AT('gm_badge'); ?></th>
+<th><?php echo _AT('gm_id'); ?></th>
+<th><?php echo _AT('gm_alias'); ?></th>
+<th><?php echo _AT('gm_title'); ?></th>
+<th><?php echo _AT('gm_description'); ?></th>
 <th></th>
 
 </tr>
@@ -235,24 +232,23 @@ foreach($all_badges as $badge){
     <td contenteditable="true" onBlur="saveBadge(this,\'title\',\''.$badge['id'].' \')" onClick="showEdit(this);">'.$badge['title'].'</td>
     <td contenteditable="true" onBlur="saveBadge(this,\'description\',\''.$badge['id'].' \')" onClick="showEdit(this);">'.$badge['description'].'</td>
 
-    <td> <a href="mods/gameme/delete_badge.php?id='.$badge['id'].SEP.'course_id='.$_SESSION['course_id'].'">remove</a></td></td>
+    <td> <a href="mods/gameme/delete_badge.php?id='.$badge['id'].SEP.'course_id='.$_SESSION['course_id'].'">'._AT('gm_remove').'</a></td></td>
     </tr>'."\n";
 }
 ?>
 </table>
 <?php } else {
-    echo '<div id="info">Editing has been disabled. Contact your administrator to have editing turned on.</div>';
-    
+    $msg->printInfos('GM_EDITING_DISABLED');    
 }?>
 
-<h3>Default Badges</h3>
+<h3><?php echo _AT('gm_default_badges'); ?></h3>
 <table class="table table-hover table-bordered col-sm-12 data" style="max-width:100%;">
 <tr>
-<th>Badge</th>
-<th>ID</th>
-<th>Alias</th>
-<th>Title</th>
-<th>Description</th>
+<th><?php echo _AT('gm_badge'); ?></th>
+<th><?php echo _AT('gm_id'); ?></th>
+<th><?php echo _AT('gm_alias'); ?></th>
+<th><?php echo _AT('gm_title'); ?></th>
+<th><?php echo _AT('gm_description'); ?></th>
 <?php
          if(!$_config['instructor_edit']){ ?>
 <th></th>
@@ -280,7 +276,7 @@ foreach($all_badges as $badge){
         <td>'.$badge['title'].'</td>
         <td>'.$badge['description'].'</td>';
          if(!$_config['instructor_edit']){ 
-        echo '<td><a href="mods/gameme/copy_badge.php?id='.$badge['id'].SEP.'course_id = '.$_SESSION['course_id'].'">copy</a></td>';
+        echo '<td><a href="mods/gameme/copy_badge.php?id='.$badge['id'].SEP.'course_id = '.$_SESSION['course_id'].'">'._AT('gm_copy').'</a></td>';
         }
         echo '</tr>'."\n";
     }
@@ -291,15 +287,16 @@ foreach($all_badges as $badge){
 
 <div id="panel3" class="panel" aria-labelledby="tab3" role="tabpanel" aria-hidden="true">
 <?php
-if(!$_config['instructor_edit']){ ?>
-<div id="info">Copy Default Levels to modify them. </div>
-<h3>Course Levels</h3>
+if(!$_config['instructor_edit']){ 
+$msg->printInfos('GM_COPY_DEFAULT_LEVELS');
+?>
+<h3><?php echo _AT('gm_course_levels'); ?></h3>
 <table class="table table-hover table-bordered col-sm-12 data">
 <tr>
-<th>Icon</th>
-<th>Level Name</th>
-<th>Description</th>
-<th>Points Threshold</th>
+<th><?php echo _AT('gm_icon'); ?></th>
+<th><?php echo _AT('gm_level_name'); ?></th>
+<th><?php echo _AT('gm_description'); ?></th>
+<th><?php echo _AT('gm_points_threshold'); ?></th>
 <th></th>
 
 </tr>
@@ -322,23 +319,22 @@ foreach($all_levels as $level){
     <td contenteditable="true" onBlur="saveLevel(this,\'title\',\''.$level['id'].' \')" onClick="showEdit(this);">'.$level['title'].'</td>
     <td contenteditable="true" onBlur="saveLevel(this,\'description\',\''.$level['id'].' \')" onClick="showEdit(this);">'.$level['description'].'</td>
     <td contenteditable="true" onBlur="saveLevel(this,\'points\',\''.$level['id'].' \')" onClick="showEdit(this);">'.$level['points'].'</td>
-    <td><a href="mods/gameme/delete_level.php?id='.$level['id'].SEP.'course_id = '.$_SESSION['course_id'].'">remove</a></td>
+    <td><a href="mods/gameme/delete_level.php?id='.$level['id'].SEP.'course_id = '.$_SESSION['course_id'].'">'._AT('gm_remove').'</a></td>
     </tr>'."\n";
 }
 ?>
 </table>
 <?php } else {
-    echo '<div id="info">Editing has been disabled. Contact your administrator to have editing turned on.</div>';
-    
+    $msg->printInfos('GM_EDITING_DISABLED');  
 }?>
-<h3>Default Levels</h3>
+<h3><?php echo _AT('gm_default_levels'); ?></h3>
 
 <table class="table table-hover table-bordered col-sm-12 data">
 <tr>
-<th>Icon</th>
-<th>Level Name</th>
-<th>Description</th>
-<th>Points Threshold</th>
+<th><?php echo _AT('gm_icon'); ?></th>
+<th><?php echo _AT('gm_level_name'); ?></th>
+<th><?php echo _AT('gm_description'); ?></th>
+<th><?php echo _AT('gm_points_threshold'); ?></th>
 <th></th>
 
 </tr>
@@ -374,7 +370,7 @@ foreach($all_levels as $level){
         <td>'.$level['description'].'</td>
         <td>'.$level['points'].'</td>';
     if(!$_config['instructor_edit']){ ?>
-        <td><a href="mods/gameme/copy_level.php?id=<?php echo $level['id'].SEP;?>course_id =<?php echo $_SESSION['course_id']; ?>">copy</a></td>
+        <td><a href="mods/gameme/copy_level.php?id=<?php echo $level['id'].SEP;?>course_id =<?php echo $_SESSION['course_id']; ?>"><?php echo _AT('gm_copy'); ?></a></td>
     <?php }
         echo '</tr>'."\n";
     }
@@ -384,27 +380,27 @@ foreach($all_levels as $level){
 </div>
 
 <div id="panel4" class="panel" aria-labelledby="tab4" role="tabpanel" aria-hidden="true">
-    <div id="info">Set game elements to display to students. </div> 
+    <?php  $msg->printInfos('GM_DISPLAY_ELEMENTS');  ?>
     <br style="clear:both;">
     <form action="<?php echo  $_base_href; ?>mods/gameme/game_options.php" method="post">
         <input type="checkbox" name="showpoints" id="showpoints" <?php if(get_option('showpoints', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showpoints">Show Points</label><br />
+        <label for="showpoints"><?php echo _AT('gm_points'); ?></label><br />
         <input type="checkbox" name="showlog" id="showlog" <?php if(get_option('showlog', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showlog">Show Log</label><br />
+        <label for="showlog"><?php echo _AT('gm_log'); ?></label><br />
         <input type="checkbox" name="showlevels" id="showlevels" <?php if(get_option('showlevels', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showlevels">Show Levels</label><br />
+        <label for="showlevels"><?php echo _AT('gm_levels'); ?></label><br />
         <input type="checkbox" name="showprogress" id="showprogress" <?php if(get_option('showprogress', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showprogress">Show progress to next level</label><br />
+        <label for="showprogress"><?php echo _AT('gm_progress_to_next2'); ?></label><br />
         <input type="checkbox" name="showposition" id="showposition" <?php if(get_option('showposition', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showposition">Show position relative to others</label><br />
+        <label for="showposition"><?php echo _AT('gm_position'); ?></label><br />
         <input type="checkbox" name="showbadges" id="showbadges" <?php if(get_option('showbadges', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showbadges">Show Badges</label><br />
-        <input type="checkbox" name="showleaders" id="showleaders" <?php if(get_option('showleaders', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showleaders">Show Leader Board</label><br />
+        <label for="showbadges"><?php echo _AT('gm_badges'); ?></label><br />
         <input type="checkbox" name="showinstructor" id="showinstructor" <?php if(get_option('showinstructor', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showinstructor">Show instructor in leader board</label><br />
+        <label for="showinstructor"><?php echo _AT('gm_show_instructor'); ?></label><br />
+        <input type="checkbox" name="showleaders" id="showleaders" <?php if(get_option('showleaders', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
+        <label for="showleaders"><?php echo _AT('gm_leader_board'); ?></label><br />
         <input type="checkbox" name="showalerts" id="showalerts" <?php if(get_option('showalerts', $_SESSION['course_id'])){ echo 'checked = "checked"';}?>/>
-        <label for="showalerts">Show Alerts</label><br />
+        <label for="showalerts"><?php echo _AT('gm_alerts'); ?></label><br />
         <select name="showleader_count" id="showleader_count">
         <?php
             // create an array with possible leader board lengths
@@ -426,7 +422,7 @@ foreach($all_levels as $level){
             }
         ?>
         </select>
-        <label for="show_leaders">Leader board length</label><br />
+        <label for="show_leaders"><?php echo _AT('gm_leader_length'); ?></label><br />
         <select name="level_count" id="level_count">
         <?php
             $level_counts = array('1','2','3','4','5','6','7','8','9','10', '11');
@@ -448,7 +444,7 @@ foreach($all_levels as $level){
         ?>
         </select>
         
-        <label for="level_count">Number of levels (max 11)</label></br />
+        <label for="level_count"><?php echo _AT('gm_level_number'); ?></label></br />
         <input type="submit" name="submit" value="Update Options">
     </form>
     </div>
@@ -465,7 +461,7 @@ function get_option($option, $course_id){
 }
 ?>
 <div id="panel5" class="panel" aria-labelledby="tab5" role="tabpanel" aria-hidden="true">
-<h3>Progress</h3>
+<h3><?php echo _AT('gm_progress'); ?></h3>
 <?php
 $sql = "SELECT %scourse_enrollment.member_id, %smembers.login 
             FROM %scourse_enrollment 
@@ -473,8 +469,8 @@ $sql = "SELECT %scourse_enrollment.member_id, %smembers.login
             WHERE %scourse_enrollment.course_id = %d";
 $students = queryDB($sql, array(TABLE_PREFIX, TABLE_PREFIX, TABLE_PREFIX, TABLE_PREFIX, TABLE_PREFIX,TABLE_PREFIX,TABLE_PREFIX,$_SESSION['course_id']));
 
+$msg->printInfos('SEE_PROGRESS'); 
 ?>
-<div id="info">Select a user from the menu below to view that person's progress. </div>     
 <hr style="clear:both; width:99%;" />
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="input-form">
 <select name="member_id">
@@ -488,14 +484,14 @@ foreach($students as $student){
 }
 ?>
 </select>
-<input type="submit" name="submit" value="view" />
+<input type="submit" name="submit" value="<?php echo _AT('gm_view'); ?>" />
 </form>
 
 
 <?php
 if(!empty($_POST['member_id'])){
 
-    echo '<h3>Progress for '.get_display_name($_POST['member_id']).'</h3>';
+    echo '<h3>'._AT('gm_progress_for', get_display_name($_POST['member_id'])).'</h3>';
     global $_base_path;
     $sql = "SELECT * FROM %sgm_options WHERE course_id=%d";
     $gm_options = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']));

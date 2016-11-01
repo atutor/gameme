@@ -118,7 +118,7 @@ if($_SESSION['is_admin'] == 1){
         $has_options = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']));
         if(empty($has_options[0])){
             global $msg;
-            $msg->addWarning("GameMe options must be set in this course. Under the Manage tab, open GameMe and select the Option tab.");
+            $msg->addWarning('GM_SET_GAMEME_OPTIONS');
         }
     }
 }

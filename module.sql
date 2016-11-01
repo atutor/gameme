@@ -1,4 +1,101 @@
-REPLACE INTO `language_text` VALUES ('en', '_module', 'gameme', 'GameMe', '2016-09-25 15:59:56', 'gamification mod');
+REPLACE INTO `language_text` VALUES ('en', '_module', 'gameme', 'GameMe',NOW(),'');
+REPLACE INTO `language_text` VALUES ('en', '_module', 'gm_gameme', 'GameMe',NOW(),'');
+# sql file for pdf converter module
+
+INSERT INTO `language_text` VALUES ('en', '_module','gm_leaders_top','Leaders (Top %s)',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_id','ID',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_level','Level',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_levels_awarded','Levels Awarded',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_description','Description',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_in_position','You are in position: %s',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_login_for_points','Login to collect points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_your_levels_reached','Your Levels Reached',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_title','Title',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_levels_awarded','Levels Awarded',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_progress_to_next','Progess to next level: %s/100',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_progress_to_next2','Progess to next level',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_manage_badges','Manage Badges',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_badge_id','Badge ID',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_counter','Counter',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_alias','Alias',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_your_badges','Your Badges',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_events','Events',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_your_alert','Your Alerts',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_no_alerts','No level or badge alerts to show',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_your_activity_log','Your Activity Log',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_event_date','Event Date',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_log','Log',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_alerts','Alerts',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_progress','Progress',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_options','Options',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_course_events','Course Events',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_repetition','Repetition',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_reach_reps','Reach Reps',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_max_points','Max Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_each_badge','Each Badge',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_reach_badge','Reach Badge',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_each_points','Each Point',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_reach_points','Reach Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_each_callback','Each Callback',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_reach_callback','Reach Callback',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_default_events','Default Events',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_remove','Remove',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_edit','Edit',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_copy','Copy',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_course_badges','Course Badges',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_default_badges','Default Badges',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_course_levels','Course Levels',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_icon','Icon',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_level_name','Level Name',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_points_threshold','Points Threshold',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_default_levels','Default Levels',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_position','Position relative to others',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_show_instructor','Show instructor in leader board',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_leader_board','Leader Board',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_leader_length','Leader board length',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_level_number','Number of levels (max 11)',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_progress_for','Progress for ',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_view','view',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
+
+
+
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_GM_SET_GAMEME_OPTIONS','GameMe options must be set in this course. Under the Manage tab, open GameMe and select the Option tab. Enable GameMe elements in Manage>Course Tools.',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_COPY_EVENT','Copy Default Events to modify them.',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_EDITING_DISABLED','Editing has been disabled. Contact your administrator to have editing turned on',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_COPY_BADGE','Copy Default Badges to modify them',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_COPY_DEFAULT_LEVELS','Copy Default Levels to modify them. Set the number of levels under the Options tab.',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_DISPLAY_ELEMENTS','Set game elements to display to students.',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_SEE_PROGRESS','Select a user from the menu below to view that person\'s progress. ',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
+
+
+
+
+
+
+
+
+
+
 
 CREATE TABLE `gm_badges` (
 `id` int(11) NOT NULL,

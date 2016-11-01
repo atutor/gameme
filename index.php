@@ -33,19 +33,19 @@ foreach($gm_options as $gm_option){
 <ul id="subnavlist" class="tablist " role="tablist">
 <?php if(in_array('showbadges', $this_options)){ ?>
 <li id="tab1" class="tab" aria-controls="panel1" aria-selected="true" tabindex="0" role="tab"   onclick="javascript:Cookies.set('activetab', 'tab1');">
-Badges</li>
+<?php echo _AT('gm_badges'); ?></li>
 <?php } ?>
 <?php if(in_array('showlevels', $this_options)){ ?>
 <li id="tab2" class="tab" aria-controls="panel2" role="tab"  tabindex="0" aria-selected="false"   onclick="javascript:Cookies.set('activetab', 'tab2');">
-Levels </li>
+<?php echo _AT('gm_levels'); ?></li>
 <?php } ?>
 <?php if(in_array('showalerts', $this_options)){ ?>
 <li id="tab3" class="tab" aria-controls="panel3" role="tab"  tabindex="0" aria-selected="false"   onclick="javascript:Cookies.set('activetab', 'tab3');">
-Alerts </li>
+<?php echo _AT('gm_alerts'); ?></li>
 <?php } ?>
 <?php if(in_array('showlog', $this_options)){ ?>
 <li id="tab4" class="tab" aria-controls="panel4" role="tab"  tabindex="0" aria-selected="false"   onclick="javascript:Cookies.set('activetab', 'tab4');">
-Log </li>
+<?php echo _AT('gm_log'); ?></li>
 <?php } ?>
 </ul>
 <?php if(in_array('showbadges', $this_options)){ ?>

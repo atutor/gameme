@@ -1,12 +1,12 @@
 <?php
 namespace gameme;
 
-/*
-
-
+/* Get a list of gameme leaders in a course
+* @$gamificaiton - a PHPGamifcations object
+* @$leader_depth - the number of leaders to display
 */
 function getLeaders(PHPGamification $gamification, $leader_depth){
-    echo "<h3>Leaders (Top ".$leader_depth.")</h3>";
+    echo "<h3>"._AT('gm_leaders_top', $leader_depth)."</h3>";
     $leaders = $gamification->getUsersPointsRanking($leader_depth);
     $sql = "SELECT member_id FROM %scourses WHERE course_id = %d";
     $instructor = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']), TRUE);
@@ -16,7 +16,7 @@ function getLeaders(PHPGamification $gamification, $leader_depth){
         width:95%; 
         border-top:1px solid #ded29e;
         border-bottom:1px solid #ded29e;
-        text-align:center;"><tr><th>#</th><th>ID</th><th>Points</th><th>Level</th></tr>';
+        text-align:center;"><tr><th>#</th><th>'._AT('gm_id').'</th><th>'._AT('gm_points').'</th><th>'._AT('gm_level').'</th></tr>';
    if(!empty($leaders)){
     foreach($leaders as $key=>$leader){
         // don't display instructor on leader board
@@ -72,7 +72,7 @@ function yourPosition($mid){
             if($leader['id_user'] != $instructor['member_id']){
                 $count++;
                 if($leader['id_user'] == $_SESSION['member_id'] && !$_SESSION['is_admin']){
-                    echo "<p>You are in position: ".$count."</p>"."\n";
+                    echo "<p>"._AT('gm_in_position' , $count)."</p>"."\n";
                 }
             }
     }
@@ -83,13 +83,13 @@ function yourPosition($mid){
 
 */
 function showUserScores(PHPGamification $gamification){
-    echo "<h3>Levels Awarded</h3>";
+    echo "<h3>"._AT('gm_levels_awarded')."</h3>";
     $score = $gamification->getUserScores();
     echo "<table class='data'>";
     echo "<tr>
     <th>&nbsp;</th>
-    <th>Level</th>
-    <th>Description</th>
+    <th>"._AT('gm_level')."</th>
+    <th>"._AT('gm_description')."</th>
     </tr>"."\n";
     echo showstars($score->getPoints());
     echo "</table>";
@@ -99,10 +99,9 @@ function showUserScores(PHPGamification $gamification){
 
 */  
 function showUserScore(PHPGamification $gamification, $courseId){
-    //echo "<h3>Your Scores</h3>";
     $score = $gamification->getUserScores();
     if($score->getPoints() == 0){
-        echo '<div style="text-align:center;">Login to collect points</div>';
+        echo '<div style="text-align:center;">'._AT('gm_login_for_points').'</div>';
     }
     echo "<div style=' 
     width:80%;
@@ -116,7 +115,7 @@ function showUserScore(PHPGamification $gamification, $courseId){
     background-color: #e9fbe9;
     border-radius:.3em;
     padding:.2em;'
-    >Points: " . $score->getPoints() . " </div><br /><hr />";
+    >"._AT('gm_points').": " . $score->getPoints() . " </div><br /><hr />";
 }
 /*
 
@@ -125,7 +124,7 @@ function showUserScore(PHPGamification $gamification, $courseId){
 function showUserLevels($gamification, $course_id)
 {
     $score = $gamification->getUserScores();
-    echo "<h3>Your Levels Reached</h3>";
+    echo "<h3>"._AT('gm_your_levels_reached')."</h3>";
     if ($score){
         $sql = "SELECT `value` from %sgm_options WHERE `course_id`=%d AND `option`='%s'";
         if($level_max = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id'], "level_count"),TRUE)){
@@ -135,10 +134,10 @@ function showUserLevels($gamification, $course_id)
         }
         echo "<table class='data'>
         <tr>
-        <th>Level</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Points</th>
+        <th>"._AT('gm_level')."</th>
+        <th>"._AT('gm_title')."</th>
+        <th>"._AT('gm_description')."</th>
+        <th>"._AT('gm_points')."</th>
         </tr>";
         $sql = "SELECT * FROM %sgm_levels WHERE points < %d ORDER BY points asc $limit ";
         $my_levels = queryDB($sql, array(TABLE_PREFIX, $score->getPoints()));
@@ -160,7 +159,7 @@ function showUserLevels($gamification, $course_id)
 */
 function showUserLevel(PHPGamification $gamification, $courseId){
 $score = $gamification->getUserScores();
-echo "<h3>Levels Awarded</h3>
+echo "<h3>"._AT('gm_levels_awarded')."</h3>
     <div style='background-color:#f6f6f6; width:100%; padding:.2em;margin-left:auto;margin-right:auto;' >".showstars($score->getPoints())."</div>";
     
 }
@@ -171,7 +170,7 @@ echo "<h3>Levels Awarded</h3>
 */
 function showUserProgress(PHPGamification $gamification, $courseId){
 $score = $gamification->getUserScores();
- return "<br >Progess to next level: ".$score->getProgress() ."/100<hr />";
+ return "<br >"._AT('gm_progress_to_next', $score->getProgress())."<hr />";
 }
 
 /*
@@ -278,16 +277,16 @@ global $_base_href;
 */
 function showUserBadges(PHPGamification $gamification)
 {
-    echo "<h3>Manage Badges</h3>";
+    echo "<h3>"._AT('gm_manage_badges')."</h3>";
     $badges = $gamification->getUserBadges();
     if ($badges){
         echo "<table class='data'>
         <tr>
         <th>&nbsp;</th>
-        <th>Badge ID</th>
-        <th>Counter</th>
-        <th>Alias</th>
-        <th>Description</th>
+        <th>"._AT('gm_badge_id')."</th>
+        <th>"._AT('gm_counter')."</th>
+        <th>"._AT('gm_alias')."</th>
+        <th>"._AT('gm_description')."</th>
         </tr>";
         foreach ($badges as $badge) {
             echo "<tr>";
@@ -304,15 +303,15 @@ function showUserBadges(PHPGamification $gamification)
 }
 function showUserBadgesStudents(PHPGamification $gamification)
 {
-    echo "<h3>Your Badges</h3>";
+    echo "<h3>"._AT('gm_your_badges')."</h3>";
     $badges = $gamification->getUserBadges();
     if ($badges){
         echo "<table class='data'>
         <tr>
         <th>&nbsp;</th>
-        <!--<th>Counter</th>-->
-        <th>Title</th>
-        <th>Description</th>
+        <!--<th>"._AT('gm_counter')."</th>-->
+        <th>"._AT('gm_title')."</th>
+        <th>"._AT('gm_description')."</th>
         </tr>";
         foreach ($badges as $badge) {
             echo "<tr>";
@@ -332,7 +331,7 @@ function showUserBadgesStudents(PHPGamification $gamification)
 */
 function showUserBadge(PHPGamification $gamification, $course_id)
 {
-    echo "<h3>Your Badges</h3>";
+    echo "<h3>"._AT('gm_your_badges')."</h3>";
     $badges = $gamification->getUserBadges();
     if ($badges){
         foreach ($badges as $badge) {
@@ -366,7 +365,7 @@ function getBadgeImage(PHPGamification $gamification, $badge_id){
 *
 */
 function showUserEvents(PHPGamification $gamification){
-    echo "<h2>Events</h2>";
+    echo "<h2>"._AT('gm_events')."</h2>";
     $events = $gamification->getUserEvents();
     echo "<ul style='margin-left:1em;line-height:1.8em;'>"."\n";
     foreach ($events as $event) {
@@ -381,10 +380,10 @@ function showUserEvents(PHPGamification $gamification){
 *
 */
 function showUserAlerts(PHPGamification $gamification){
- echo "<h3>Your Alerts</h3>"."\n";
+ echo "<h3>"._AT('gm_your_alert')."</h3>"."\n";
     $alerts = $gamification->getUserAlerts();
     if ($alerts == null) {
-        echo "No level or badge alerts to show<br>";
+        echo _AT('gm_no_alerts')."<br/>";
     } else {
         foreach ($alerts as $alert) {
             if ($alert->getIdBadge())
@@ -400,16 +399,16 @@ function showUserAlerts(PHPGamification $gamification){
 *
 */
 function showUserLog(PHPGamification $gamification){
- echo "<h2>Your Activity Log</h2>";
+ echo "<h2>"._AT('gm_your_activity_log')."</h2>";
     $logs = $gamification->getUserLog();
     if ($logs)
         echo "<table class='data'>
         <tr>
-        <th>Event Date</th>
-        <th>Event</th>
-        <th>Points</th>
-        <th>Badge</th>
-        <th>Level</th>
+        <th>"._AT('gm_event_date')."</th>
+        <th>"._AT('gm_event')."</th>
+        <th>"._AT('gm_points')."</th>
+        <th>"._AT('gm_badge')."</th>
+        <th>"._AT('gm_level')."</th>
         </tr>";
         foreach ($logs as $log) {
             echo "<tr>";
