@@ -93,38 +93,37 @@ $this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$_base_pat
 
 <ul class="tablist " role="tablist" id="subnavlist">
 <li id="tab1" class="tab" aria-controls="panel1" aria-selected="true" tabindex="0" role="tab"  onclick="javascript:Cookies.set('activetab', 'tab1');">
-Events</li>
+<?php echo _AT('gm_events'); ?></li>
 <li id="tab2" class="tab" aria-controls="panel2" role="tab"  tabindex="0" aria-selected="false" onclick="javascript:Cookies.set('activetab', 'tab2');">
-Badges </li>
+<?php echo _AT('gm_badges'); ?></li>
 <li id="tab3" class="tab" aria-controls="panel3" role="tab"  tabindex="0" aria-selected="false"  onclick="javascript:Cookies.set('activetab', 'tab3');">
-Levels </li>
+<?php echo _AT('gm_levels'); ?></li>
 <li id="tab4" class="tab" aria-controls="panel4" role="tab"  tabindex="0" aria-selected="false"  onclick="javascript:Cookies.set('activetab', 'tab4');">
-Options </li>
+<?php echo _AT('gm_options'); ?></li>
 </ul>
 
 <div id="panel1" class="panel" aria-labelledby="tab1" role="tabpanel" aria-hidden="false">
-<a href="mods/gameme/edit_event.php" style="float:right;">Add +</a>
+<a href="mods/gameme/edit_event.php" style="float:right;"><?php echo _AT('gm_addplus'); ?></a>
 <?php
 if($_SESSION['inline_edit']){ ?>
-    <a href="javascript:;" onclick="" id="inline_edit_toggle">Enable inline edit</a>
+    <a href="javascript:;" onclick="" id="inline_edit_toggle"><?php echo _AT('gm_enable_edit'); ?></a>
 <?php } ?>
 
-<h3>Default Events</h3>
-<div id="info">Click on a table cells to edit values, click out to save. See the Handbook for more about creating and modifying the system's Default Events.</div>
-
+<h3><?php echo _AT('gm_default_events'); ?></h3>
+<?php $msg->printInfos('GM_ENABLE_EDIT_TEXT'); ?>
 <table class="table table-hover table-bordered col-sm-12 data">
 <tr>
-<th>Alias</th>
-<th>Description</th>
-<th>Repetition</th>
-<th>Reach Reps</th>
-<th>Max Points</th>
-<th>Each Badge</th>
-<th>Reach Badge</th>
-<th>Each Point</th>
-<th>Reach Points</th>
-<th>Each Callback</th>
-<th>Reach Callback</th>
+<th><?php echo _AT('gm_alias'); ?></th>
+<th><?php echo _AT('gm_description'); ?></th>
+<th><?php echo _AT('gm_repetition'); ?></th>
+<th><?php echo _AT('gm_reach_reps'); ?></th>
+<th><?php echo _AT('gm_max_points'); ?></th>
+<th><?php echo _AT('gm_each_badge'); ?></th>
+<th><?php echo _AT('gm_reach_badge'); ?></th>
+<th><?php echo _AT('gm_each_points'); ?></th>
+<th><?php echo _AT('gm_reach_points'); ?></th>
+<th><?php echo _AT('gm_each_callback'); ?></th>
+<th><?php echo _AT('gm_reach_callback'); ?></th>
 <th></th>
 </tr>
 
@@ -146,7 +145,7 @@ foreach($all_events as $key=>$event){
     <td style="text-align:center;" contenteditable="true" onBlur="saveEvent(this,\'reach_points\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['reach_points'].'</td>
     <td  contenteditable="true" onBlur="saveEvent(this,\'each_callback\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['each_callback'].'</td>
     <td contenteditable="true" onBlur="saveEvent(this,\'reach_callback\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['reach_callback'].'</td>
-    <td><!--<a href="mods/gameme/edit_event.php?id='.$event['id'].'">edit</a>--> <a href="mods/gameme/delete_event.php?id='.$event['id'].'">delete</a></td>
+    <td><!--<a href="mods/gameme/edit_event.php?id='.$event['id'].'">'._AT('gm_edit').'</a>--> <a href="mods/gameme/delete_event.php?id='.$event['id'].'">'._AT('gm_delete').'</a></td>
     </tr>';
     }
 
@@ -155,17 +154,16 @@ foreach($all_events as $key=>$event){
 </div>
 
 <div id="panel2" class="panel" aria-labelledby="tab2" role="tabpanel" aria-hidden="true">
-<a href="mods/gameme/edit_badge.php" style="float:right;">Add +</a>
-<h3>Default Badges</h3>
-<div id="info">Drag badges into the Badge dropzone in the first column, or click on a table cells to edits its value, click out to save. See the Handbook for more about creating and modifying the system's Default Badges </div>
-
+<a href="mods/gameme/edit_badge.php" style="float:right;"><?php echo _AT('gm_addplus'); ?></a>
+<h3><?php echo _AT('gm_default_badges'); ?></h3>
+<?php $msg->printInfos('GM_EDIT_BADGE_TEXT'); ?>
 <table class="table table-hover table-bordered col-sm-12 data">
 <tr>
-<th>Badge</th>
-<th>ID</th>
-<th>Alias</th>
-<th>Title</th>
-<th>Description</th>
+<th><?php echo _AT('gm_badge'); ?></th>
+<th><?php echo _AT('gm_id'); ?></th>
+<th><?php echo _AT('gm_alias'); ?></th>
+<th><?php echo _AT('gm_title'); ?></th>
+<th><?php echo _AT('gm_description'); ?></th>
 <th></th>
 
 </tr>
@@ -197,7 +195,7 @@ foreach($all_badges as $badge){
     <td contenteditable="true" onBlur="saveBadge(this,\'title\',\''.$badge['id'].' \')" onClick="showEdit(this);">'.$badge['title'].'</td>
     <td contenteditable="true" onBlur="saveBadge(this,\'description\',\''.$badge['id'].' \')" onClick="showEdit(this);">'.$badge['description'].'</td>
 
-    <td><!-- <a href="mods/gameme/edit_badge.php?id='.$badge['id'].'"">edit</a> --><a href="mods/gameme/delete_badge.php?id='.$badge['id'].'">delete</a></td>
+    <td><!-- <a href="mods/gameme/edit_badge.php?id='.$badge['id'].'">'._AT('gm_edit').'</a> --><a href="mods/gameme/delete_badge.php?id='.$badge['id'].'">'._AT('gm_delete').'</a></td>
     </tr>';
 }
 ?>
@@ -205,16 +203,15 @@ foreach($all_badges as $badge){
 </div>
 
 <div id="panel3" class="panel" aria-labelledby="tab3" role="tabpanel" aria-hidden="true">
-<a href="mods/gameme/edit_level.php" style="float:right;">Add +</a>
-<h3>Default Levels</h3>
-<div id="info">Drag level icons into the Icon dropzone in the first colum, or click on a table cells to edits its value, click out to save. See the Handbook for more about creating and modifying the system's Default Levels </div>
-
+<a href="mods/gameme/edit_level.php" style="float:right;"><?php echo _AT('gm_addplus'); ?></a>
+<h3><?php echo _AT('gm_default_levels'); ?></h3>
+<?php $msg->printInfos('GM_LEVELS_TEXT'); ?>
 <table class="table table-hover table-bordered col-sm-12 data">
 <tr>
-<th>Icon</th>
-<th>Level Name</th>
-<th>Description</th>
-<th>Points Threshold</th>
+<th><?php echo _AT('gm_icon'); ?></th>
+<th><?php echo _AT('gm_level_name'); ?></th>
+<th><?php echo _AT('gm_description'); ?></th>
+<th><?php echo _AT('gm_points_threshold'); ?></th>
 <th></th>
 </tr>
 <?php
@@ -236,7 +233,7 @@ foreach($all_levels as $level){
     <td contenteditable="true" onBlur="saveLevel(this,\'title\',\''.$level['id'].' \')" onClick="showEdit(this);">'.$level['title'].'</td>
     <td contenteditable="true" onBlur="saveLevel(this,\'description\',\''.$level['id'].' \')" onClick="showEdit(this);">'.$level['description'].'</td>
     <td contenteditable="true" onBlur="saveLevel(this,\'points\',\''.$level['id'].' \')" onClick="showEdit(this);">'.$level['points'].'</td>
-    <td><a href="mods/gameme/delete_level.php?id='.$level['id'].SEP.'course_id=0">delete</a></td>
+    <td><a href="mods/gameme/delete_level.php?id='.$level['id'].SEP.'course_id=0">'._AT('gm_delete').'</a></td>
     </tr>';
 }
 /*
@@ -252,13 +249,12 @@ function showstars_lg($points){
 </table>
 </div>
 <div id="panel4" class="panel" aria-labelledby="tab4" role="tabpanel" aria-hidden="true">
-<h3>Options</h3>
-<div id="info">Most options are managed by instructors at the course level, enabled by default. You may choose to prevent Instructors from modifying game elements by checking the checkbox below, allowing only the default settings to be used. </div>
-
+<h3><?php echo _AT('gm_options'); ?></h3>
+<?php $msg->printInfos('GM_OPTIONS_TEXT'); ?>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <input type="checkbox" name="instructor_edit" id="instructor_edit" <?php if($_config['instructor_edit']){echo 'checked="checked"';}?>/>
-<label for="instructor_edit">Disallow instructor customizing</label>
-<input type="submit" name="submit" value="Update Options" />
+<label for="instructor_edit"><?php echo _AT('gm_disallow_instructors'); ?></label>
+<input type="submit" name="submit" value="<?php echo _AT('gm_update_options'); ?>" />
 </form> 
 
 </div>

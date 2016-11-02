@@ -57,11 +57,11 @@ INSERT INTO `language_text` VALUES ('en', '_module','gm_leader_length','Leader b
 INSERT INTO `language_text` VALUES ('en', '_module','gm_level_number','Number of levels (max 11)',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_progress_for','Progress for ',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_view','view',NOW(),'');
-INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
-INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
-INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
-INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
-INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_addplus','Add +',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_enable_edit','Enable inline edit',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_delete','delete',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_disallow_instructors','Disallow instructor customizing',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_update_options','Update Options',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
@@ -79,6 +79,10 @@ INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_COPY_BADGE','Copy 
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_COPY_DEFAULT_LEVELS','Copy Default Levels to modify them. Set the number of levels under the Options tab.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_DISPLAY_ELEMENTS','Set game elements to display to students.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_SEE_PROGRESS','Select a user from the menu below to view that person\'s progress. ',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_ENABLE_EDIT_TEXT','Click on a table cells to edit values, click out to save. See the Handbook for more about creating and modifying the system\'s Default Events.',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_EDIT_BADGE_TEXT','Drag badges into the Badge dropzone in the first column, or click on a table cells to edit its value, click out to save. See the Handbook for more about creating and modifying the system\'s Default Badges.',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_LEVELS_TEXT','Drag level icons into the Icon dropzone in the first colum, or click on a table cells to edit its value, click out to save. See the Handbook for more about creating and modifying the system's Default Levels. ',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_OPTIONS_TEXT','Most options are managed by instructors at the course level, enabled by default. You may choose to prevent Instructors from modifying game elements by checking the checkbox below, allowing only the default settings to be used.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
@@ -86,7 +90,14 @@ INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),''
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
-
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_','Points',NOW(),'');
 
 
 
