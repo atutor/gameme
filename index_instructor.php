@@ -469,7 +469,7 @@ $sql = "SELECT %scourse_enrollment.member_id, %smembers.login
             WHERE %scourse_enrollment.course_id = %d";
 $students = queryDB($sql, array(TABLE_PREFIX, TABLE_PREFIX, TABLE_PREFIX, TABLE_PREFIX, TABLE_PREFIX,TABLE_PREFIX,TABLE_PREFIX,$_SESSION['course_id']));
 
-$msg->printInfos('SEE_PROGRESS'); 
+$msg->printInfos('GM_SEE_PROGRESS'); 
 ?>
 <hr style="clear:both; width:99%;" />
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="input-form">

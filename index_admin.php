@@ -251,6 +251,7 @@ function showstars_lg($points){
 <div id="panel4" class="panel" aria-labelledby="tab4" role="tabpanel" aria-hidden="true">
 <h3><?php echo _AT('gm_options'); ?></h3>
 <?php $msg->printInfos('GM_OPTIONS_TEXT'); ?>
+<br style="clear:both;" />
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <input type="checkbox" name="instructor_edit" id="instructor_edit" <?php if($_config['instructor_edit']){echo 'checked="checked"';}?>/>
 <label for="instructor_edit"><?php echo _AT('gm_disallow_instructors'); ?></label>

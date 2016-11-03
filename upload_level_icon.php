@@ -42,7 +42,7 @@ list($width, $height) = getimagesize($targetFile);
 
 if($height > $max_height || $width > $max_width){
     unset($targetFile);
-    $msg->addError('MAX_DIMENSION');
+    $msg->addError('GM_MAX_DIMENSION', $max_height, $max_width);
     return false;
 
 } else{
@@ -50,7 +50,7 @@ if($height > $max_height || $width > $max_width){
         $sql ="UPDATE %sgm_levels set icon ='%s' WHERE id = %d AND course_id=%d";
         queryDB($sql, array(TABLE_PREFIX,$_FILES['file']['name'], $_POST["level_id"], $course_id));
     } else {
-        $msg->addError('MAX_FILESESIZE');
+        $msg->addError('GM_MAX_FILESESIZE', ($max_levelicon_size/1000));
         return false;
     }
 } 

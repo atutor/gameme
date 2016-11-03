@@ -4,10 +4,8 @@ namespace gameme\PHPGamification;
 define('AT_INCLUDE_PATH', '../../include/');
 require (AT_INCLUDE_PATH.'vitals.inc.php');
 
-//foreach()
-//$sql = "REPLACE into %sgm_options "
 global $_base_href;
-array_pop($_POST );
+array_pop($_POST);
 $sql = "DELETE from %sgm_options WHERE course_id=%d";
 queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']));
 foreach($_POST as $option=>$value){
@@ -17,10 +15,19 @@ foreach($_POST as $option=>$value){
         $value = 0;
     }
     $sql = "INSERT into %sgm_options(`id`,`course_id`, `option`, `value`) VALUES ('',%d, '%s',%d)";
-    queryDB($sql, array(TABLE_PREFIX,$_SESSION['course_id'], $option, $value));
+    if(queryDB($sql, array(TABLE_PREFIX,$_SESSION['course_id'], $option, $value))){
+        // do nothing
+    } else {
+        // en error occured
+        $has_error = 1;
+    }
 }
 
-$msg->addFeedback('UPDATED_OPTIONS');
+if(!isset($has_error)){
+    $msg->addFeedback('GM_UPDATED_OPTIONS');
+}else{
+    $msg->addError('GM_UPDATED_OPTIONS_FAILED');
+}
 header('Location: '.$_base_href.'mods/gameme/index_instructor.php');
 exit;
 
