@@ -36,9 +36,9 @@ $gamification->setUserId($_SESSION['member_id']);
 <!-- <ul class="tablist" role="tablist" id="game_panel"> -->
 <ul id="subnavlist" class="tablist " role="tablist">
 <li id="tab1" class="tab" aria-controls="panel1" aria-selected="true" tabindex="0" role="tab"   onclick="javascript:Cookies.set('activetab', 'tab1');">
-Badges</li>
+<?php echo _AT('gm_badges'); ?></li>
 <li id="tab2" class="tab" aria-controls="panel2" role="tab"  tabindex="0" aria-selected="false"   onclick="javascript:Cookies.set('activetab', 'tab2');">
-Levels </li>
+<?php echo _AT('gm_levels'); ?></li>
 </ul>
 <div id="panel1" class="panel" aria-labelledby="tab1" role="tabpanel" aria-hidden="false">
 <?php

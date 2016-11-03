@@ -21,17 +21,21 @@ if($_GET["id"]!= ''){
     $gamification = new PHPGamification();
     $gamification->setDAO(new DAO(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD));
 
-    $gamification->copyLevel(
+    if($gamification->copyLevel(
         $default_level['id'], 
         $default_level['title'], 
         $default_level['description'],
         $default_level['points'],
         $default_level['icon']
-        //str_replace(".", "_lg.", $default_level['icon'])
-        );
-    $msg->addFeedback('LEVEL_COPIED');
-    header("Location: ".AT_BASE_HREF."mods/gameme/index_instructor.php");
-    exit;
+        )){
+            $msg->addFeedback('GM_LEVEL_COPIED');
+            header("Location: ".AT_BASE_HREF."mods/gameme/index_instructor.php");
+            exit;
+        }else{
+            $msg->addFeedback('GM_LEVEL_COPIED_FAILED');
+            header("Location: ".AT_BASE_HREF."mods/gameme/index_instructor.php");
+            exit;       
+        }
 }
 
 ?>

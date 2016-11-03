@@ -28,11 +28,11 @@ if($gamification->copyBadge($default_badge['id'],
         $default_badge['title'], 
         $default_badge['description'], 
         $default_badge['image_url'])){
-            $msg->addFeedback('BADGE_COPIED');
+            $msg->addFeedback('GM_BADGE_COPIED');
             header("Location: ".AT_BASE_HREF."mods/gameme/index_instructor.php");
             exit;
        } else{
-            $msg->addError('BADGE_COPY_FAILED');
+            $msg->addError('GM_BADGE_COPY_FAILED');
             header("Location: ".AT_BASE_HREF."mods/gameme/index_instructor.php");
             exit;
        }

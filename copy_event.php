@@ -74,11 +74,11 @@ if($_GET["id"]!= ''){
         }     
 
        if( $gamification->addEvent($event, $course_id)){
-            $msg->addFeedback('EVENT_COPIED');
+            $msg->addFeedback('GM_EVENT_COPIED');
             header("Location: ".AT_BASE_HREF."mods/gameme/index_instructor.php");
             exit;
        } else{
-            $msg->addError('EVENT_COPY_FAILED');
+            $msg->addError('GM_EVENT_COPY_FAILED');
             header("Location: ".AT_BASE_HREF."mods/gameme/index_instructor.php");
             exit;
        }

@@ -100,16 +100,15 @@ if($_POST['submit']){
 require (AT_INCLUDE_PATH.'header.inc.php');
 $sql = "SELECT * FROM %sgm_events WHERE id = %d AND course_id =%d";
 $this_event = queryDB($sql, array(TABLE_PREFIX, $_GET['id'], $course_id), TRUE);
-
+$msg->printInfos('GM_CREATE_EVENT_TEXT');
 ?>
-<div id="info">Creating new events also requires adding matching script to the module's event.php file. See the Handbook page for details.</div>
 <form name="form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <input type="hidden" id="id" name="id" value="<?php echo $this_event['id']; ?>" />
 <input type="hidden" id="course_id" name="course_id" value="<?php echo $this_event['course_id']; ?>" />
 <div class="input-form">
 <fieldset class="group_form">
-<legend class="group_form">Edit Event</legend>
-<label for="alias">Alias</label><br />
+<legend class="group_form"><?php echo _AT('gm_edit_event'); ?></legend>
+<label for="alias"><?php echo _AT('gm_alias'); ?></label><br />
 <?php
 if(!isset($_GET['id'])){?>
     <input type="text" id="alias" name="alias" value="<?php echo $this_event['alias']; ?>" />
@@ -119,30 +118,30 @@ if(!isset($_GET['id'])){?>
 <?php } ?>
 
 <br /><br />
-<label for="description">Description</label><br />
+<label for="description"><?php echo _AT('gm_description'); ?></label><br />
 <input type="text" id="description" name="description" value="<?php echo $this_event['description']; ?>"  size="48"/><br />
-<label for="allow_repetitions">Allow Repetition</label>(Can this event repeat, or is it a one time occurence)<br />
+<label for="allow_repetitions"><?php echo _AT('gm_allow_repetition'); ?></label><br />
 <select name="allow_repetitions" id="allow_repetitions">
-<option value="0" <?php if($this_event['allow_repetition'] ==0){ echo ' selected="selected"';} ?>>Yes</option>
-<option value="1" <?php if($this_event['allow_repetition'] ==1){ echo ' selected="selected"';} ?>>No</option>
+<option value="0" <?php if($this_event['allow_repetition'] ==0){ echo ' selected="selected"';} ?>><?php echo _AT('gm_yes'); ?></option>
+<option value="1" <?php if($this_event['allow_repetition'] ==1){ echo ' selected="selected"';} ?>><?php echo _AT('gm_no'); ?></option>
 </select><br />
-<label for="reach_required_repetitions">Reach required repetitions</label> (Repetitions required to trigger reach event)<br />
+<label for="reach_required_repetitions"><?php echo _AT('gm_reach_repetition'); ?></label> <br />
 <input type="text" id="reach_required_repetitions" name="reach_required_repetitions" value="<?php echo $this_event['reach_required_repetitions']; ?>" maxlength="3" size="3" /><br />
-<label for="max_points">Maximum points allowed</label> (Maximum points that can be scored for this event)<br />
+<label for="max_points"><?php echo _AT('gm_max_points_allowed'); ?></label><br />
 <input type="text" id="max_points" name="max_points" value="<?php echo $this_event['max_points']; ?>"  maxlength="5" size="5"/><br />
-<label for="id_each_badge">Badge ID each event</label> (When event occurs, issue this badge)<br />
+<label for="id_each_badge"><?php echo _AT('gm_each_badge_id'); ?></label><br />
 <input type="text" id="id_each_badge" name="id_each_badge" value="<?php echo $this_event['id_each_badge']; ?>" maxlength="3" size="3"/><br />
-<label for="id_reach_badge">Badge ID reach event</label> (When event repetitions is reach, issue this badge)<br />
+<label for="id_reach_badge"><?php echo _AT('gm_reach_badge_id'); ?></label> <br />
 <input type="text" id="id_reach_badge" name="id_reach_badge" value="<?php echo $this_event['id_reach_badge']; ?>"maxlength="3" size="3" /><br />
-<label for="each_points">Points for each event</label> (Points awarded for each occurence of this event)<br />
+<label for="each_points"><?php echo _AT('gm_eachevent_points'); ?></label> <br />
 <input type="text" id="each_points" name="each_points" value="<?php echo $this_event['each_points']; ?>" maxlength="4" size="4"/><br />
-<label for="reach_points">Points increased to for reach event</label> (Points increase to this amount after reach event occurs)<br />
+<label for="reach_points"><?php echo _AT('gm_reachevent_points'); ?></label> <br />
 <input type="text" id="reach_points" name="reach_points" value="<?php echo $this_event['reach_points']; ?>"maxlength="5" size="5" /><br />
-<label for="each_callback">Each callback function</label> (When event occurs, run this file)<br />
+<label for="each_callback"><?php echo _AT('gm_eachevent_callback'); ?></label><br />
 <input type="text" id="each_callback"  name="each_callback" value="<?php echo $this_event['each_callback']; ?>"  size="35"/><br />
-<label for="reach_callback">Reach callback function</label> (When event repetitions is reached, run this file)<br />
+<label for="reach_callback"><?php echo _AT('gm_reachevent_callback'); ?></label> <br />
 <input type="text" id="reach_callback"  name="reach_callback" value="<?php echo $this_event['reach_callback']; ?>" size="35" /><br />
-<input type="submit" name="submit" value="Save Event"/><input type="submit" name="cancel" value="Cancel"/>
+<input type="submit" name="submit" value="<?php echo _AT('gm_save_event'); ?>"/><input type="submit" name="cancel" value="<?php echo _AT('gm_cancel'); ?>"/>
 </fieldset>
 </div>
 </form>

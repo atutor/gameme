@@ -32,13 +32,13 @@ if($_POST['submit']){
     $gamification = new PHPGamification();
     $gamification->setDAO(new DAO(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD));
     
-    if(!empty($_POST['title']) && !empty($_POST['points'])){
+    if(!empty($_POST['title']) && !empty($_POST['points']) && is_int($_POST['points'])){
         $gamification->addLevel($_POST['points'], $_POST['title'], $_POST['description']);
-        $msg->addFeedback('success');
+        $msg->addFeedback('GM_LEVEL_ADDED');
         header('Location:'.$_base_href.'mods/gameme/index_admin.php?tab=3');
         exit;
     } else {
-        $msg->addError("LEVEL_REQUIREMENTS");
+        $msg->addError("GM_LEVEL_REQUIREMENTS");
         //$gamification->addLevel(0, 'No Star');
     }
 
@@ -53,8 +53,8 @@ $this_level = queryDB($sql, array(TABLE_PREFIX, $_GET['id']), TRUE);
 <input type="hidden" id="id" name="id" value="<?php echo $this_level['id']; ?>" />
 <div class="input-form">
 <fieldset class="group_form">
-<legend class="group_form">Edit Level</legend>
-<span title="required">*</span><label for>Level Title</label><br />
+<legend class="group_form"><?php echo _AT('gm_edit_level'); ?></legend>
+<span title="required">*</span><label for="title"><?php echo _AT('gm_level_title'); ?></label><br />
 <?php
 if(!isset($_GET['id'])){?>
     <input type="text" id="title" name="title" value="<?php echo $this_level['title']; ?>" aria-required="true" />
@@ -64,12 +64,12 @@ if(!isset($_GET['id'])){?>
 <?php } ?>
 
 <br /><br />
-<label for="alias">Short Description</label><br />
+<label for="description"><?php echo _AT('gm_short_description'); ?></label><br />
 <input type="text" id="description" name="description" value="<?php echo $this_level['description']; ?>"  size="48"/><br />
-<span title="required">*</span><label for="points">Points Reached</label> (Points scored to reach level)<br />
+<span title="required">*</span><label for="points"><?php echo _AT('gm_points_reached'); ?></label> <br />
 <input type="text" id="points" name="points" value="<?php echo $this_level['points']; ?>" maxlength="8" size="8" aria-required="true"/><br />
 
-<input type="submit" name="submit" value="Update Level" /><input type="submit" name="cancel" value="Cancel"/>
+<input type="submit" name="submit" value="<?php echo _AT('gm_update_level'); ?>" /><input type="submit" name="cancel" value="<?php echo _AT('gm_cancel'); ?>"/>
 </fieldset>
 </div>
 </form>
