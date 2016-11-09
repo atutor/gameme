@@ -447,4 +447,31 @@ function show_instructor(){
     return $show_instructor['value'];
 }  
 
+/* Gets the reach message from the database, either
+* 1. a message created by the instructor for a particular course
+* 2. a custom message created by the administrator
+* 3. or the default message that come with the module
+* -in that order, whichever come first-
+* @$alias the alias for the event defined in the gm_events table, 
+* and passed from the events.php file 
+*/
+function get_reach_message($alias){
+         if($_SESSION['course_id'] > 0){
+            $is_course = " AND course_id=".$_SESSION['course_id'];
+        } else{
+            $is_course = " AND course_id=0";
+        }
+        
+        //$is_course = " AND course_id=".$_SESSION['course_id'];
+        $sql = "SELECT reach_message from %sgm_events WHERE alias = '%s' $is_course";
+        
+        if($reach_message = queryDB($sql, array(TABLE_PREFIX, $alias), TRUE)){
+            // all good
+        }else{
+            // reach message does not exist so get the system default
+            $sql = "SELECT reach_message from %sgm_events WHERE alias = '%s' AND course_id=0";
+            $reach_message = queryDB($sql, array(TABLE_PREFIX, $alias), TRUE);
+        }
+        return $reach_message;
+    }
 ?>

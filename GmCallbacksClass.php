@@ -7,60 +7,77 @@ class GmCallbacksClass
 	/*
 	* Event callback functions send an email to a badge recipient with the new badge, 
 	* and a list of badges earned so far
-	* @params are defined the events.php file in the call to each executeEvent()
+	* @params are defined in the events.php file in the call to each executeEvent()
 	*/
+	
     static function ReadPageCallback($params)
     {
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for getting a good amount of course reading done. ";
+        if ($params['badges']){     
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('read_page').'</div>';              
+            //$feedback = "Congratulations, you have received a new badge for getting a good amount of course reading done. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }
     static function WelcomeCallback($params)
     {
-        if ($params['firstname']){                        
-            $feedback = "Welcome to the course. You have earned your first badge by successfully logging in. Continue earning badges by using the features in the course, and participating in course activities.<br /><br />By participating in the course you can also earn points and advance through levels as your points grow. Follow the leader board to see your position among others in the course. Watch for hints after earning a badge, for earning additional badges and bonus points.";
+        if ($params['firstname']){    
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('welcome').'</div>';   
+                     
+            //$feedback = "Welcome to the course. You have earned your first badge by successfully logging in. Continue earning badges by using the features in the course, and participating in course activities.<br /><br />By participating in the course you can also earn points and advance through levels as your points grow. Follow the leader board to see your position among others in the course. Watch for hints after earning a badge, for earning additional badges and bonus points.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }
     static function LoginReachCallback($params)
     {
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for logging into the course many times. You can also earn points by logging out of the course properly, clicking the logout link, instead of just leaving or letting your session timeout.";
+        if ($params['badges']){           
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('login').'</div>';              
+            //$feedback = "Congratulations, you have received a new badge for logging into the course many times. You can also earn points by logging out of the course properly, clicking the logout link, instead of just leaving or letting your session timeout.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }
     static function LogoutReachCallback($params)
     {   
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for logging out properly, instead of leaving or letting your session timeout, maintaining your privacy and security. ";
+        if ($params['badges']){                      
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('logout').'</div>';              
+            
+             //$feedback = "Congratulations, you have received a new badge for logging out properly, instead of leaving or letting your session timeout, maintaining your privacy and security. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }
+    /*
     static function ProfilePictureCallback($params)
     { 
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for updating you profile picture. Updating your profile picture now and again earns you bonus points. ";
+        if ($params['badges']){     
+            $feedback = self::getReachMessage('logout');                   
+            $feedback = "Congratulations, you have received a new badge for updating your profile picture. Updating your profile picture now and again earns you bonus points. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
@@ -69,220 +86,275 @@ class GmCallbacksClass
         }
         return true;
     }
+    */
     static function ProfileViewReachCallback($params)
     {
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for getting to know your classmates by viewing their profiles. You can earn additional points by sending a private message to a person through their profile page.";
+        if ($params['badges']){ 
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('profile_view').'</div>';                      
+            //$feedback = "Congratulations, you have received a new badge for getting to know your classmates by viewing their profiles. You can earn additional points by sending a private message to a person through their profile page.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }
     static function ProfileViewedReachCallback($params)
     {
-    	if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge because lots of people have been viewing your profile. ";
+    	if ($params['badges']){ 
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('profile_viewed').'</div>';                  
+            //$feedback = "Congratulations, you have received a new badge because lots of people have been viewing your profile. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }
     static function ProfilePicUploadCallback($params)
     {      
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for adding a profile picture. Update your profile picture occassionally to receive additional points ";
+        if ($params['badges']){     
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('profile_pic_upload').'</div>';                             
+            //$feedback = "Congratulations, you have received a new badge for adding a profile picture. Update your profile picture occassionally to receive additional points. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }
     static function PreferencesUpdateCallback($params)
     { 
-       if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for updating your personal preference. ";
+       if ($params['badges']){     
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('prefs_update').'</div>';                                            
+            //$feedback = "Congratulations, you have received a new badge for updating your personal preference. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }
     static function FileStorageFolderCallback($params)
     {
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for learning how to create folders to organize your files. You can also earn points and badges by adding files to those folders";
+        if ($params['badges']){     
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('new_folder').'</div>';                                                            
+            //$feedback = "Congratulations, you have received a new badge for learning how to create folders to organize your files. You can also earn points and badges by adding files to those folders";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }
     static function UploadFilesCallback($params)
     {
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for learning how to use file storage to store your files. Create additional folders to organize your files for additional points and badges.";
+        if ($params['badges']){         
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('upload_file').'</div>';          
+            //$feedback = "Congratulations, you have received a new badge for learning how to use file storage to store your files. Create additional folders to organize your files for additional points and badges.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     } 
     static function CreateFilesCallback($params)
     {
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for learning how to create new files in file storage.";
+        if ($params['badges']){        
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('create_file').'</div>';                
+            //$feedback = "Congratulations, you have received a new badge for learning how to create new files in file storage.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }  
     static function ForumViewCallback($params)
     {
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for keeping up with reading forum posts. Continue reading forum posts, start new threads, and reply to others posts to earn additional points and badges.";
+        if ($params['badges']){          
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('forum_view').'</div>';             
+            //$feedback = "Congratulations, you have received a new badge for keeping up with reading forum posts. Continue reading forum posts, start new threads, and reply to others posts to earn additional points and badges.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }  
     static function ForumPostsCallback($params)
     {
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for contributing new threads to the discussion forums. Continue reading forum posts, start new threads, and reply to others posts to earn additional points and badges.";
+        if ($params['badges']){      
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('forum_post').'</div>';                 
+            //$feedback = "Congratulations, you have received a new badge for contributing new threads to the discussion forums. Continue reading forum posts, start new threads, and reply to others posts to earn additional points and badges.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     } 
     static function ForumReplyCallback($params)
     {
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for contributing good feedback to discussion forums. Continue reading forum posts, start new threads, and reply to others posts to earn additional points and badges.";
+        if ($params['badges']){      
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('forum_reply').'</div>';                  
+            //$feedback = "Congratulations, you have received a new badge for contributing good feedback to discussion forums. Continue reading forum posts, start new threads, and reply to others posts to earn additional points and badges.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     } 
     static function BlogAddCallback($params)
     {
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for contributing a good collection of blog posts. Continue adding to your blog, and comments on others' blogs to earn additional points and badges.";
+        if ($params['badges']){
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('blog_add').'</div>';                         
+            //$feedback = "Congratulations, you have received a new badge for contributing a good collection of blog posts. Continue adding to your blog, and comments on others' blogs to earn additional points and badges.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }   
     static function BlogCommentsCallback($params)
     {
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for contributing a good feedback, and commenting on blog posts. Continue posting to your blog, and commenting on others' blog posts to earn additional points.";
+        if ($params['badges']){           
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('blog_comment').'</div>';               
+            //$feedback = "Congratulations, you have received a new badge for contributing good feedback, and commenting on blog posts. Continue posting to your blog, and commenting on others' blog posts to earn additional points.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     } 
     static function ChatLoginCallback($params)
     {
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for logging into the chat regularly. Just using the chat helps accumulate points.";
+        if ($params['badges']){      
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('chat_login').'</div>';                
+            //$feedback = "Congratulations, you have received a new badge for logging into the chat regularly. Just using the chat helps accumulate points.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }
     static function ChatPostCallback($params)
     {
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for keeping conversation going in the chat room. Returning to the chat room regularly earns additional points.";
+        if ($params['badges']){    
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('chat_post').'</div>';                   
+           // $feedback = "Congratulations, you have received a new badge for keeping conversation going in the chat room. Returning to the chat room regularly earns additional points.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }
     static function LinkAddCallback($params)
     {
-        if ($params['badges']){                        
+        if ($params['badges']){     
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('link_add').'</div>';                         
             $feedback = "Congratulations, you have received a new badge for making a good contribution to the course links. View links others have posted to earn additional points.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }
     static function PhotoAlbumCallback($params)
     { 
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for creating a photo album. Continue adding photos to earn more points and badges. ";
+        if ($params['badges']){    
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('photo_create_album').'</div>';                   
+            //$feedback = "Congratulations, you have received a new badge for creating a photo album. Continue adding photos to earn more points and badges. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }
     static function PhotoAlbumsCallback($params)
     {
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for creating multiple photo albums to organize your photos. Continue adding photos to them to earn more points. ";
+        if ($params['badges']){        
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('photo_create_albums').'</div>';                
+           // $feedback = "Congratulations, you have received a new badge for creating multiple photo albums to organize your photos. Continue adding photos to earn more points. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         }
         return true;
     }
     static function PhotoUploadCallback($params)
     {
         //global $msg;
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for uploading a good collection of photos. Continue adding photos to earn more points. Create additional albums to organize your photos for bonus points.";
+        if ($params['badges']){     
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('photo_upload').'</div>';                 
+            //$feedback = "Congratulations, you have received a new badge for uploading a good collection of photos. Continue adding photos to earn more points. Create additional albums to organize your photos for bonus points.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
+        	$_GET['fb'] = $feedback;
         	//$msg->addfeedback('Congratulations, you have received a new badge for uploading a good collection of photos. Continue adding photos to earn more points. Create additional folders to organize your photos for ponus points.');
         }
         return true;
@@ -290,77 +362,68 @@ class GmCallbacksClass
     static function PhotoAlbumCommentCallback($params)
     {
         global $msg;
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for providing comments on your's, and other's albums. Continue commenting about albums for additional points.";
+        if ($params['badges']){    
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('photo_album_comment').'</div>';                   
+            //$feedback = "Congratulations, you have received a new badge for providing comments on your's, and other's albums. Continue commenting about albums for additional points.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	
-        	$badge_file= '<img src="'.self::getBadgeFile($params['alias']).'" style="float:left;text-align:top;"/>';
+        	//$badge_file= '<img src="'.self::getBadgeFile($params['alias']).'" style="float:left;text-align:top;"/>';
         	//$msg->addFeedback('Congratulations, you have received a new badge for uploading a good collection of photos. Continue adding photos to earn more points. Create additional folders to organize your photos for ponus points.');
-        	$msg->addFeedback(array('GM_PA_COMMENTS', $badge_file));
+        	//$msg->addFeedback(array('GM_PA_COMMENTS', $badge_file));
             self::SendMail($params, $message);
+            $_GET['fb'] = $feedback;
         }
         return true;
     }
     static function PhotoDescriptionCallback($params)
     {
         global $msg;
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for providing descriptions for your photos. Add alternative text to make your photos accessible to blind classmates, and earn bonus points and a badge";
+        if ($params['badges']){       
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('photo_description').'</div>';                      
+            //$feedback = "Congratulations, you have received a new badge for providing descriptions for your photos. Add alternative text to make your photos accessible to blind classmates, and earn bonus points and a badge";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
-        	
-        	//debug_to_log($params);
-        	//$badge_file= '<img src="'.self::getBadgeFile($params['alias']).'" style="float:left;text-align:top;"/>';
-        	//debug_to_log($badge_file);
-        	//$msg->addFeedback('Congratulations, you have received a new badge for uploading a good collection of photos. Continue adding photos to earn more points. Create additional folders to organize your photos for ponus points.');
-        	//$msg->addFeedback(array('GM_PA_COMMENTS', $badge_file));
-        	//debug_to_log($badge_file);
             self::SendMail($params, $message);
+            $_GET['fb'] = $feedback;
         }
         return true;
     }
     static function PhotoAltTextCallback($params)
     {
         global $msg;
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for providing alternative text for your photos. This makes photos accessible to blind classmates using a screen reader to access the course. Providing descriptions for your photos can also earn points, and a badge. ";
+        if ($params['badges']){         
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('photo_alt_text').'</div>';                  
+            //$feedback = "Congratulations, you have received a new badge for providing alternative text for your photos. This makes photos accessible to blind classmates using a screen reader to access the course. Providing descriptions for your photos can also earn points, and a badge. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
-        	
-        	//debug_to_log($params);
-        	//$badge_file= '<img src="'.self::getBadgeFile($params['alias']).'" style="float:left;text-align:top;"/>';
-        	//debug_to_log($badge_file);
-        	//$msg->addFeedback('Congratulations, you have received a new badge for uploading a good collection of photos. Continue adding photos to earn more points. Create additional folders to organize your photos for ponus points.');
-        	//$msg->addFeedback(array('GM_PA_COMMENTS', $badge_file));
-        	//debug_to_log($badge_file);
             self::SendMail($params, $message);
+            $_GET['fb'] = $feedback;
         }
         return true;
     }
     static function PhotoCommentCallback($params)
     {
         global $msg;
-        if ($params['badges']){                        
-            $feedback = "Congratulations, you have received a new badge for providing comments on yours, and others photos. Continue commenting to earn additional points. You can also comment on photo albums as a whole, to earn bonus points. ";
+        if ($params['badges']){        
+            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            $feedback .= '<div style="height:5em;">'.self::getReachMessage('photo_comment').'</div>';                   
+            //$feedback = "Congratulations, you have received a new badge for providing comments on yours, and others photos. Continue commenting to earn additional points. You can also comment on photo albums as a whole, to earn bonus points. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
-        	
-        	//debug_to_log($params);
-        	//$badge_file= '<img src="'.self::getBadgeFile($params['alias']).'" style="float:left;text-align:top;"/>';
-        	//debug_to_log($badge_file);
-        	//$msg->addFeedback('Congratulations, you have received a new badge for uploading a good collection of photos. Continue adding photos to earn more points. Create additional folders to organize your photos for ponus points.');
-        	//$msg->addFeedback(array('GM_PA_COMMENTS', $badge_file));
-        	//debug_to_log($badge_file);
             self::SendMail($params, $message);
+            $_GET['fb'] = $feedback;
         }
         return true;
     }
@@ -511,12 +574,30 @@ class GmCallbacksClass
         $badge['image_url']= self::getBadgeFile($badge['alias']);
         return $badge;
     }
-    
-    static function myPostToChatReachCallBackFunction(){
-        //echo "<br><i>Posted to chat so many times and granted a Badge! Send some email or call an API endpoint...</i>";
-        // IT MUST RETURN TRUE to gamification continue to flow.
-        // Returning true it will give the points and badges like setup
-        // Returning false it will don't give any points of badges for that event
-        return true;
+	 /* Gets the message to display for the reach email alert, either
+    * 1. a message created by the instructor for a particular course
+    * 2. a custom message created by the administrator
+    * 3. the default message that come with the module
+    * -in that order, whichever come first-
+    * @$alias the alias for the event defined in the gm_events table, 
+    * and passed from the events.php file 
+    */
+    public static function getReachMessage($alias){
+         if($_SESSION['course_id'] > 0){
+            $is_course = " AND course_id=".$_SESSION['course_id'];
+        } else{
+            $is_course = " AND course_id=0";
+        }
+        
+        $sql = "SELECT reach_message from %sgm_events WHERE alias = '%s' $is_course";
+        
+        if($reach_message = queryDB($sql, array(TABLE_PREFIX, $alias), TRUE)){
+            // all good
+        }else{
+            // reach message does not exist so get the system default
+            $sql = "SELECT reach_message from %sgm_events WHERE alias = '%s' AND course_id=0";
+            $reach_message = queryDB($sql, array(TABLE_PREFIX, $alias), TRUE);
+        }
+        return $reach_message['reach_message'];
     }
 }
