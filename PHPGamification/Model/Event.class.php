@@ -27,7 +27,7 @@ class Event extends Entity
     protected $reachPoints = null;        /* Points granted when reachRequiredRepetitions are reached */
     protected $eachCallback = null;
     protected $reachCallback = null;
-
+    protected $reachMessage = null;
     function __construct($stdClass = null)
     {
         if ($stdClass)
@@ -81,7 +81,10 @@ class Event extends Entity
     {
         return $this->reachPoints;
     }
-
+    public function getReachMessage()
+    {
+        return $this->reachMessage;
+    }
     public function getRequiredRepetitions()
     {
         return $this->reachRequiredRepetitions;
