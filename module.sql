@@ -21,12 +21,14 @@ INSERT INTO `language_text` VALUES ('en', '_module','gm_badges','Badges',NOW(),'
 INSERT INTO `language_text` VALUES ('en', '_module','gm_badge','Badge',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_your_badges','Your Badges',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_events','Events',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_event','Event',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_your_alert','Your Alerts',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_no_alerts','No level or badge alerts to show',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_your_activity_log','Your Activity Log',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_event_date','Event Date',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_log','Log',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_alerts','Alerts',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_count','Count',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_progress','Progress',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_options','Options',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_course_events','Course Events',NOW(),'');
@@ -96,7 +98,7 @@ INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_LEVELS_TEXT','Drag
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_OPTIONS_TEXT','Most options are managed by instructors at the course level, enabled by default. You may choose to prevent Instructors from modifying game elements by checking the checkbox below, allowing only the default settings to be used.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_FEEDBACK_GM_BADGE_COPIED','Badge was successfully copied. Drag badges into the drop done in the first column to change a badge image. Click on cells to edit them, click out to save.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_ERROR_GM_BADGE_COPY_FAILED','Copy badge failed. Contact your administrator if it persists.',NOW(),'');
-INSERT INTO `language_text` VALUES ('en', '_msg','AT_FEEDBACK_GM_EVENT_COPIED','Event was successfully copied. Drag icons into the drop done in the first column to change a level\'s image. Click on cells to edit them, click out to save. ',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_FEEDBACK_GM_EVENT_COPIED','Event was successfully copied. Click on cells to edit them, click out to save. ',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_ERROR_GM_EVENT_COPY_FAILED','Copy event failed. Contact your administrator if it persists.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_FEEDBACK_GM_LEVEL_COPIED','Level was successfully copied. Click on cells to edit them, click out to save. ',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_ERROR_GM_LEVEL_COPIED_FAILED','Copy level failed. Contact your administrator if it persists.',NOW(),'');
