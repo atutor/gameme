@@ -163,13 +163,17 @@ class DAO implements DAOInterface
         // Already exists?
         if ($this->getByAlias(TABLE_PREFIX.'gm_badges', $alias))
             throw new Exception(__METHOD__ . ': Alias ' . $alias . ' already exists');
-
+        if($_SESSION['course_id'] > 0){
+            $this_cid = $_SESSION['course_id']; 
+        }else{
+            $this_cid = 0;
+        }
         $sql = 'INSERT INTO '.TABLE_PREFIX.'gm_badges
                 (course_id, alias, title, description,image_url)
                 VALUES
                 (:cid, :alias, :title, :description,:image_url)';
         $params = array(
-            ':cid' => $_SESSION['course_id'],
+            ':cid' => $this_cid,
             ':alias' => $alias,
             ':title' => $title,
             ':description' => $description,
@@ -613,6 +617,11 @@ class DAO implements DAOInterface
     public function saveBadgeAlert($userId, $badgeId)
     {
         // echo "User: $userId - badge: $badgeId<br>";
+        if($_SESSION['course_id'] > 0){
+            $this_cid = $_SESSION['course_id']; 
+        }else{
+            $this_cid = 0;
+        }
         $sql = 'INSERT INTO '.TABLE_PREFIX.'gm_user_alerts
                 (id_user, id_badge, id_level, course_id)
                 VALUES
@@ -620,7 +629,7 @@ class DAO implements DAOInterface
         $params = array(
             ':uid' => $userId,
             ':bid' => $badgeId,
-            ':cid' => $_SESSION['course_id']
+            ':cid' => $this_cid
         );
         $this->execute($sql, $params);
         return true;
