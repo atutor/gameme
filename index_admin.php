@@ -111,7 +111,9 @@ if($_SESSION['inline_edit']){ ?>
 
 <h3><?php echo _AT('gm_default_events'); ?></h3>
 <?php $msg->printInfos('GM_ENABLE_EDIT_TEXT'); ?>
-<?php require_once($this_path.'mods/gameme/gamify.lib.php'); ?>
+<?php //require_once($this_path.'mods/gameme/gamify.lib.php');
+require_once(AT_INCLUDE_PATH.'../mods/gameme/gamify.lib.php');
+ ?>
 <table class="table table-hover table-bordered col-sm-12 data" >
 <tr>
 <th><?php echo _AT('gm_alias'); ?></th>
@@ -147,7 +149,7 @@ foreach($all_events as $key=>$event){
     <td style="text-align:center;" contenteditable="true" onBlur="saveEvent(this,\'reach_points\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['reach_points'].'</td>
     <td  contenteditable="true" onBlur="saveEvent(this,\'each_callback\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['each_callback'].'</td>
     <td contenteditable="true" onBlur="saveEvent(this,\'reach_callback\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['reach_callback'].'</td>
-    <td contenteditable="true" onBlur="saveEvent(this,\'reach_message\',\''.$event['id'].' \')" onClick="showEdit(this);">'.get_reach_message($event['alias']).'</td>
+    <td contenteditable="true" onBlur="saveEvent(this,\'reach_message\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['reach_message'].'</td>
     <td><!--<a href="mods/gameme/edit_event.php?id='.$event['id'].'">'._AT('gm_edit').'</a>--> <a href="mods/gameme/delete_event.php?id='.$event['id'].'">'._AT('gm_delete').'</a></td>
     </tr>';
     }
@@ -218,7 +220,8 @@ foreach($all_badges as $badge){
 <th></th>
 </tr>
 <?php
-require_once($this_path.'mods/gameme/gamify.lib.php');
+//require_once($this_path.'mods/gameme/gamify.lib.php');
+require_once(AT_INCLUDE_PATH.'../mods/gameme/gamify.lib.php');
 $sql = "SELECT * from %sgm_levels ORDER BY points desc";
 $all_levels = queryDB($sql, array(TABLE_PREFIX));
 foreach($all_levels as $level){
@@ -297,33 +300,7 @@ function star_file($id){
         }
     return $level_file;
 }
-/* Gets the reach message from the database, either
-* 1. a message created by the instructor for a particular course
-* 2. a custom message created by the administrator
-* 3. or the default message that come with the module
-* -in that order, whichever come first-
-* @$alias the alias for the event defined in the gm_events table, 
-* and passed from the events.php file 
-*/
-function get_reach_message($alias){
-         if($_SESSION['course_id'] > 0){
-            $is_course = " AND course_id=".$_SESSION['course_id'];
-        } else{
-            $is_course = " AND course_id=0";
-        }
-        
-        //$is_course = " AND course_id=".$_SESSION['course_id'];
-        $sql = "SELECT reach_message from %sgm_events WHERE alias = '%s' $is_course";
-        
-        if($reach_message = queryDB($sql, array(TABLE_PREFIX, $alias), TRUE)){
-            // all good
-        }else{
-            // reach message does not exist so get the system default
-            $sql = "SELECT reach_message from %sgm_events WHERE alias = '%s' AND course_id=0";
-            $reach_message = queryDB($sql, array(TABLE_PREFIX, $alias), TRUE);
-        }
-        return $reach_message['reach_message'];
-    }
+
 ?>
 
 

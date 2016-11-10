@@ -113,6 +113,7 @@ $this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$_base_pat
 <th><?php echo _AT('gm_reach_badge'); ?></th>
 <th><?php echo _AT('gm_each_points'); ?></th>
 <th><?php echo _AT('gm_reach_points'); ?></th>
+<th><?php echo _AT('gm_reach_message'); ?></th>
 <th></th>
 </tr>
 <?php
@@ -131,6 +132,7 @@ foreach($all_crs_events as $key=>$event){
     <td style="text-align:center;" contenteditable="true" onBlur="saveEvent(this,\'id_reach_badge\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['id_reach_badge'].'</td>
     <td style="text-align:center;" contenteditable="true" onBlur="saveEvent(this,\'each_points\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['each_points'].'</td>
     <td style="text-align:center;" contenteditable="true" onBlur="saveEvent(this,\'reach_points\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['reach_points'].'</td>
+     <td contenteditable="true" onBlur="saveEvent(this,\'reach_message\',\''.$event['id'].' \')" onClick="showEdit(this);">'.get_reach_message($event['alias']).'</td>
     <!--<td  contenteditable="true" onBlur="saveEvent(this,\'each_callback\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['each_callback'].'</td>
     <td contenteditable="true" onBlur="saveEvent(this,\'reach_callback\',\''.$event['id'].' \')" onClick="showEdit(this);">'.$event['reach_callback'].'</td>-->
     <td><!--<a href="mods/gameme/edit_event.php?id='.$event['id'].SEP.'course_id = '.$_SESSION['course_id'].'">'._AT('gm_edit').'</a>--> 
@@ -156,6 +158,7 @@ foreach($all_crs_events as $key=>$event){
 <th><?php echo _AT('gm_reach_badge'); ?></th>
 <th><?php echo _AT('gm_each_points'); ?></th>
 <th><?php echo _AT('gm_reach_points'); ?></th>
+<th><?php echo _AT('gm_reach_message'); ?></th>
 <?php  if(!$_config['instructor_edit']){ ?>
 <th></th>
 <?php } ?>
@@ -178,7 +181,8 @@ foreach($all_events as $key=>$event){
         <td style="text-align:center;">'.$event['id_each_badge'].'</td>
         <td style="text-align:center;">'.$event['id_reach_badge'].'</td>
         <td style="text-align:center;">'.$event['each_points'].'</td>
-        <td style="text-align:center;">'.$event['reach_points'].'</td>';
+        <td style="text-align:center;">'.$event['reach_points'].'</td>
+        <td>'.get_reach_message($event['alias']).'</td>';
          if(!$_config['instructor_edit']){ 
         echo '<td><a href="mods/gameme/copy_event.php?id='.$event['id'].SEP.'course_id = '.$_SESSION['course_id'].'">'._AT('gm_copy').'</a></td>'."\n";
         }

@@ -62,6 +62,7 @@ INSERT INTO `language_text` VALUES ('en', '_module','gm_view','view',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_addplus','Add +',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_enable_edit','Enable inline edit',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_delete','delete',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_delete_event','Delete Event',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_disallow_instructors','Disallow instructor customizing',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_update_options','Update Options',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_edit_level','Add/Edit Level',NOW(),'');
@@ -82,6 +83,8 @@ INSERT INTO `language_text` VALUES ('en', '_module','gm_eachevent_points','Point
 INSERT INTO `language_text` VALUES ('en', '_module','gm_reachevent_points','Points awared for the reach event (Bonus points added when the reach event occurs)',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_eachevent_callback','Each callback function (When event occurs, run this function)',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_reachevent_callback','Reach callback function (When event repetitions is reached, run this function)',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_reach_message','Reach Message',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_reachevent_message','Reach Message (The message sent to users when a reach event occurs)',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_save_event','Save Event',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_yes','Yes',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_no','No',NOW(),'');

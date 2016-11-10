@@ -89,8 +89,10 @@ class PHPGamification
         // Save badge
         $badge = $this->dao->saveBadge($alias, $title, $description, $imageURL);
         // Add badge to gamification engine
+debug_to_log('something');
         $this->badges[$badge->getId()] = $badge;
-
+        
+debug_to_log($badge);
         return $badge;
     }
     /**

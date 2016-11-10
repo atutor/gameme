@@ -270,10 +270,16 @@ class Event extends Entity
         return $this;
     }
 
-    public function copyReachPointsGranted($n)
+    public function copyReachMessage($id)
     {
-        if (!is_numeric($n)) throw new Exception(__METHOD__ . ': Invalid points');
-        $this->reachPoints = $n;
+        $sql = "SELECT reach_message FROM %sgm_events WHERE id =%d AND course_id = %d";
+        $this_reach_message = queryDB($sql, array(TABLE_PREFIX, $id, 0), TRUE);
+        $this->reachMessage = $this_reach_message['reach_message'];
+        return $this;
+    }
+    public function setReachMessage($str)
+    {
+        $this->reachMessage = $str;
         return $this;
     }
     /**

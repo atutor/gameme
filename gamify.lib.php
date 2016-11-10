@@ -121,7 +121,7 @@ function showUserScore(PHPGamification $gamification, $courseId){
 
 
 */ 
-function showUserLevels($gamification, $course_id)
+function showUserLevels(PHPGamification $gamification, $course_id)
 {
     $score = $gamification->getUserScores();
     echo "<h3>"._AT('gm_your_levels_reached')."</h3>";
@@ -442,8 +442,7 @@ function show_instructor(){
 
 /* Gets the reach message from the database, either
 * 1. a message created by the instructor for a particular course
-* 2. a custom message created by the administrator
-* 3. or the default message that come with the module
+* 2. or the default message that come with the module
 * -in that order, whichever come first-
 * @$alias the alias for the event defined in the gm_events table, 
 * and passed from the events.php file 

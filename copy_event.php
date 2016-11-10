@@ -72,7 +72,9 @@ if($_GET["id"]!= ''){
         if($default_event['reach_callback']){
             $event->setReachCallback($default_event['reach_callback']);
         }     
-
+        if($default_event['reach_message']){
+            $event->setReachMessage($default_event['reach_message']);
+        } 
        if( $gamification->addEvent($event, $course_id)){
             $msg->addFeedback('GM_EVENT_COPIED');
             header("Location: ".AT_BASE_HREF."mods/gameme/index_instructor.php");

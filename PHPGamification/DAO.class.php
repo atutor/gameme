@@ -317,9 +317,9 @@ class DAO implements DAOInterface
             $course_id = 0;
         }
         $sql = 'REPLACE INTO '.TABLE_PREFIX.'gm_events
-                (id, course_id, alias, description, allow_repetitions, reach_required_repetitions, max_points, id_each_badge, id_reach_badge, each_points, reach_points, each_callback, reach_callback)
+                (id, course_id, alias, description, allow_repetitions, reach_required_repetitions, max_points, id_each_badge, id_reach_badge, each_points, reach_points, each_callback, reach_callback, reach_message)
                 VALUES
-                (:id, :cid,:alias, :description, :allow_repetitions, :reach_required_repetitions, :max_points, :id_each_badge, :id_reach_badge, :each_points, :reach_points, :each_callback, :reach_callback)';
+                (:id, :cid,:alias, :description, :allow_repetitions, :reach_required_repetitions, :max_points, :id_each_badge, :id_reach_badge, :each_points, :reach_points, :each_callback, :reach_callback, :reach_message)';
         $params = array(
             ':id' => $event->getId(),
             ':cid' => $course_id,
@@ -333,7 +333,8 @@ class DAO implements DAOInterface
             ':reach_points' => $event->getReachPoints(),
             ':max_points' => $event->getMaxPoints(),
             ':each_callback' => $event->getEachCallback(),
-            ':reach_callback' => $event->getReachCallback()
+            ':reach_callback' => $event->getReachCallback(),
+            ':reach_message' => $event->getReachMessage()
         );
         
         $this->execute($sql, $params);

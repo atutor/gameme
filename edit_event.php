@@ -87,7 +87,9 @@ if($_POST['submit']){
      if(!empty($_POST['reach_callback'])){
         $event->setReachCallback($_POST['reach_callback'], $course_id);
      }     
-    
+     if(!empty($_POST['reach_message'])){
+        $event->setReachMessage($_POST['reach_message'], $course_id);
+     }     
     $gamification->addEvent($event, $course_id);
     $msg->addFeedback('success');
     if($course_id >0){
@@ -141,6 +143,8 @@ if(!isset($_GET['id'])){?>
 <input type="text" id="each_callback"  name="each_callback" value="<?php echo $this_event['each_callback']; ?>"  size="35"/><br />
 <label for="reach_callback"><?php echo _AT('gm_reachevent_callback'); ?></label> <br />
 <input type="text" id="reach_callback"  name="reach_callback" value="<?php echo $this_event['reach_callback']; ?>" size="35" /><br />
+<label for="reach_message"><?php echo _AT('gm_reachevent_message'); ?></label> <br />
+<textarea type="text" id="reach_message"  name="reach_message" rows="4" cols=50><?php echo $this_event['reach_message']; ?></textarea><br />
 <input type="submit" name="submit" value="<?php echo _AT('gm_save_event'); ?>"/><input type="submit" name="cancel" value="<?php echo _AT('gm_cancel'); ?>"/>
 </fieldset>
 </div>
