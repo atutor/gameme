@@ -222,8 +222,13 @@ foreach($all_badges as $badge){
 <?php
 //require_once($this_path.'mods/gameme/gamify.lib.php');
 require_once(AT_INCLUDE_PATH.'../mods/gameme/gamify.lib.php');
-$sql = "SELECT * from %sgm_levels ORDER BY points desc";
-$all_levels = queryDB($sql, array(TABLE_PREFIX));
+ if($_SESSION['course_id'] > 0){
+    $course_id = $_SESSION['course_id'];
+} else{
+    $course_id = 0;
+}
+$sql = "SELECT * from %sgm_levels WHERE course_id = %d ORDER BY points desc";
+$all_levels = queryDB($sql, array(TABLE_PREFIX, $course_id));
 foreach($all_levels as $level){
     echo '<tr>
     <td><form action="'.$_base_href.'mods/gameme/upload_level_icon.php"
@@ -242,15 +247,7 @@ foreach($all_levels as $level){
     <td><a href="mods/gameme/delete_level.php?id='.$level['id'].SEP.'course_id=0">'._AT('gm_delete').'</a></td>
     </tr>';
 }
-/*
-function showstars_lg($points){
-    $sql = "SELECT * FROM %sgm_levels WHERE points = $points";
-    $level = queryDB($sql, array(TABLE_PREFIX), TRUE);
-    $lg_star = str_replace(".", "_lg.", $level['icon']);
-    $stars .= '<img src="'.$_base_href.'mods/gameme/images/'.$level['icon'].'" alt="'.$level['title'].': '.$level['description'].'" title="'.$level['title'].': '.$level['description'].'" style="vertical-align:middle;margin-left:.2em;"/>'; 
-    return $stars;
-}
-*/
+
 ?>
 </table>
 </div>
@@ -279,7 +276,7 @@ function star_file($id){
     global $_base_href;
     $sql = "SELECT * FROM %sgm_levels WHERE id = %d AND course_id=%d";
     if($_SESSION['course_id'] >0){
-        $level = queryDB($sql, array(TABLE_PREFIX, $id, 0), TRUE);
+        $level = queryDB($sql, array(TABLE_PREFIX, $id, $_SESSION['course_id']), TRUE);
         if(empty($level)){
             $level = queryDB($sql, array(TABLE_PREFIX, $id, 0), TRUE);
         }
@@ -287,16 +284,18 @@ function star_file($id){
         $level = queryDB($sql, array(TABLE_PREFIX, $id, 0), TRUE);
     }
     
-    if(!file_get_contents($_base_href.'mods/gameme/images/'.$level['icon'] )){
+    //if(!file_get_contents($_base_href.'mods/gameme/images/'.$level['icon'] )){
+    if(!file_get_contents(file_get_contents(end($content_dir)).'/'.$_SESSION['course_id'].'/gameme/images/'.$level['icon'] )){
             $content_dir = explode('/',AT_CONTENT_DIR);
             array_pop($content_dir);
             if(!file_get_contents(end($content_dir).'/0/gameme/levels/'.$level['icon'])){
-                $level_file = end($content_dir).'/0/gameme/levels/'.$level['icon'] ;
+                //$level_file = end($content_dir).'/0/gameme/levels/'.$level['icon'] ;
             }else{
-                $level_file = end($content_dir).'/0/gameme/levels/'.$level['icon'] ;
+                //$level_file = end($content_dir).'/0/gameme/levels/'.$level['icon'] ;
             }
         } else{
-            $level_file = $_base_href.'mods/gameme/images/'.$level['icon'] ;
+            //$level_file = $_base_href.'mods/gameme/images/'.$level['icon'] ;
+           //$level_file =  end($content_dir).'/'.$_SESSION['course_id'].'/gameme/images/'.$level['icon']
         }
     return $level_file;
 }

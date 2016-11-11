@@ -64,6 +64,7 @@ INSERT INTO `language_text` VALUES ('en', '_module','gm_enable_edit','Enable inl
 INSERT INTO `language_text` VALUES ('en', '_module','gm_delete','delete',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_delete_event','Delete Event',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_delete_badge','Delete Badge',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_delete_level','Delete Level',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_disallow_instructors','Disallow instructor customizing',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_update_options','Update Options',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_edit_level','Add/Edit Level',NOW(),'');

@@ -205,8 +205,8 @@ function showstars($points){
         if(!empty($level_image['icon'])){
             if(file_get_contents($_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'])){
                 $level_file =  $_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'];
-            }else if(file_get_contents($_base_href.'content/0/levels/'.$level_image['icon'])){
-                $level_file =$_base_href.'content/0/levels/'.$level_image['icon'];
+            }else if(file_get_contents($_base_href.'content/0/gameme/levels/'.$level_image['icon'])){
+                $level_file =$_base_href.'content/0/gameme/levels/'.$level_image['icon'];
             }else {
                 $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
             }
@@ -215,7 +215,7 @@ function showstars($points){
             $sql = "SELECT icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
             $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],0), TRUE);
             
-            if(!file_get_contents($_base_href.'content/0/levels/'.$level_image['icon'])){
+            if(!file_get_contents($_base_href.'content/0/gameme/levels/'.$level_image['icon'])){
                 $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
             } else {
                 $content_dir = explode('/',AT_CONTENT_DIR);
@@ -236,6 +236,7 @@ function showstar($points){
     
     $sql = "SELECT id FROM %sgm_levels WHERE course_id = %d AND points = %d";
     $course_levels = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id'], $points), TRUE);
+    
     $content_dir = explode('/',AT_CONTENT_DIR);
     array_pop($content_dir);
     
@@ -246,8 +247,8 @@ function showstar($points){
     if(!empty($level_image['icon'])){
         if(file_get_contents($_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'])){
             $level_file =  $_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'];
-        }else if(file_get_contents($_base_href.'content/0/levels/'.$level_image['icon'])){
-            $level_file =$_base_href.'content/0/levels/'.$level_image['icon'];
+        }else if(file_get_contents($_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'])){
+            $level_file =$_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'];
         }else {
             $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
         }
@@ -255,8 +256,7 @@ function showstar($points){
         if(!in_array($level['id'] , $course_levels)){
         $sql = "SELECT icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
         $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],0), TRUE);
-        
-        if(!file_get_contents($_base_href.'content/0/levels/'.$level_image['icon'])){
+        if(!file_get_contents($_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'])){
             $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
         } else {
             $content_dir = explode('/',AT_CONTENT_DIR);

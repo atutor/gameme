@@ -31,8 +31,8 @@ if($_POST['submit']){
     require_once($this_path.'mods/gameme/PHPGamification/PHPGamification.class.php');
     $gamification = new PHPGamification();
     $gamification->setDAO(new DAO(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD));
-    
-    if(!empty($_POST['title']) && !empty($_POST['points']) && is_int($_POST['points'])){
+
+    if(!empty($_POST['title']) && !empty($_POST['points']) && settype($_POST['points'], 'integer')){
         $gamification->addLevel($_POST['points'], $_POST['title'], $_POST['description']);
         $msg->addFeedback('GM_LEVEL_ADDED');
         header('Location:'.$_base_href.'mods/gameme/index_admin.php?tab=3');
