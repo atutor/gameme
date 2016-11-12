@@ -305,7 +305,7 @@ ALTER TABLE `gm_events`
 
 ALTER TABLE `gm_levels`
  ADD PRIMARY KEY (`id`,`course_id`);
-
+*/
 ALTER TABLE `gm_options`
  ADD PRIMARY KEY (`course_id`,`option`), ADD KEY `id` (`id`);
 
@@ -332,4 +332,3 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 
 ALTER TABLE `gm_options`
 MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=410;
-*/
