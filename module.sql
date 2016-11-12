@@ -90,7 +90,7 @@ INSERT INTO `language_text` VALUES ('en', '_module','gm_reachevent_message','Rea
 INSERT INTO `language_text` VALUES ('en', '_module','gm_save_event','Save Event',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_yes','Yes',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_no','No',NOW(),'');
-INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_GM_SET_GAMEME_OPTIONS','GameMe options must be set in this course. Under the Manage tab, open GameMe and select the Option tab. Enable GameMe elements in Manage>Course Tools.',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_GM_SET_GAMEME_OPTIONS','GameMe options must be set in this course. Under the Manage tab, open GameMe and select the Options tab. Enable GameMe elements in Manage>Course Tools.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_COPY_EVENT','Copy Default Events to modify them.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_EDITING_DISABLED','Editing has been disabled. Contact your administrator to have editing turned on',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_COPY_BADGE','Copy Default Badges to modify them',NOW(),'');
