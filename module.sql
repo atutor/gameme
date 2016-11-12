@@ -296,7 +296,7 @@ CREATE TABLE `gm_user_scores` (
   `id_level` int(10) unsigned NOT NULL,
   `course_id` int(10) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
+/*
 ALTER TABLE `gm_badges`
  ADD PRIMARY KEY (`id`,`course_id`);
 
@@ -332,3 +332,4 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 
 ALTER TABLE `gm_options`
 MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=410;
+*/
