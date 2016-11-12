@@ -23,11 +23,11 @@ define('AT_ADMIN_PRIV_GAMEME', $this->getAdminPrivilege());
 $this->_stacks['gameme'] = array('title_var'=>'gameme', 'file'=>AT_INCLUDE_PATH.'../mods/gameme/side_menu.inc.php');
 
 // Uncomment for big icon for module sublinks "detail view" on course home page
-$this->_pages['mods/gameme/index.php']['img']      = 'mods/gameme/gamify.png';
+//$this->_pages['mods/gameme/index.php']['img']      = 'mods/gameme/gamify.png';
 
 // ** possible alternative: **
 // the text to display on module "detail view" when sublinks are not available
-$this->_pages['mods/gameme/index.php']['text']      = _AT('gameme_text');
+//$this->_pages['mods/gameme/index.php']['text']      = _AT('gameme_text');
 
 /*******
  * add the admin pages when needed.
