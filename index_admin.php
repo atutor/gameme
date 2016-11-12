@@ -283,20 +283,22 @@ function star_file($id){
     }else{
         $level = queryDB($sql, array(TABLE_PREFIX, $id, 0), TRUE);
     }
+    $content_dir = explode('/',AT_CONTENT_DIR);
+    array_pop($content_dir);
     
     //if(!file_get_contents($_base_href.'mods/gameme/images/'.$level['icon'] )){
-    if(!file_get_contents(file_get_contents(end($content_dir)).'/'.$_SESSION['course_id'].'/gameme/images/'.$level['icon'] )){
+    if(!file_get_contents($_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/images/'.$level['icon'] )){
             $content_dir = explode('/',AT_CONTENT_DIR);
             array_pop($content_dir);
-            if(!file_get_contents(end($content_dir).'/0/gameme/levels/'.$level['icon'])){
-                //$level_file = end($content_dir).'/0/gameme/levels/'.$level['icon'] ;
+            if(!file_get_contents($_base_href.end($content_dir).'/0/gameme/levels/'.$level['icon'])){
+                $level_file = $_base_href.'mods/gameme/images/'.$level['icon'] ;
             }else{
-                //$level_file = end($content_dir).'/0/gameme/levels/'.$level['icon'] ;
+                $level_file = $_base_href.end($content_dir).'/0/gameme/levels/'.$level['icon'] ;
             }
-        } else{
+    } else{
             //$level_file = $_base_href.'mods/gameme/images/'.$level['icon'] ;
-           //$level_file =  end($content_dir).'/'.$_SESSION['course_id'].'/gameme/images/'.$level['icon']
-        }
+           $level_file =  $_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/images/'.$level['icon'];
+    }
     return $level_file;
 }
 
