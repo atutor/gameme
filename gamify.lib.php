@@ -127,11 +127,12 @@ function showUserLevels(PHPGamification $gamification, $course_id)
     echo "<h3>"._AT('gm_your_levels_reached')."</h3>";
     if ($score){
         $sql = "SELECT `value` from %sgm_options WHERE `course_id`=%d AND `option`='%s'";
-        if($level_max = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id'], "level_count"),TRUE)){
+        if($level_max = queryDB($sql, array(TABLE_PREFIX, $course_id, "level_count"),TRUE)){
             if($level_max['value']  >0){
                 $limit = " LIMIT ".$level_max['value'];
             }
         }
+
         echo "<table class='data'>
         <tr>
         <th>"._AT('gm_level')."</th>
@@ -139,15 +140,24 @@ function showUserLevels(PHPGamification $gamification, $course_id)
         <th>"._AT('gm_description')."</th>
         <th>"._AT('gm_points')."</th>
         </tr>";
+        // get a list of course level ids
+        $sql = "SELECT id FROM %sgm_levels WHERE course_id=%d";
+        $course_levels = queryDB($sql, array(TABLE_PREFIX, $course_id));
+
         $sql = "SELECT * FROM %sgm_levels WHERE points < %d ORDER BY points asc $limit ";
         $my_levels = queryDB($sql, array(TABLE_PREFIX, $score->getPoints()));
+
         foreach($my_levels as $level){
-            echo "<tr>";
-            echo "<td>".showstar($level['points'])."</td>";
-            echo "<td>".$level['title']."</td>";
-            echo "<td>".$level['description']."</td>";
-            echo "<td>".$level['points']."</td>";            
-            echo "</tr>"."\n";
+            // check if a level id exists in the list of course level ids, if not then echo default level
+            if(!in_array($level['id'], $course_levels) && $level['course_id'] ==0){
+                echo "<tr>";
+                echo "<td>".showstar($level['points'])."</td>";
+                echo "<td>".$level['title']."</td>";
+                echo "<td>".$level['description']."</td>";
+                echo "<td>".$level['points']."</td>";            
+                echo "</tr>"."\n";
+            }
+            $count++;
         }
         echo "</table>";
     }
