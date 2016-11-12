@@ -123,6 +123,7 @@ INSERT INTO `language_text` VALUES ('en', '_msg','AT_FEEDBACK_GM_UPDATED_OPTIONS
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_ERROR_GM_UPDATED_OPTIONS_FAILED','Update options failed. Contact your administrator if it persists.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_ERROR_GM_MAX_DIMENSION','Maximum dimensions of %sx%s exceeded. Reduce the height and width of the image.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_ERROR_GM_MAX_FILESESIZE','Maximum files size of %sKB exceeded. Reduce the size of the image.',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_msg','AT_FEEDBACK_GM_CONFIG_UPDATED','GameMe configuration was sucessfully updated',NOW(),'');
 
 CREATE TABLE `gm_badges` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

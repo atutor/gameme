@@ -71,7 +71,7 @@ $_custom_head .= '<script type="text/javascript" src="'.$_base_path.'mods/gameme
 				$sql = 'REPLACE INTO %sconfig VALUES ("%s", "%s")';
 				$num_rows = queryDB($sql, array(TABLE_PREFIX, 'instructor_edit', $_POST['instructor_edit']));
 				write_to_log(AT_ADMIN_LOG_REPLACE, 'config', $num_rows, $sqlout);
-				$msg->addFeedback('CONFIG_UPDATED');
+				$msg->addFeedback('GM_CONFIG_UPDATED');
 				header('Location:'.$_SERVER['PHP_SELF']);
 				exit;
 
@@ -79,7 +79,7 @@ $_custom_head .= '<script type="text/javascript" src="'.$_base_path.'mods/gameme
 				$sql = "DELETE FROM %sconfig WHERE name='%s'";
 				$num_rows = queryDB($sql, array(TABLE_PREFIX, 'instructor_edit'));
 				write_to_log(AT_ADMIN_LOG_DELETE, 'config', $num_rows, $sqlout);
-				$msg->addFeedback('CONFIG_UPDATED');
+				$msg->addFeedback('GM_CONFIG_UPDATED');
 			    header('Location:'.$_SERVER['PHP_SELF']);
 				exit;
 			}
