@@ -76,6 +76,7 @@ INSERT INTO `language_text` VALUES ('en', '_module','gm_cancel','Cancel',NOW(),'
 INSERT INTO `language_text` VALUES ('en', '_module','gm_edit_badge','Add/Edit Badge',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_save_badge','Save Badge',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_edit_event','Add/Edit Event',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_badges_so_far','Your other badges earned so far',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_allow_repetition','Allow Repetition (Yes this event can repeat, or No is it a one time occurence)',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_reach_repetition','Reach required repetitions (Repetitions required to trigger reach event)',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_max_points_allowed','Maximum points allowed  (Maximum points that can be scored for this event)',NOW(),'');
@@ -90,6 +91,7 @@ INSERT INTO `language_text` VALUES ('en', '_module','gm_reachevent_message','Rea
 INSERT INTO `language_text` VALUES ('en', '_module','gm_save_event','Save Event',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_yes','Yes',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_no','No',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_gameme_notification','ATutor GameMe Notification',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_GM_SET_GAMEME_OPTIONS','GameMe options must be set in this course. Under the Manage tab, open GameMe and select the Options tab. Enable GameMe elements in Manage>Course Tools.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_COPY_EVENT','Copy Default Events to modify them.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_EDITING_DISABLED','Editing has been disabled. Contact your administrator to have editing turned on',NOW(),'');
@@ -161,7 +163,7 @@ VALUES
 	(22,0,'photo_description_badge','Photo Describer','Exellent job providing descriptions for you photos. ','mods/gameme/images/badges/feather.png'),
 	(23,0,'photo_alt_text','Accessibility Aware','Its great you are providing Alt text for you image, to make them accessible to people with disabilities. Secret bonus points if you continue adding Alt text to new images in you gallery.','mods/gameme/images/badges/heart.png'),
 	(24,0,'login_badge reach','Returning Visitor','You come back quite a few times now. Keep on visiting the course for bonus points.','mods/gameme/images/badges/hot.png'),
-	(25,0,'logout_badge','Security Conscious','You have been loggin out, rather than leaving or allowing your session to time out. This helps improve security.','mods/gameme/images/badges/lock.png'),
+	(25,0,'logout_badge','Security Conscious','You have been logging out, rather than leaving or allowing your session to time out. This helps improve security.','mods/gameme/images/badges/lock.png'),
 	(26,0,'welcome_badge','Welcome','Welcome to the course. Finding your way here earned you your first badge. Get busy with the course to earn points and collect more badges.','mods/gameme/images/badges/acorn.png');
 
 CREATE TABLE `gm_events` (
