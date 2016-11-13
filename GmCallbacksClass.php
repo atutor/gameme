@@ -28,7 +28,7 @@ class GmCallbacksClass
     static function WelcomeCallback($params)
     {
         if ($params['firstname']){    
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
+            //$feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
             $feedback .= '<div style="height:5em;">'.self::getReachMessage('welcome').'</div>';   
                      
             //$feedback = "Welcome to the course. You have earned your first badge by successfully logging in. Continue earning badges by using the features in the course, and participating in course activities.<br /><br />By participating in the course you can also earn points and advance through levels as your points grow. Follow the leader board to see your position among others in the course. Watch for hints after earning a badge, for earning additional badges and bonus points.";
@@ -456,7 +456,7 @@ class GmCallbacksClass
                 $mail->IsHTML(true);
 				$mail->From = $from_email;
 				$mail->AddAddress($to_email);
-				$mail->Subject = "ATutor GameMe Notification";
+				$mail->Subject = _AT('gm_gameme_notification');
 				$mail->Body    = $tmp_message;
 
 				if(!$mail->Send()) {
@@ -482,7 +482,7 @@ class GmCallbacksClass
     */
     public static function getCurrentBadges($badges){
     	if(!empty($badges)){
-    		$current_badges .='<h3>Your other badges earned so far</h3>'."\n";                  
+    		$current_badges .='<h3>'._AT('gm_badges_so_far').'</h3>'."\n";                  
             $current_badges .= '<table style="border:1px solid #eeeeee;width:97%;">';     
             foreach ($badges as $badge) {
                 $sql = "SELECT image_url FROM %sgm_badges WHERE id=%d";
@@ -505,7 +505,7 @@ class GmCallbacksClass
             $new_badge .= '<p> Hi '.$params['firstname']."!</p>\n\n";
             $new_badge .= "<p>".$feedback." <br /></p>" ;
             
-            $new_badge .= '<table  style="border:1px solid #eeeeee;width:97%;">'."\n";
+            $new_badge .= '<table  style="border:1px solid #eeeeee;width:97%;float:left;clear:both;">'."\n";
             $new_badge .= '<tr><td style="background-color:#eeeee;"><img src="'.$earned_badge['image_url'].'" alt ="'.$earned_badge['title'].'" /></td>
                     <td style="background-color:#efefef; padding:.3em;"><strong>'.$earned_badge['title'].'</strong><br/>'.$earned_badge['description'].'</td></tr>'."\n";
             $new_badge.='</table><br /><br />'."\n"; 
