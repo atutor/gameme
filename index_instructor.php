@@ -1,6 +1,6 @@
 <?php
-namespace gameme;
-use gameme\PHPGamification\DAO;
+//namespace gameme;
+//use gameme\PHPGamification\DAO;
 
 define('AT_INCLUDE_PATH', '../../include/');
 require (AT_INCLUDE_PATH.'vitals.inc.php');
@@ -262,7 +262,7 @@ foreach($all_badges as $badge){
 $sql = "SELECT * from %sgm_badges WHERE course_id=0";
 $all_badges = queryDB($sql, array(TABLE_PREFIX));
 foreach($all_badges as $badge){
-    if(!file_get_contents($_base_href.$badge['image_url'])){
+    if(!file_exists($_base_href.$badge['image_url'])){
         $content_dir = explode('/',AT_CONTENT_DIR);
         array_pop($content_dir);
         $badge_file_name = explode("/",$badge['image_url']);
@@ -356,7 +356,7 @@ $all_levels = queryDB($sql, array(TABLE_PREFIX, 0));
 
 foreach($all_levels as $level){
     $levels_crs_exists ='';
-    if(!file_get_contents($_base_href.'mods/gameme/image/'.$level['icon'])){
+    if(!file_exists($_base_href.'mods/gameme/image/'.$level['icon'])){
         $content_dir = explode('/',AT_CONTENT_DIR);
         array_pop($content_dir);
         $level_file_name = explode("/",$level['icon']);
@@ -557,7 +557,7 @@ function showstars_lg($points){
     
     $lg_star = str_replace(".", "_lg.", $level['icon']);
     
-    if(!file_get_contents($_base_href.'mods/gameme/images/'.$level['icon'] )){
+    if(!file_exists($_base_href.'mods/gameme/images/'.$level['icon'] )){
         $content_dir = explode('/',AT_CONTENT_DIR);
         array_pop($content_dir);
         $level_file = end($content_dir).'/0/gameme/levels/'.$level['icon'] ;
@@ -587,9 +587,9 @@ function star_file($id){
     
     // this chunk doubles the page load time
     if(!empty($level_image['icon'])){
-        if(file_get_contents($_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'])){
+        if(file_exists($_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'])){
             $level_file =  $_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'];
-        }else if(file_get_contents($_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'])){
+        }else if(file_exists($_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'])){
             $level_file =$_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'];
         }else {
             $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
@@ -599,7 +599,7 @@ function star_file($id){
         $sql = "SELECT icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
         $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],0), TRUE);
         //debug_to_log($_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon']);
-        if(!file_get_contents($_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'])){
+        if(!file_exists($_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'])){
             $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
         } else {
             $content_dir = explode('/',AT_CONTENT_DIR);
@@ -614,7 +614,24 @@ function star_file($id){
 if(!empty($_POST)){
     $json = json_encode($_POST);
 }
-
+function get_reach_message($alias){
+         if($_SESSION['course_id'] > 0){
+            $is_course = " AND course_id=".$_SESSION['course_id'];
+        } else{
+            $is_course = " AND course_id=0";
+        }
+        
+        $sql = "SELECT reach_message from %sgm_events WHERE alias = '%s' $is_course";
+        
+        if($reach_message = queryDB($sql, array(TABLE_PREFIX, $alias), TRUE)){
+            // all good
+        }else{
+            // reach message does not exist so get the system default
+            $sql = "SELECT reach_message from %sgm_events WHERE alias = '%s' AND course_id=0";
+            $reach_message = queryDB($sql, array(TABLE_PREFIX, $alias), TRUE);
+        }
+        return $reach_message['reach_message'];
+    }
 
 ?>
 
