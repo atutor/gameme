@@ -28,8 +28,8 @@ class GmCallbacksClass
     static function WelcomeCallback($params)
     {
         if ($params['firstname']){    
-            //$feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('welcome').'</div>';   
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';
+            $feedback .= '<div style="height:auto;float:left; clear:both;">'. $feedback_img.self::getReachMessage('welcome').'</div>';   
                      
             //$feedback = "Welcome to the course. You have earned your first badge by successfully logging in. Continue earning badges by using the features in the course, and participating in course activities.<br /><br />By participating in the course you can also earn points and advance through levels as your points grow. Follow the leader board to see your position among others in the course. Watch for hints after earning a badge, for earning additional badges and bonus points.";
             $message .= self::getNewBadge($params, $feedback);
@@ -482,6 +482,7 @@ class GmCallbacksClass
     */
     public static function getCurrentBadges($badges){
     	if(!empty($badges)){
+    	    $current_badges .= '<div style="height:auto; float:left;clear:both;">';
     		$current_badges .='<h3>'._AT('gm_badges_so_far').'</h3>'."\n";                  
             $current_badges .= '<table style="border:1px solid #eeeeee;width:97%;">';     
             foreach ($badges as $badge) {
@@ -491,6 +492,7 @@ class GmCallbacksClass
                 $current_badges .=  '<td style="background-color:#efefef; padding:.3em;"><strong>'.$badge->getBadge()->getTitle().'</strong><br/>'.$badge->getBadge()->getDescription().'</td></tr>'."\n";
             }
             $current_badges .= "</table>";
+            $current_badges .= "</div>";
     	}
     	return $current_badges;
     }
