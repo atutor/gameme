@@ -92,6 +92,11 @@ INSERT INTO `language_text` VALUES ('en', '_module','gm_save_event','Save Event'
 INSERT INTO `language_text` VALUES ('en', '_module','gm_yes','Yes',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_no','No',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_gameme_notification','ATutor GameMe Notification',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_no_course_badges_yet','No course badges yet. Click "copy" next to a default badge, to move it here for customizing.',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_no_badges_earned','You have not earned any badges yet. ',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_no_course_events_yet','No course events yet. Click "copy" next to a default event, to move it here for customizing.',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_no_course_levels_yet','No course levels yet. Click "copy" next to a default level, to move it here for customizing.',NOW(),'');
+
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_GM_SET_GAMEME_OPTIONS','GameMe options must be set in this course. Under the Manage tab, open GameMe and select the Options tab. Enable GameMe elements in Manage>Course Tools.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_COPY_EVENT','Copy Default Events to modify them.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_EDITING_DISABLED','Editing has been disabled. Contact your administrator to have editing turned on',NOW(),'');
@@ -242,16 +247,16 @@ CREATE TABLE `gm_levels` (
 INSERT INTO `gm_levels` (`id`, `course_id`, `title`, `description`, `points`, `icon`)
 VALUES
 	(1,0,'Level 0','Welcome to the course',0,'star_empty_lg.png'),
-	(2,0,'Level 1','250 points passed',250,'star_white_lg.png'),
-	(3,0,'Level 2','500 points passed',500,'star_yellow_lg.png'),
-	(4,0,'Level 3','1000 points passed',1000,'star_red_lg.png'),
-	(5,0,'Level 4','1500 points passed',1500,'star_green_lg.png'),
-	(6,0,'Level 5','2000 points passed: ',2000,'star_blue_lg.png'),
-	(7,0,'Level 6','3000 points passed',3000,'star_black_lg.png'),
-	(8,0,'Level 7','5000 points passed: Accomplished status, Bronze Badge',5000,'star_bronze_lg.png'),
-	(9,0,'Level 8','7500 point passed: Intermediate status, Silver Badge',7500,'star_silver_lg.png'),
-	(10,0,'Level 9','10000 points passed: Advanced status: Gold Badge',10000,'star_gold_lg.png'),
-	(11,0,'Level 10','15000 point passed: Highest Honor: Platinum Badge',15000,'star_platinum_lg.png');
+	(2,0,'Level 1','1000 points passed',1000,'star_white_lg.png'),
+	(3,0,'Level 2','2500 points passed',2500,'star_yellow_lg.png'),
+	(4,0,'Level 3','5000 points passed',5000,'star_red_lg.png'),
+	(5,0,'Level 4','7500 points passed',7500,'star_green_lg.png'),
+	(6,0,'Level 5','10000 points passed: ',10000,'star_blue_lg.png'),
+	(7,0,'Level 6','20000 points passed',20000,'star_black_lg.png'),
+	(8,0,'Level 7','25000 points passed: Accomplished status, Bronze Badge',25000,'star_bronze_lg.png'),
+	(9,0,'Level 8','35000 point passed: Intermediate status, Silver Badge',35000,'star_silver_lg.png'),
+	(10,0,'Level 9','50000 points passed: Advanced status: Gold Badge',50000,'star_gold_lg.png'),
+	(11,0,'Level 10','65000 point passed: Highest Honor: Platinum Badge',65000,'star_platinum_lg.png');
 
 CREATE TABLE `gm_options` (
 `id` int(11) unsigned NOT NULL,
