@@ -1,5 +1,5 @@
 <?php
-namespace gameme\PHPGamification;
+//namespace gameme\PHPGamification;
 
 /*******
  * doesn't allow this file to be loaded with a browser.
@@ -14,7 +14,7 @@ if (!isset($this) || (isset($this) && (strtolower(get_class($this)) != 'module')
 /*******
  * assign the instructor and admin privileges to the constants.
  */
-define('AT_PRIV_GAMEME',       $this->getPrivilege());
+define('AT_PRIV_GAMEME', $this->getPrivilege());
 define('AT_ADMIN_PRIV_GAMEME', $this->getAdminPrivilege());
 
 /*******
@@ -28,11 +28,11 @@ $this->_stacks['gameme'] = array('title_var'=>'gameme', 'file'=>AT_INCLUDE_PATH.
 // ** possible alternative: **
 // the text to display on module "detail view" when sublinks are not available
 //$this->_pages['mods/gameme/index.php']['text']      = _AT('gameme_text');
-
+$_student_tool = 'mods/gameme/index.php';
 /*******
  * add the admin pages when needed.
  */
-if (admin_authenticate(AT_ADMIN_PRIV_GAMEME, TRUE)) {
+if (admin_authenticate(AT_ADMIN_PRIV_GAMEME, TRUE) || admin_authenticate(AT_ADMIN_PRIV_ADMIN, TRUE)) {
 	$this->_pages[AT_NAV_ADMIN] = array('mods/gameme/index_admin.php');
 	$this->_pages['mods/gameme/index_admin.php']['title_var'] = 'gm_gameme';
 	$this->_pages['mods/gameme/index_admin.php']['parent']    = AT_NAV_ADMIN;
@@ -55,7 +55,7 @@ if (admin_authenticate(AT_ADMIN_PRIV_GAMEME, TRUE)) {
 /*******
  * instructor Manage section:
  */
- if (authenticate(AT_PRIV_GAMEME, TRUE)) {
+// if (authenticate(AT_PRIV_GAMEME, TRUE)) {
 $this->_pages['mods/gameme/index_instructor.php']['title_var'] = 'gm_gameme';
 $this->_pages['mods/gameme/index_instructor.php']['parent']   = 'tools/index.php';
 $this->_pages['mods/gameme/index_instructor.php']['guide'] = 'mods/gameme/instructor_handbook.php';
@@ -76,7 +76,7 @@ $this->_pages['mods/gameme/delete_level.php']['parent']   = 'mods/gameme/index_i
 $this->_pages['mods/gameme/game_options.php']['title_var'] = 'gm_game_options';
 $this->_pages['mods/gameme/game_options.php']['parent']   = 'mods/gameme/index_instructor.php';
 $this->_pages['mods/gameme/index_instructor.php']['img']    = 'mods/gameme/images/gamify.png';
-}
+//}
 
 /*******
  * student page.
@@ -95,25 +95,31 @@ $this->_pages[AT_NAV_START]  = array('mods/gameme/index_mystart.php');
 $this->_pages['mods/gameme/index_mystart.php']['title_var'] = 'gm_gameme';
 $this->_pages['mods/gameme/index_mystart.php']['parent'] = AT_NAV_START;
 
+
+function gamemeEnabled(){
+    $sql = "SELECT home_links, main_links, side_menu FROM %scourses WHERE course_id = %d";
+    $gameme_elements = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']), TRUE);  
+    foreach($gameme_elements as $gameme_element){
+        if(preg_match('/gameme/',$gameme_element)){
+            return TRUE;   
+        }
+    }
+}
 // Run gameme events if a valid user is logged in
-if($_SESSION['valid_user'] == 1 && $_SESSION['valid_user'] >0){
+if($_SESSION['valid_user'] == 1){
     global $_base_path;
     // Hack to fix the get.php appending issue
     $root_path =  preg_replace ('#/get.php#','',$_base_path);
-    include($_SERVER['DOCUMENT_ROOT'].$root_path.'/mods/gameme/events.php');
+    include(AT_INCLUDE_PATH.'../mods/gameme/events.php');
+    // limit gameme to within courses (BREAKS LOGIN EVENT)
+    //if(($_SESSION['course_id']>0 || $_REQUEST['course'] >0) && gamemeEnabled() === TRUE){
+        //include($_SERVER['DOCUMENT_ROOT'].$root_path.'/mods/gameme/events.php');
+    //}
 }
 // Check course gameme options, and warn if not set
-if($_SESSION['is_admin'] == 1){
+if($_SESSION['is_admin'] == true){
     //check if gameme is enabled
-    $sql = "SELECT home_links, main_links, side_menu FROM %scourses WHERE course_id = %d";
-    $gameme_elements = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']), TRUE);
-    
-    foreach($gameme_elements as $gameme_element){
-        if(preg_match('/gameme/',$gameme_element)){
-            $gameme_enabled = TRUE;            
-        }
-    }
-    if($_SESSION['course_id']>0 && $gameme_enabled === TRUE){
+    if($_SESSION['course_id']>0 && gamemeEnabled() === TRUE){
         $sql = "SELECT * from %sgm_options WHERE course_id=%d";
         $has_options = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']));
         if(empty($has_options[0])){
