@@ -586,6 +586,11 @@ class DAO implements DAOInterface
      */
     public function increaseEventCounter($userId, $eventId)
     {
+        if($_SESSION['course_id'] >0){
+            $this_cid = $_SESSION['course_id'];
+        }else if($_REQUEST['course']){
+            $this_cid = $_REQUEST['course'];
+        } 
         $sql = 'INSERT INTO '.TABLE_PREFIX.'gm_user_events
                 (id_user, id_event, event_counter, course_id)
                 VALUES
@@ -594,7 +599,7 @@ class DAO implements DAOInterface
         $params = array(
             ':uid' => $userId,
             ':eid' => $eventId,
-            ':cid' => $_SESSION['course_id']
+            ':cid' => $this_cid
         );
         return $this->execute($sql, $params);
     }
