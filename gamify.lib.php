@@ -244,13 +244,13 @@ function showstar($points){
     $sql = "SELECT icon, description FROM %sgm_levels WHERE points=%d AND course_id=%d";
     $star_image = queryDB($sql, array(TABLE_PREFIX, $points,$_SESSION['course_id']), TRUE);
     if(is_file(AT_CONTENT_DIR.$_SESSION['course_id'].'/gameme/levels/'.$star_image['icon'])){
-        $level_file = $_base_href.'get.php/gameme/badges/'.$star_image['icon'];
+        $level_file = $_base_href.'get.php/gameme/levels/'.$star_image['icon'];
     }else{
         // Not a course level, so check for custom system level
         $sql = "SELECT id, icon, description FROM %sgm_levels WHERE points=%d AND course_id=%d";
         $star_image = queryDB($sql, array(TABLE_PREFIX, $points, 0), TRUE);
         // get the custom admin created icon
-        if(is_file(AT_CONTENT_DIR.'0/gameme/badges/'.$star_image['icon'])){
+        if(is_file(AT_CONTENT_DIR.'0/gameme/levels/'.$star_image['icon'])){
             $level_file = $_base_href.'mods/gameme/get_level_icon.php?level_id='.$star_image['id'];
         } else{
             // Default level icon
