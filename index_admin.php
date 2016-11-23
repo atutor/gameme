@@ -180,7 +180,8 @@ foreach($all_badges as $badge){
         $content_dir = explode('/',AT_CONTENT_DIR);
         array_pop($content_dir);
         $badge_file_name = explode("/",$badge['image_url']);
-        $badge_file = end($content_dir).'/0/gameme/badges/'.end($badge_file_name);
+        //$badge_file = end($content_dir).'/0/gameme/badges/'.end($badge_file_name);
+        $badge_file = $_base_href.'mods/gameme/get_badge_icon.php?badge_id='.$badge['id'];
     } else{
         $badge_file = $_base_href.$badge['image_url'];
     }
