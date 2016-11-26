@@ -39,7 +39,7 @@ if (admin_authenticate(AT_ADMIN_PRIV_GAMEME, TRUE) || admin_authenticate(AT_ADMI
 	$this->_pages['mods/gameme/index_admin.php']['guide'] = 'mods/gameme/admin_handbook.php';
 	$this->_pages['mods/gameme/edit_event.php']['title_var'] = 'gm_edit_event';
 	$this->_pages['mods/gameme/edit_event.php']['parent']    = 'mods/gameme/index_admin.php';
-	$this->_pages['mods/gameme/edit_event.php']['guide'] = 'mods/gameme/admin_handbook.php';
+	//$this->_pages['mods/gameme/edit_event.php']['guide'] = 'mods/gameme/admin_handbook.php';
 	$this->_pages['mods/gameme/edit_level.php']['title_var'] = 'gm_edit_level';
     $this->_pages['mods/gameme/edit_level.php']['parent']   = 'mods/gameme/index_admin.php';
     $this->_pages['mods/gameme/edit_badge.php']['title_var'] = 'gm_edit_badge';
@@ -55,28 +55,28 @@ if (admin_authenticate(AT_ADMIN_PRIV_GAMEME, TRUE) || admin_authenticate(AT_ADMI
 /*******
  * instructor Manage section:
  */
-// if (authenticate(AT_PRIV_GAMEME, TRUE)) {
-$this->_pages['mods/gameme/index_instructor.php']['title_var'] = 'gm_gameme';
-$this->_pages['mods/gameme/index_instructor.php']['parent']   = 'tools/index.php';
-$this->_pages['mods/gameme/index_instructor.php']['guide'] = 'mods/gameme/instructor_handbook.php';
-$this->_pages['mods/gameme/delete_event.php']['title_var'] = 'gm_delete_event';
-$this->_pages['mods/gameme/delete_event.php']['parent']   = 'mods/gameme/index_instructor.php';
-$this->_pages['mods/gameme/edit_event.php']['title_var'] = 'gm_edit_event';
-$this->_pages['mods/gameme/edit_event.php']['parent']   = 'mods/gameme/index_instructor.php';
-$this->_pages['mods/gameme/edit_level.php']['title_var'] = 'gm_edit_level';
-$this->_pages['mods/gameme/edit_level.php']['parent']   = 'mods/gameme/index_instructor.php';
-$this->_pages['mods/gameme/copy_event.php']['title_var'] = 'gm_edit_event';
-$this->_pages['mods/gameme/copy_event.php']['parent']   = 'mods/gameme/index_instructor.php';
-$this->_pages['mods/gameme/copy_badge.php']['title_var'] = 'gm_copy_badge';
-$this->_pages['mods/gameme/copy_badge.php']['parent']   = 'mods/gameme/index_instructor.php';
-$this->_pages['mods/gameme/delete_badge.php']['title_var'] = 'gm_delete_badge';
-$this->_pages['mods/gameme/delete_badget.php']['parent']   = 'mods/gameme/index_instructor.php';
-$this->_pages['mods/gameme/delete_level.php']['title_var'] = 'gm_delete_level';
-$this->_pages['mods/gameme/delete_level.php']['parent']   = 'mods/gameme/index_instructor.php';
-$this->_pages['mods/gameme/game_options.php']['title_var'] = 'gm_game_options';
-$this->_pages['mods/gameme/game_options.php']['parent']   = 'mods/gameme/index_instructor.php';
-$this->_pages['mods/gameme/index_instructor.php']['img']    = 'mods/gameme/images/gamify.png';
-//}
+ if (authenticate(AT_PRIV_GAMEME, TRUE)) {
+    $this->_pages['mods/gameme/index_instructor.php']['title_var'] = 'gm_gameme';
+    $this->_pages['mods/gameme/index_instructor.php']['parent']   = 'tools/index.php';
+    $this->_pages['mods/gameme/index_instructor.php']['guide'] = 'mods/gameme/instructor_handbook.php';
+    $this->_pages['mods/gameme/delete_event.php']['title_var'] = 'gm_delete_event';
+    $this->_pages['mods/gameme/delete_event.php']['parent']   = 'mods/gameme/index_instructor.php';
+    $this->_pages['mods/gameme/edit_event.php']['title_var'] = 'gm_edit_event';
+    $this->_pages['mods/gameme/edit_event.php']['parent']   = 'mods/gameme/index_instructor.php';
+    $this->_pages['mods/gameme/edit_level.php']['title_var'] = 'gm_edit_level';
+    $this->_pages['mods/gameme/edit_level.php']['parent']   = 'mods/gameme/index_instructor.php';
+    $this->_pages['mods/gameme/copy_event.php']['title_var'] = 'gm_edit_event';
+    $this->_pages['mods/gameme/copy_event.php']['parent']   = 'mods/gameme/index_instructor.php';
+    $this->_pages['mods/gameme/copy_badge.php']['title_var'] = 'gm_copy_badge';
+    $this->_pages['mods/gameme/copy_badge.php']['parent']   = 'mods/gameme/index_instructor.php';
+    $this->_pages['mods/gameme/delete_badge.php']['title_var'] = 'gm_delete_badge';
+    $this->_pages['mods/gameme/delete_badget.php']['parent']   = 'mods/gameme/index_instructor.php';
+    $this->_pages['mods/gameme/delete_level.php']['title_var'] = 'gm_delete_level';
+    $this->_pages['mods/gameme/delete_level.php']['parent']   = 'mods/gameme/index_instructor.php';
+    $this->_pages['mods/gameme/game_options.php']['title_var'] = 'gm_game_options';
+    $this->_pages['mods/gameme/game_options.php']['parent']   = 'mods/gameme/index_instructor.php';
+    $this->_pages['mods/gameme/index_instructor.php']['img']    = 'mods/gameme/images/gamify.png';
+}
 
 /*******
  * student page.
