@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="ISO-8859-1"?> 
 <module version="0.1"> 
     <name lang="en">GameMe</name> 
-    <description lang="en">Integrates PHPGamification into ATutor, to add various gamification tools.</description> 
+    <description lang="en">Integrates game elements into ATutor. Setup points, badges, levels, and events to add game mechanics to ATutor courses. </description> 
     <maintainers>
         <maintainer> 
             <name>ATutor Team</name> 
             <email>info@atutor.ca</email> 
         </maintainer>
     </maintainers> 
-    <url>https://atsp.atutorspaces.com</url>  
+    <url>https://atutor.ca</url>
     <private>
+        <subsite>greg2.atutorspaces.com</subsite>
         <subsite>atsp.atutorspaces.com</subsite>
     </private>
     <license>BSD</license> 
 	<release> 
-        <version>0.9</version> 
+        <version>1.0</version> 
         <date>2016-28-08</date> 
-        <state>development</state> 
-        <notes></notes> 
+        <state>Stable</state> 
+        <notes>Once installed and enabled, see the administrator handbook, linked from the top right when the GameMe manager is open, for details on customising game elements for your partcular ATutor system.</notes> 
     </release> 
 </module>
