@@ -250,7 +250,7 @@ function showstar($points){
         $sql = "SELECT id, icon, description FROM %sgm_levels WHERE points=%d AND course_id=%d";
         $star_image = queryDB($sql, array(TABLE_PREFIX, $points, 0), TRUE);
         // get the custom admin created icon
-        if(is_file(AT_CONTENT_DIR.'0/gameme/levels/'.$star_image['icon'])){
+        if(is_file(AT_CONTENT_DIR.'0/gameme/levels/'.$star_image['icon']) && !empty($star_image['icon'])){
             $level_file = $_base_href.'mods/gameme/get_level_icon.php?level_id='.$star_image['id'];
         } else{
             // Default level icon
