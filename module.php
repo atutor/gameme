@@ -85,15 +85,15 @@ $this->_pages['mods/gameme/index.php']['title_var'] = 'gm_gameme';
 $this->_pages['mods/gameme/index.php']['img']       = 'mods/gameme/gamify.png';
 
 /* Add GameMe tab to Course Networking */
-$this->_pages['mods/gameme/my_progress.php']['title_var']   = 'gm_gameme';
-$this->_pages['mods/gameme/my_progress.php']['parent']   = 'mods/_standard/social/index.php';
-$this->_pages['mods/_standard/social/index.php']['children'] = array_merge(
-array('mods/gameme/my_progress.php'));
+//$this->_pages['mods/gameme/my_progress.php']['title_var']   = 'gm_gameme';
+//$this->_pages['mods/gameme/my_progress.php']['parent']   = 'mods/_standard/social/index.php';
+//$this->_pages['mods/_standard/social/index.php']['children'] = array_merge(
+//array('mods/gameme/my_progress.php'));
 
 /* my start page pages */
-$this->_pages[AT_NAV_START]  = array('mods/gameme/index_mystart.php');
-$this->_pages['mods/gameme/index_mystart.php']['title_var'] = 'gm_gameme';
-$this->_pages['mods/gameme/index_mystart.php']['parent'] = AT_NAV_START;
+//$this->_pages[AT_NAV_START]  = array('mods/gameme/index_mystart.php');
+//$this->_pages['mods/gameme/index_mystart.php']['title_var'] = 'gm_gameme';
+//$this->_pages['mods/gameme/index_mystart.php']['parent'] = AT_NAV_START;
 
 
 function gamemeEnabled(){
@@ -108,8 +108,6 @@ function gamemeEnabled(){
 // Run gameme events if a valid user is logged in
 if($_SESSION['valid_user'] == 1){
     global $_base_path;
-    // Hack to fix the get.php appending issue
-    $root_path =  preg_replace ('#/get.php#','',$_base_path);
     include(AT_INCLUDE_PATH.'../mods/gameme/events.php');
     // limit gameme to within courses (BREAKS LOGIN EVENT)
     //if(($_SESSION['course_id']>0 || $_REQUEST['course'] >0) && gamemeEnabled() === TRUE){
