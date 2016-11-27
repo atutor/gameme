@@ -36,7 +36,7 @@ if (admin_authenticate(AT_ADMIN_PRIV_GAMEME, TRUE) || admin_authenticate(AT_ADMI
 	$this->_pages[AT_NAV_ADMIN] = array('mods/gameme/index_admin.php');
 	$this->_pages['mods/gameme/index_admin.php']['title_var'] = 'gm_gameme';
 	$this->_pages['mods/gameme/index_admin.php']['parent']    = AT_NAV_ADMIN;
-	$this->_pages['mods/gameme/index_admin.php']['guide'] = 'mods/gameme/admin_handbook.php';
+	$this->_pages['mods/gameme/index_admin.php']['guide'] = '../mods/gameme/admin_handbook.php';
 	$this->_pages['mods/gameme/edit_event.php']['title_var'] = 'gm_edit_event';
 	$this->_pages['mods/gameme/edit_event.php']['parent']    = 'mods/gameme/index_admin.php';
 	//$this->_pages['mods/gameme/edit_event.php']['guide'] = 'mods/gameme/admin_handbook.php';
@@ -58,7 +58,7 @@ if (admin_authenticate(AT_ADMIN_PRIV_GAMEME, TRUE) || admin_authenticate(AT_ADMI
  if (authenticate(AT_PRIV_GAMEME, TRUE)) {
     $this->_pages['mods/gameme/index_instructor.php']['title_var'] = 'gm_gameme';
     $this->_pages['mods/gameme/index_instructor.php']['parent']   = 'tools/index.php';
-    $this->_pages['mods/gameme/index_instructor.php']['guide'] = 'mods/gameme/instructor_handbook.php';
+    $this->_pages['mods/gameme/index_instructor.php']['guide'] = '../mods/gameme/instructor_handbook.php';
     $this->_pages['mods/gameme/delete_event.php']['title_var'] = 'gm_delete_event';
     $this->_pages['mods/gameme/delete_event.php']['parent']   = 'mods/gameme/index_instructor.php';
     $this->_pages['mods/gameme/edit_event.php']['title_var'] = 'gm_edit_event';
