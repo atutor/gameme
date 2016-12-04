@@ -169,14 +169,14 @@ INSERT INTO `language_text` VALUES ('es', '_module','gm_progress','Progreso',NOW
 INSERT INTO `language_text` VALUES ('es', '_module','gm_options','Opciones',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_course_events','Eventos del Curso',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_repetition','Repetición',NOW(),'');
-INSERT INTO `language_text` VALUES ('es', '_module','gm_reach_reps','*** Alcanzar a los representantes',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_reach_reps','Alcanzar Reps',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_max_points','Puntos Máximos',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_each_badge','Cada Insignia',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_reach_badge','Alcanzar Insignia',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_each_points','Cada Punto',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_reach_points','Alcanzar Puntos',NOW(),'');
-INSERT INTO `language_text` VALUES ('es', '_module','gm_each_callback','*** Cada Callback',NOW(),'');
-INSERT INTO `language_text` VALUES ('es', '_module','gm_reach_callback','*** Alcanzar Callback',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_each_callback','Cada Callback',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_reach_callback','Alcanzar Callback',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_default_events','Eventos Predeterminados',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_remove','Remover',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_edit','Editar',NOW(),'');
@@ -196,7 +196,7 @@ INSERT INTO `language_text` VALUES ('es', '_module','gm_level_number','Número d
 INSERT INTO `language_text` VALUES ('es', '_module','gm_progress_for','Progreso para ',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_view','ver',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_addplus','Añadir +',NOW(),'');
-INSERT INTO `language_text` VALUES ('es', '_module','gm_enable_edit','*** Enable inline edit',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_enable_edit','Habilitar edición dentro de la línea',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_delete','borrar',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_delete_event','Borrar Evento',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_delete_badge','Borrar Insignia',NOW(),'');
@@ -220,8 +220,8 @@ INSERT INTO `language_text` VALUES ('es', '_module','gm_reach_badge_id','ID del 
 INSERT INTO `language_text` VALUES ('es', '_module','gm_each_badge_id','ID de cada evento (Cuando se produzca el evento, emitir esta insignia)',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_eachevent_points','Puntos para cada evento (Puntos otorgados por cada ocurrencia de este evento)',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_reachevent_points','Puntos otorgados para el evento alcanzado (puntos de bonificación añadidos cuando ocurre el evento alcanzado)',NOW(),'');
-INSERT INTO `language_text` VALUES ('es', '_module','gm_eachevent_callback','*** Cada función de callback (cuando se produce el evento, ejecutar esta función)',NOW(),'');
-INSERT INTO `language_text` VALUES ('es', '_module','gm_reachevent_callback','*** Llegar a la función callback (Cuando se alcanza repeticiones de eventos, ejecutar esta función)',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_eachevent_callback','Cada función de callback (cuando se produce el evento, ejecutar esta función)',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_reachevent_callback','Llegar a la función callback (Cuando se alcanza repeticiones de eventos, ejecutar esta función)',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_reach_message','Mensaje de Llegada',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_reachevent_message','Mensaje de Llegada (El mensaje enviado a los usuarios cuando se produce un evento de alcance)',NOW(),'');
 INSERT INTO `language_text` VALUES ('es', '_module','gm_save_event','Guardar Evento',NOW(),'');
