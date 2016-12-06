@@ -13,8 +13,9 @@ class GmCallbacksClass
     static function ReadPageCallback($params)
     {
         if ($params['badges']){     
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('read_page').'</div>';              
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('read_page').'</td></tr></table>';              
             //$feedback = "Congratulations, you have received a new badge for getting a good amount of course reading done. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -28,12 +29,11 @@ class GmCallbacksClass
     static function WelcomeCallback($params)
     {
         if ($params['firstname']){    
-            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';
-            $feedback .= '<div style="height:auto;float:left; clear:both;">'. $feedback_img.self::getReachMessage('welcome').'</div>';   
-                     
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('welcome').'</td></tr></table>';        
             //$feedback = "Welcome to the course. You have earned your first badge by successfully logging in. Continue earning badges by using the features in the course, and participating in course activities.<br /><br />By participating in the course you can also earn points and advance through levels as your points grow. Follow the leader board to see your position among others in the course. Watch for hints after earning a badge, for earning additional badges and bonus points.";
             $message .= self::getNewBadge($params, $feedback);
-            $message .= self::getCurrentBadges($params['badges']);
         } 
         if(!empty($message)){
         	self::SendMail($params, $message);
@@ -44,8 +44,9 @@ class GmCallbacksClass
     static function LoginReachCallback($params)
     {
         if ($params['badges']){           
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('login').'</div>';              
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('login').'</td></tr></table>';                
             //$feedback = "Congratulations, you have received a new badge for logging into the course many times. You can also earn points by logging out of the course properly, clicking the logout link, instead of just leaving or letting your session timeout.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -58,10 +59,10 @@ class GmCallbacksClass
     }
     static function LogoutReachCallback($params)
     {   
-        if ($params['badges']){                      
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('logout').'</div>';              
-            
+        if ($params['badges']){                                 
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('logout').'</td></tr></table>'; 
              //$feedback = "Congratulations, you have received a new badge for logging out properly, instead of leaving or letting your session timeout, maintaining your privacy and security. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -90,8 +91,9 @@ class GmCallbacksClass
     static function ProfileViewReachCallback($params)
     {
         if ($params['badges']){ 
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('profile_view').'</div>';                      
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('profile_view').'</td></tr></table>';                        
             //$feedback = "Congratulations, you have received a new badge for getting to know your classmates by viewing their profiles. You can earn additional points by sending a private message to a person through their profile page.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -105,8 +107,9 @@ class GmCallbacksClass
     static function ProfileViewedReachCallback($params)
     {
     	if ($params['badges']){ 
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('profile_viewed').'</div>';                  
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('profile_viewed').'</td></tr></table>';                    
             //$feedback = "Congratulations, you have received a new badge because lots of people have been viewing your profile. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -120,8 +123,9 @@ class GmCallbacksClass
     static function ProfilePicUploadCallback($params)
     {      
         if ($params['badges']){     
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('profile_pic_upload').'</div>';                             
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('profile_pic_upload').'</td></tr></table>';                               
             //$feedback = "Congratulations, you have received a new badge for adding a profile picture. Update your profile picture occassionally to receive additional points. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -135,8 +139,9 @@ class GmCallbacksClass
     static function PreferencesUpdateCallback($params)
     { 
        if ($params['badges']){     
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('prefs_update').'</div>';                                            
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('prefs_update').'</td></tr></table>';                                              
             //$feedback = "Congratulations, you have received a new badge for updating your personal preference. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -150,8 +155,9 @@ class GmCallbacksClass
     static function FileStorageFolderCallback($params)
     {
         if ($params['badges']){     
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('new_folder').'</div>';                                                            
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('new_folder').'</td></tr></table>';                                                              
             //$feedback = "Congratulations, you have received a new badge for learning how to create folders to organize your files. You can also earn points and badges by adding files to those folders";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -165,8 +171,9 @@ class GmCallbacksClass
     static function UploadFilesCallback($params)
     {
         if ($params['badges']){         
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('upload_file').'</div>';          
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('upload_file').'</td></tr></table>';           
             //$feedback = "Congratulations, you have received a new badge for learning how to use file storage to store your files. Create additional folders to organize your files for additional points and badges.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -180,8 +187,9 @@ class GmCallbacksClass
     static function CreateFilesCallback($params)
     {
         if ($params['badges']){        
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('create_file').'</div>';                
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('create_file').'</td></tr></table>';                  
             //$feedback = "Congratulations, you have received a new badge for learning how to create new files in file storage.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -195,8 +203,9 @@ class GmCallbacksClass
     static function ForumViewCallback($params)
     {
         if ($params['badges']){          
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('forum_view').'</div>';             
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('forum_view').'</td></tr></table>';               
             //$feedback = "Congratulations, you have received a new badge for keeping up with reading forum posts. Continue reading forum posts, start new threads, and reply to others posts to earn additional points and badges.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -210,8 +219,9 @@ class GmCallbacksClass
     static function ForumPostsCallback($params)
     {
         if ($params['badges']){      
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('forum_post').'</div>';                 
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('forum_post').'</td></tr></table>';                   
             //$feedback = "Congratulations, you have received a new badge for contributing new threads to the discussion forums. Continue reading forum posts, start new threads, and reply to others posts to earn additional points and badges.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -225,8 +235,9 @@ class GmCallbacksClass
     static function ForumReplyCallback($params)
     {
         if ($params['badges']){      
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('forum_reply').'</div>';                  
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('forum_reply').'</td></tr></table>';                    
             //$feedback = "Congratulations, you have received a new badge for contributing good feedback to discussion forums. Continue reading forum posts, start new threads, and reply to others posts to earn additional points and badges.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -240,8 +251,9 @@ class GmCallbacksClass
     static function BlogAddCallback($params)
     {
         if ($params['badges']){
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('blog_add').'</div>';                         
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('blog_add').'</td></tr></table>';                           
             //$feedback = "Congratulations, you have received a new badge for contributing a good collection of blog posts. Continue adding to your blog, and comments on others' blogs to earn additional points and badges.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -255,8 +267,9 @@ class GmCallbacksClass
     static function BlogCommentsCallback($params)
     {
         if ($params['badges']){           
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('blog_comment').'</div>';               
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('blog_comment').'</td></tr></table>';                
             //$feedback = "Congratulations, you have received a new badge for contributing good feedback, and commenting on blog posts. Continue posting to your blog, and commenting on others' blog posts to earn additional points.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -270,8 +283,9 @@ class GmCallbacksClass
     static function ChatLoginCallback($params)
     {
         if ($params['badges']){      
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('chat_login').'</div>';                
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('chat_login').'</td></tr></table>';                  
             //$feedback = "Congratulations, you have received a new badge for logging into the chat regularly. Just using the chat helps accumulate points.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -285,8 +299,9 @@ class GmCallbacksClass
     static function ChatPostCallback($params)
     {
         if ($params['badges']){    
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('chat_post').'</div>';                   
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('chat_post').'</td></tr></table>';                    
            // $feedback = "Congratulations, you have received a new badge for keeping conversation going in the chat room. Returning to the chat room regularly earns additional points.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -300,8 +315,9 @@ class GmCallbacksClass
     static function LinkAddCallback($params)
     {
         if ($params['badges']){     
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('link_add').'</div>';                         
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('link_add').'</td></tr></table>';                          
             $feedback = "Congratulations, you have received a new badge for making a good contribution to the course links. View links others have posted to earn additional points.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -315,8 +331,9 @@ class GmCallbacksClass
     static function PhotoAlbumCallback($params)
     { 
         if ($params['badges']){    
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('photo_create_album').'</div>';                   
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('photo_create_album').'</td></tr></table>';                   
             //$feedback = "Congratulations, you have received a new badge for creating a photo album. Continue adding photos to earn more points and badges. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -330,8 +347,9 @@ class GmCallbacksClass
     static function PhotoAlbumsCallback($params)
     {
         if ($params['badges']){        
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('photo_create_albums').'</div>';                
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('photo_create_albums').'</td></tr></table>';                  
            // $feedback = "Congratulations, you have received a new badge for creating multiple photo albums to organize your photos. Continue adding photos to earn more points. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -346,8 +364,9 @@ class GmCallbacksClass
     {
         //global $msg;
         if ($params['badges']){     
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('photo_upload').'</div>';                 
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('photo_upload').'</td></tr></table>';                 
             //$feedback = "Congratulations, you have received a new badge for uploading a good collection of photos. Continue adding photos to earn more points. Create additional albums to organize your photos for bonus points.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -363,8 +382,9 @@ class GmCallbacksClass
     {
         global $msg;
         if ($params['badges']){    
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('photo_album_comment').'</div>';                   
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('photo_album_comment').'</td></tr></table>';                   
             //$feedback = "Congratulations, you have received a new badge for providing comments on your's, and other's albums. Continue commenting about albums for additional points.";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -383,8 +403,9 @@ class GmCallbacksClass
     {
         global $msg;
         if ($params['badges']){       
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('photo_description').'</div>';                      
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('photo_description').'</td></tr></table>';                     
             //$feedback = "Congratulations, you have received a new badge for providing descriptions for your photos. Add alternative text to make your photos accessible to blind classmates, and earn bonus points and a badge";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -399,8 +420,9 @@ class GmCallbacksClass
     {
         global $msg;
         if ($params['badges']){         
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('photo_alt_text').'</div>';                  
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('photo_alt_text').'</td></tr></table>';                    
             //$feedback = "Congratulations, you have received a new badge for providing alternative text for your photos. This makes photos accessible to blind classmates using a screen reader to access the course. Providing descriptions for your photos can also earn points, and a badge. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -415,8 +437,9 @@ class GmCallbacksClass
     {
         global $msg;
         if ($params['badges']){        
-            $feedback = '<div style="float:left;text-align:middle;height:5em; width:5em; margin-left:1.2em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" /></div>';
-            $feedback .= '<div style="height:5em;">'.self::getReachMessage('photo_comment').'</div>';                   
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+             $feedback .= '<table>
+             <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('photo_comment').'</td></tr></table>';                     
             //$feedback = "Congratulations, you have received a new badge for providing comments on yours, and others photos. Continue commenting to earn additional points. You can also comment on photo albums as a whole, to earn bonus points. ";
             $message .= self::getNewBadge($params, $feedback);
             $message .= self::getCurrentBadges($params['badges']);
@@ -449,7 +472,7 @@ class GmCallbacksClass
             $from_email = $_config['contact_email'];
         
         if ($to_email != '') {
-				$tmp_message = $message;
+				$tmp_message = '<div style="width:98%; background-color:#eeeeee;padding:1em;"><div style="width:80%; margin-left:auto;margin-right:auto;border:thin solid #cccccc;padding:.5em;background-color:#ffffff;">'.$message.'</div></div>';
 				require($this_path.'mods/gameme/atutormailer.class.php');
 
 				$mail = new ATutorMailer;
@@ -482,9 +505,9 @@ class GmCallbacksClass
     */
     public static function getCurrentBadges($badges){
     	if(!empty($badges)){
-    	    $current_badges .= '<div style="height:auto; float:left;clear:both;">';
+    	    //$current_badges .= '<div style="height:auto; float:left;clear:both;">';
     		$current_badges .='<h3>'._AT('gm_badges_so_far').'</h3>'."\n";                  
-            $current_badges .= '<table style="border:1px solid #eeeeee;width:97%;">';     
+            $current_badges .= '<table style="border:1px solid #eeeeee;width:100%;">';     
             foreach ($badges as $badge) {
                 $sql = "SELECT image_url FROM %sgm_badges WHERE id=%d";
                 $badge_image = queryDB($sql, array(TABLE_PREFIX, $badge->getIdBadge()), TRUE);
@@ -492,7 +515,7 @@ class GmCallbacksClass
                 $current_badges .=  '<td style="background-color:#efefef; padding:.3em;"><strong>'.$badge->getBadge()->getTitle().'</strong><br/>'.$badge->getBadge()->getDescription().'</td></tr>'."\n";
             }
             $current_badges .= "</table>";
-            $current_badges .= "</div>";
+           // $current_badges .= "</div>";
     	}
     	return $current_badges;
     }
@@ -503,14 +526,16 @@ class GmCallbacksClass
     */
     public static function getNewBadge($params, $feedback){
     		$earned_badge = self::getBadge($params['alias']);
-        	$new_badge .='<div style="width:97%;padding-left: 2em;border:1px solid #cccccc;background-color:#f6f4da;"><h2>'.$_SESSION['course_title'].'</h2></div>';
+        	$new_badge .='<div style="width:auto;padding-left: 2em;border:1px solid #cccccc;background-color:#f6f4da;"><h2>'.$_SESSION['course_title'].'</h2></div>';
             $new_badge .= '<p> Hi '.$params['firstname']."!</p>\n\n";
             $new_badge .= "<p>".$feedback." <br /></p>" ;
+            //$new_badge .= '<table  style="border:1px solid #eeeeee;width:97%;float:left;clear:both;">'."\n";
+            //$new_badge.='</table><br /><br />'."\n"; 
             
-            $new_badge .= '<table  style="border:1px solid #eeeeee;width:97%;float:left;clear:both;">'."\n";
-            $new_badge .= '<tr><td style="background-color:#eeeee;"><img src="'.$earned_badge['image_url'].'" alt ="'.$earned_badge['title'].'" /></td>
-                    <td style="background-color:#efefef; padding:.3em;"><strong>'.$earned_badge['title'].'</strong><br/>'.$earned_badge['description'].'</td></tr>'."\n";
-            $new_badge.='</table><br /><br />'."\n"; 
+            //$new_badge .= '<table  style="border:1px solid #eeeeee;width:97%;float:left;clear:both;">'."\n";
+            //$new_badge .= '<tr><td style="background-color:#eeeee;"><img src="'.$earned_badge['image_url'].'" alt ="'.$earned_badge['title'].'" /></td>
+            //        <td style="background-color:#efefef; padding:.3em;"><strong>'.$earned_badge['title'].'</strong><br/>'.$earned_badge['description'].'</td></tr>'."\n";
+            //$new_badge.='</table><br /><br />'."\n"; 
             
             return $new_badge;
     }

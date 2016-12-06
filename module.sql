@@ -77,7 +77,7 @@ INSERT INTO `language_text` VALUES ('en', '_module','gm_cancel','Cancel',NOW(),'
 INSERT INTO `language_text` VALUES ('en', '_module','gm_edit_badge','Add/Edit Badge',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_save_badge','Save Badge',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_edit_event','Add/Edit Event',NOW(),'');
-INSERT INTO `language_text` VALUES ('en', '_module','gm_badges_so_far','Your other badges earned so far',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_badges_so_far','Your badges earned so far',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_allow_repetition','Allow Repetition (Yes this event can repeat, or No is it a one time occurence)',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_reach_repetition','Reach required repetitions (Repetitions required to trigger reach event)',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_max_points_allowed','Maximum points allowed  (Maximum points that can be scored for this event)',NOW(),'');

@@ -66,7 +66,8 @@ if(isset($_SESSION['member_id'])){
                     'email'=>$gm_member['email'],
                     'firstname'=>$gm_member['first_name'],
                     'contact_email'=>$_config['contact_email'], 
-                    'course_id'=>$_SESSION['course_id']));
+                    'course_id'=>$_SESSION['course_id'],
+                    'badges'=>$gamification->getUserBadges()));
     }
     
     ////////

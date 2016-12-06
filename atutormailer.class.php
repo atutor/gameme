@@ -66,7 +66,7 @@ class ATutorMailer extends PHPMailer {
 		global $_config;
 
 		// attach the ATutor footer to the body first:
-		$this->Body .= 	'<br style="float:left;clear:both;"/><hr style="float:left;clear:both;"/><br />';
+		$this->Body .= 	'<br style="float:left;clear:both;"/><hr style="float:left;clear:both;width:95%;"/><br />';
 		$this->Body .= "<p>"._AT('sent_via_atutor', AT_BASE_HREF);
 		if ($_SESSION['course_id'] > 0) {
 			$this->Body .= 'login.php?course='.$_SESSION['course_id'].' | <a href="'.AT_BASE_HREF.'login.php?course='.$_SESSION['course_id'].'">' . $_SESSION['course_title'].'</a>';
