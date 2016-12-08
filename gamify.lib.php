@@ -224,6 +224,7 @@ function showstars($points){
             array_push($this_levels, $level);
         }
     }
+    
     $content_dir = explode('/',AT_CONTENT_DIR);
     array_pop($content_dir);
     
