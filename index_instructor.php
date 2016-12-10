@@ -649,7 +649,6 @@ function star_file($id){
         if(!in_array($level['id'] , $course_levels)){
         $sql = "SELECT icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
         $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],0), TRUE);
-        //debug_to_log($_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon']);
         if(!file_exists($_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'])){
             $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
         } else {

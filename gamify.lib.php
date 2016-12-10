@@ -170,7 +170,6 @@ function showUserLevels($gamification, $course_id)
 function showUserLevel($gamification, $courseId){
 
 $score = $gamification->getUserScores();
-debug_to_log($score->getPoints());
 echo "<h3>"._AT('gm_levels_awarded')."</h3>
     <div style='background-color:#f6f6f6; width:100%; padding:.2em;margin-left:auto;margin-right:auto;' >".showstars($score->getPoints())."</div>";
     

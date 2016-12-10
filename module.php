@@ -119,7 +119,6 @@ if($_SESSION['valid_user'] == 1){
 if($_SESSION['is_admin'] == true){
 
     //check if gameme is enabled
-    debug_to_log(gamemeEnabled());
     if($_SESSION['course_id']>0 && gamemeEnabled() === true){
         $sql = "SELECT * from %sgm_options WHERE course_id=%d";
         $has_options = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']));
