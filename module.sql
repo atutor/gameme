@@ -301,7 +301,7 @@ VALUES
 	(20,0,'photo_comment_badge','Photo comments','You have been commenting you yours and others photos. Keep commenting for bonus points;','mods/gameme/images/badges/like.png'),
 	(21,0,'photo_album_comment','Album Comment','Most people comment on photo, but you commenteed on an album for bonus points.','mods/gameme/images/badges/cards.png'),
 	(22,0,'photo_description_badge','Photo Describer','Exellent job providing descriptions for you photos. ','mods/gameme/images/badges/feather.png'),
-	(23,0,'photo_alt_text','Accessibility Aware','Its great you are providing Alt text for you image, to make them accessible to people with disabilities. Secret bonus points if you continue adding Alt text to new images in you gallery.','mods/gameme/images/badges/heart.png'),
+	(23,0,'photo_alt_text','Accessibility Aware','Its great you are providing Alt text for you image, to make them accessible to people with disabilities. Secret bonus points if you continue adding Alt text to new images in your gallery.','mods/gameme/images/badges/heart.png'),
 	(24,0,'login_badge reach','Returning Visitor','You come back quite a few times now. Keep on visiting the course for bonus points.','mods/gameme/images/badges/hot.png'),
 	(25,0,'logout_badge','Security Conscious','You have been logging out, rather than leaving or allowing your session to time out. This helps improve security.','mods/gameme/images/badges/lock.png'),
 	(26,0,'welcome_badge','Welcome','Welcome to the course. Finding your way here earned you your first badge. Get busy with the course to earn points and collect more badges.','mods/gameme/images/badges/acorn.png');
