@@ -168,7 +168,9 @@ function showUserLevels($gamification, $course_id)
 
 */
 function showUserLevel($gamification, $courseId){
+
 $score = $gamification->getUserScores();
+debug_to_log($score->getPoints());
 echo "<h3>"._AT('gm_levels_awarded')."</h3>
     <div style='background-color:#f6f6f6; width:100%; padding:.2em;margin-left:auto;margin-right:auto;' >".showstars($score->getPoints())."</div>";
     
@@ -183,6 +185,9 @@ $score = $gamification->getUserScores();
  return "<br >"._AT('gm_progress_to_next', $score->getProgress())."<hr />";
 }
 
+function sortByOrder($a, $b) {
+     return $a['points'] - $b['points'];
+}
 /*
 * Strings stars together, laid out in Levels in the sidemenu block
 * @param $points - the user's current points scored
@@ -224,7 +229,9 @@ function showstars($points){
             array_push($this_levels, $level);
         }
     }
-    
+
+    usort($this_levels, 'sortByOrder');
+
     $content_dir = explode('/',AT_CONTENT_DIR);
     array_pop($content_dir);
     
@@ -234,28 +241,27 @@ function showstars($points){
         } else{
             $course_id = 0;
         }
-        $sql = "SELECT icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
+        $sql = "SELECT id, icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
         $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],$_SESSION['course_id']), TRUE);
 
         if(!empty($level_image['icon'])){
             if(is_file(AT_CONTENT_DIR.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'])){
-                $level_file =  $_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'];
+                 $level_file = $_base_href.'get.php/gameme/levels/'.$level_image['icon'];
             }else if(is_file(AT_CONTENT_DIR.'0/gameme/levels/'.$level_image['icon'])){
-                $level_file =$_base_href.'content/0/gameme/levels/'.$level_image['icon'];
+                $level_file = $_base_href.'mods/gameme/get_level_icon.php?level_id='.$level_image['id'];
             }else {
                 $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
             }
         } else {
             if(!in_array($level['id'] , $course_levels)){
-                $sql = "SELECT icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
+                $sql = "SELECT id, icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
                 $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],0), TRUE);
-
                 if(!is_file(AT_CONTENT_DIR.'0/gameme/levels/'.$level_image['icon'])){
                     $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
                 } else {
                     $content_dir = explode('/',AT_CONTENT_DIR);
                     array_pop($content_dir);
-                    $level_file = $_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'];
+                    $level_file = $_base_href.'mods/gameme/get_level_icon.php?level_id='.$level_image['id'];
                 }
             }
         }
@@ -370,15 +376,23 @@ function getBadgeImage($badge_id){
     $sql = "SELECT image_url, description FROM %sgm_badges WHERE id=%d AND course_id=%d";
     $badge_image = queryDB($sql, array(TABLE_PREFIX, $badge_id,$_SESSION['course_id']), TRUE);
     
-    $badge_file_array = explode('/',$badge_image['image_url']);
-    array_shift($badge_file_array);
-
-    $badge_file_stem = implode('/',$badge_file_array);
-
-    if(is_file(AT_CONTENT_DIR.$badge_file_stem)){
-        $badge_file = $_base_href.'get.php/gameme/badges/'.end($badge_file_array);
-    }else{
-
+    if(strstr($badge_image['image_url'], "content")){
+        $badge_file_array = explode('/',$badge_image['image_url']);
+        if($badge_file_array[1] == 0){
+            $custom_default = TRUE;
+        }
+        array_shift($badge_file_array);
+        $badge_file_stem = implode('/',$badge_file_array);
+        
+        if(is_file(AT_CONTENT_DIR.$badge_file_stem)){
+            if(!$custom_default){
+                $badge_file = $_base_href.'get.php/gameme/badges/'.end($badge_file_array);
+            } else{
+                $badge_file = $_base_href.'mods/gameme/get_badge_icon.php?badge_id='.$badge_id;
+            }
+        }
+    } else{
+        $badge_file = $_base_href.$badge_image['image_url'];
     // Not a course badge, so check for custom system badge
         $sql = "SELECT image_url, description FROM %sgm_badges WHERE id=%d AND course_id=%d";
         $badge_image = queryDB($sql, array(TABLE_PREFIX, $badge_id, 0), TRUE);
