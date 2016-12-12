@@ -34,7 +34,7 @@ if(isset($_SESSION['member_id'])){
     // LOGIN TO OR ENTER COURSE
     
     // SEE MANTIS 5733 FOR DETAILS ON LOGIN EVENT BUG. NEED A NEW TRIGGER
-    if(strpos($_SERVER['PHP_SELF'], "index.php") && $_REQUEST['course'] >0){
+    if(strpos($_SERVER['PHP_SELF'], "bounce.php") && $_REQUEST['course'] >0){
         $_SESSION['course_id'] = $_REQUEST['course'];
         $gamification->executeEvent('login', array(
                     'user_id'=>$_SESSION['member_id'], 
@@ -45,7 +45,7 @@ if(isset($_SESSION['member_id'])){
                     'badges'=>$gamification->getUserBadges()));
     }
     
-    
+    // LOGIN TO OR ENTER A COURSE FOR THE FIRST TIME
     if(strpos($_SERVER['PHP_SELF'], "bounce.php")&& $_REQUEST['course'] > 0){
         $_SESSION['course_id'] = $_REQUEST['course'];
         $gamification->executeEvent('welcome', array(
