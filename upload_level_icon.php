@@ -1,9 +1,9 @@
 <?php
-namespace gameme\PHPGamification;
-use Exception;
-use gameme\PHPGamification;
-use gameme\PHPGamification\Model;
-use gameme\PHPGamification\Model\Level;
+//namespace gameme\PHPGamification;
+//use Exception;
+//use gameme\PHPGamification;
+//use gameme\PHPGamification\Model;
+//use gameme\PHPGamification\Model\Level;
 
 define('AT_INCLUDE_PATH', '../../include/');
 require (AT_INCLUDE_PATH.'vitals.inc.php');

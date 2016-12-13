@@ -1,3 +1,4 @@
+/* English */
 INSERT INTO `language_text` VALUES ('en', '_module', 'gameme', 'GameMe',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module', 'gm_gameme', 'GameMe',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_leaders_top','Leaders (Top %s)',NOW(),'');
@@ -76,7 +77,7 @@ INSERT INTO `language_text` VALUES ('en', '_module','gm_cancel','Cancel',NOW(),'
 INSERT INTO `language_text` VALUES ('en', '_module','gm_edit_badge','Add/Edit Badge',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_save_badge','Save Badge',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_edit_event','Add/Edit Event',NOW(),'');
-INSERT INTO `language_text` VALUES ('en', '_module','gm_badges_so_far','Your other badges earned so far',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_badges_so_far','Your badges earned so far',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_allow_repetition','Allow Repetition (Yes this event can repeat, or No is it a one time occurence)',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_reach_repetition','Reach required repetitions (Repetitions required to trigger reach event)',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_max_points_allowed','Maximum points allowed  (Maximum points that can be scored for this event)',NOW(),'');
@@ -92,6 +93,11 @@ INSERT INTO `language_text` VALUES ('en', '_module','gm_save_event','Save Event'
 INSERT INTO `language_text` VALUES ('en', '_module','gm_yes','Yes',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_no','No',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_gameme_notification','ATutor GameMe Notification',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_no_course_badges_yet','No course badges yet. Click "copy" next to a default badge, to move it here for customizing.',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_no_badges_earned','You have not earned any badges yet. ',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_no_course_events_yet','No course events yet. Click "copy" next to a default event, to move it here for customizing.',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module','gm_no_course_levels_yet','No course levels yet. Click "copy" next to a default level, to move it here for customizing.',NOW(),'');
+
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_WARNING_GM_SET_GAMEME_OPTIONS','GameMe options must be set in this course. Under the Manage tab, open GameMe and select the Options tab. Enable GameMe elements in Manage>Course Tools.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_COPY_EVENT','Copy Default Events to modify them.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_INFOS_GM_EDITING_DISABLED','Editing has been disabled. Contact your administrator to have editing turned on',NOW(),'');
@@ -127,6 +133,140 @@ INSERT INTO `language_text` VALUES ('en', '_msg','AT_ERROR_GM_MAX_DIMENSION','Ma
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_ERROR_GM_MAX_FILESESIZE','Maximum files size of %sKB exceeded. Reduce the size of the image.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_msg','AT_FEEDBACK_GM_CONFIG_UPDATED','GameMe configuration was sucessfully updated',NOW(),'');
 
+/* Spanish */
+INSERT INTO `language_text` VALUES ('es', '_module', 'gameme', 'GameMe',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module', 'gm_gameme', 'GameMe',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_leaders_top','Líderes (Top %s)',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_id','ID',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_points','Puntos',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_level','Nivel',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_levels','Niveles',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_levels_awarded','Niveles otorgados',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_description','Descripción',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_in_position','Ud está en la posición: %s',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_login_for_points','Login para acumular puntos',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_your_levels_reached','Sus niveles alcanzados',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_title','Título',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_progress_to_next','Progreso al siguiente nivel: %s/100',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_progress_to_next2','Progreso al siguiente nivel',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_manage_badges','Administrar Insignias',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_badge_id','ID de Insignia',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_counter','Contador',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_alias','Alias',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_badges','Insignias',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_badge','Insignias',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_your_badges','Sus Insignias',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_events','Eventos',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_event','Evento',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_your_alert','Sus Alertas',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_no_alerts','No hay alertas de nivel o de insignia para mostrar',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_your_activity_log','Su registro de actividades',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_event_date','Fecha del Evento',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_log','Registro',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_alerts','Alertas',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_count','Recuento',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_progress','Progreso',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_options','Opciones',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_course_events','Eventos del Curso',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_repetition','Repetición',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_reach_reps','Alcanzar Reps',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_max_points','Puntos Máximos',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_each_badge','Cada Insignia',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_reach_badge','Alcanzar Insignia',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_each_points','Cada Punto',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_reach_points','Alcanzar Puntos',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_each_callback','Cada Callback',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_reach_callback','Alcanzar Callback',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_default_events','Eventos Predeterminados',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_remove','Remover',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_edit','Editar',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_copy','Copiar',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_course_badges','Insignias del Curso',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_default_badges','Insignias Predeterminadas',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_course_levels','Niveles del Curso',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_icon','Icono',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_level_name','Nombre del Nivel',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_points_threshold','Umbral de Puntos',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_default_levels','Niveles Predeterminados',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_position','Posición relativa a otros',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_show_instructor','Mostrar al instructor en el tablero',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_leader_board','Tablero',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_leader_length','Largo del Tablero',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_level_number','Número de niveles (max 11)',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_progress_for','Progreso para ',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_view','ver',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_addplus','Añadir +',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_enable_edit','Habilitar edición dentro de la línea',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_delete','borrar',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_delete_event','Borrar Evento',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_delete_badge','Borrar Insignia',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_delete_level','Borrar Nivel',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_disallow_instructors','Prohibir la personalización del instructor',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_update_options','Actualizar Opciones',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_edit_level','Añadir/Editar Nivel',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_level_title','Título del Nivel',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_short_description','Descripción Corta',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_points_reached','Puntos alcanzados (Puntos anotados para alcanzar el nivel)',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_update_level','Actualizar Nivel',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_cancel','Cancelar',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_edit_badge','Añadir/Editar Insignia',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_save_badge','Guardar Insignia',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_edit_event','Añadir/Editar Evento',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_badges_so_far','Sus otras insignias ganadas hasta ahora',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_allow_repetition','Permitir Repetición (Sí este evento se puede repetir, o No es una ocurrencia de una sola vez)',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_reach_repetition','Alcanzar las repeticiones requeridas (Repeticiones necesarias para activar el evento de alcance)',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_max_points_allowed','Máximo de puntos permitidos (Puntos máximos que se pueden marcar para este evento)',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_reach_badge_id','ID del Evento de alcance (Cuando se alcanza la repetición del evento, emitir esta insignia)',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_each_badge_id','ID de cada evento (Cuando se produzca el evento, emitir esta insignia)',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_eachevent_points','Puntos para cada evento (Puntos otorgados por cada ocurrencia de este evento)',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_reachevent_points','Puntos otorgados para el evento alcanzado (puntos de bonificación añadidos cuando ocurre el evento alcanzado)',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_eachevent_callback','Cada función de callback (cuando se produce el evento, ejecutar esta función)',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_reachevent_callback','Llegar a la función callback (Cuando se alcanza repeticiones de eventos, ejecutar esta función)',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_reach_message','Mensaje de Llegada',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_reachevent_message','Mensaje de Llegada (El mensaje enviado a los usuarios cuando se produce un evento de alcance)',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_save_event','Guardar Evento',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_yes','Si',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_no','No',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_gameme_notification','Notificación de ATutor GameMe',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_no_course_badges_yet','Todavía no hay insignias del curso. Haga clic en "copiar" junto a una insignia predeterminada para moverla aquí para personalizarla.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_no_badges_earned','Usted todavía no ha ganado insignias. ',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_no_course_events_yet','Todavía no hay eventos del curso. Haga clic en "copiar" junto a un evento predeterminado, para moverlo aquí para personalizarlo.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_module','gm_no_course_levels_yet','Aún no hay niveles del curso. Haga clic en "copiar" junto a un nivel predeterminado, para moverlo aquí para personalizarlo.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_WARNING_GM_SET_GAMEME_OPTIONS','Las opciones de GameMe deben establecerse en este curso. En la pestaña Administrar, abra GameMe y seleccione la pestaña Opciones. Habilitar elementos de GameMe en Administrar> Herramientas del curso.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_INFOS_GM_COPY_EVENT','Copie los eventos predeterminados para modificarlos.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_INFOS_GM_EDITING_DISABLED','Se ha deshabilitado la edición. Póngase en contacto con su administrador para activar la edición',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_INFOS_GM_COPY_BADGE','Copiar las insigniar predeterminadas para modificarlas',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_INFOS_GM_COPY_DEFAULT_LEVELS','Copiar Niveles predeterminados para modificarlos. Establezca el número de niveles en la pestaña Opciones.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_INFOS_GM_DISPLAY_ELEMENTS','Establezca los elementos del juego para mostrarlos a los estudiantes.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_INFOS_GM_SEE_PROGRESS','Seleccione un usuario en el menú de abajo para ver el progreso de esa persona. ',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_INFOS_GM_ENABLE_EDIT_TEXT','Haga clic en las celdas de una tabla para editar valores, haga clic para guardar. Consulte el Manual para obtener más información sobre cómo crear y modificar los Eventos Predeterminados del sistema.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_INFOS_GM_EDIT_BADGE_TEXT','Arrastre insignias en la dropzone de eliminación de insignias en la primera columna, o haga clic en las celdas de una tabla para editar su valor, haga clic para guardar. Consulte el manual para obtener más información sobre la creación y modificación de las Insignias Predeterminadas del sistema.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_INFOS_GM_LEVELS_TEXT','Arrastre los iconos de nivel a la dropzpne de eliminación de iconos en la primera columna, o haga clic en las celdas de una tabla para editar su valor, haga clic para guardar. Consulte el Manual para obtener más información sobre la creación y modificación de los Niveles Predeterminados del sistema. ',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_INFOS_GM_OPTIONS_TEXT','La mayoría de las opciones son administradas por instructores a nivel de curso, habilitados de forma predeterminada. Puede optar por impedir que los instructores modifiquen elementos del juego marcando la casilla de verificación que se muestra a continuación, permitiendo sólo que se utilicen los valores predeterminados.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_FEEDBACK_GM_BADGE_COPIED','La insignia se copió correctamente. Arrastrar insignias adentro en la primera columna para cambiar una imagen de insignia. Haga clic en las celdas para editarlas, haga clic para guardar.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_ERROR_GM_BADGE_COPY_FAILED','Error al copiar la insignia. Póngase en contacto con su administrador si persiste el fallo.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_FEEDBACK_GM_EVENT_COPIED','El evento se copió correctamente. Haga clic en las celdas para editarlas, haga clic para guardar. ',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_ERROR_GM_EVENT_COPY_FAILED','Error al copiar el evento. Póngase en contacto con su administrador si persiste el fallo.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_FEEDBACK_GM_LEVEL_COPIED','El nivel se copió correctamente. Haga clic en las celdas para editarlas, haga clic para guardar. ',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_ERROR_GM_LEVEL_COPIED_FAILED','Error en el evento del nivel. Póngase en contacto con su administrador si persiste el fallo.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_CONFIRM_GM_DELETE_BADGE','¿Seguro que quiere borrar esta insignia?',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_FEEDBACK_GM_BADGE_REMOVED','Isignia eliminada correctamente.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_CONFIRM_GM_DELETE_EVENT_ADMIN','¿Está seguro que quiere eliminar este evento? Eliminar eventos predeterminados puede causar problemas. Asegúrese de saber lo que está haciendo.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_CONFIRM_GM_DELETE_EVENT','¿Seguro que quiere eliminar este evento?',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_FEEDBACK_GM_EVENT_REMOVED','Evento eliminado correctamente.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_CONFIRM_GM_DELETE_LEVEL','¿Seguro que quiere eliminar este nivel?',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_FEEDBACK_GM_LEVEL_REMOVED','Nivel eliminado correctamente.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_ERROR_GM_LEVEL_REQUIREMENTS','Se debe definir el título de nivel y un valor de puntos numéricos alcanzados.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_FEEDBACK_GM_BADGED_ADDED','Se ha añadido correctamente la insignia. Arrastre una imagen de insignia en la zona desplegable de la primera columna para agregar/editar la insignia.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_ERROR_GM_BADGE_REQUIREMENTS','Se debe proporcionar un alias, sin espacios, y un título para la insignia.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_INFOS_GM_BADGE_PROPERTIES','Establezca las propiedades de la insignia aquí. Arrastre una imagen de insignia en la dropzone Insignia para la insignia nueva después de guardar.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_INFOS_GM_CREATE_EVENT_TEXT','La creación de nuevos eventos también requiere agregar una secuencia de comandos coincidente al archivo events.php del módulo. Consulte la página del Manual para más detalles.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_FEEDBACK_GM_UPDATED_OPTIONS','Opciones actualizadas correctamente.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_ERROR_GM_UPDATED_OPTIONS_FAILED','Ha fallado la actualización de opciones. Contacte a su administrator si persiste el fallo.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_ERROR_GM_MAX_DIMENSION','Se han ecedido las dimensiones máximas de %sx%s. Reduzca la altura y el ancho de la imagen.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_ERROR_GM_MAX_FILESESIZE','Se ha superado el tamaño máximo de archivos de %sKB. Reduzca el tamaño de la imagen.',NOW(),'');
+INSERT INTO `language_text` VALUES ('es', '_msg','AT_FEEDBACK_GM_CONFIG_UPDATED','La configuración de GameMe se ha actualizado correctamente',NOW(),'');
+
 CREATE TABLE `gm_badges` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `course_id` int(11) NOT NULL DEFAULT '0',
@@ -161,7 +301,7 @@ VALUES
 	(20,0,'photo_comment_badge','Photo comments','You have been commenting you yours and others photos. Keep commenting for bonus points;','mods/gameme/images/badges/like.png'),
 	(21,0,'photo_album_comment','Album Comment','Most people comment on photo, but you commenteed on an album for bonus points.','mods/gameme/images/badges/cards.png'),
 	(22,0,'photo_description_badge','Photo Describer','Exellent job providing descriptions for you photos. ','mods/gameme/images/badges/feather.png'),
-	(23,0,'photo_alt_text','Accessibility Aware','Its great you are providing Alt text for you image, to make them accessible to people with disabilities. Secret bonus points if you continue adding Alt text to new images in you gallery.','mods/gameme/images/badges/heart.png'),
+	(23,0,'photo_alt_text','Accessibility Aware','Its great you are providing Alt text for you image, to make them accessible to people with disabilities. Secret bonus points if you continue adding Alt text to new images in your gallery.','mods/gameme/images/badges/heart.png'),
 	(24,0,'login_badge reach','Returning Visitor','You come back quite a few times now. Keep on visiting the course for bonus points.','mods/gameme/images/badges/hot.png'),
 	(25,0,'logout_badge','Security Conscious','You have been logging out, rather than leaving or allowing your session to time out. This helps improve security.','mods/gameme/images/badges/lock.png'),
 	(26,0,'welcome_badge','Welcome','Welcome to the course. Finding your way here earned you your first badge. Get busy with the course to earn points and collect more badges.','mods/gameme/images/badges/acorn.png');
@@ -242,16 +382,16 @@ CREATE TABLE `gm_levels` (
 INSERT INTO `gm_levels` (`id`, `course_id`, `title`, `description`, `points`, `icon`)
 VALUES
 	(1,0,'Level 0','Welcome to the course',0,'star_empty_lg.png'),
-	(2,0,'Level 1','250 points passed',250,'star_white_lg.png'),
-	(3,0,'Level 2','500 points passed',500,'star_yellow_lg.png'),
-	(4,0,'Level 3','1000 points passed',1000,'star_red_lg.png'),
-	(5,0,'Level 4','1500 points passed',1500,'star_green_lg.png'),
-	(6,0,'Level 5','2000 points passed: ',2000,'star_blue_lg.png'),
-	(7,0,'Level 6','3000 points passed',3000,'star_black_lg.png'),
-	(8,0,'Level 7','5000 points passed: Accomplished status, Bronze Badge',5000,'star_bronze_lg.png'),
-	(9,0,'Level 8','7500 point passed: Intermediate status, Silver Badge',7500,'star_silver_lg.png'),
-	(10,0,'Level 9','10000 points passed: Advanced status: Gold Badge',10000,'star_gold_lg.png'),
-	(11,0,'Level 10','15000 point passed: Highest Honor: Platinum Badge',15000,'star_platinum_lg.png');
+	(2,0,'Level 1','1000 points passed',1000,'star_white_lg.png'),
+	(3,0,'Level 2','2500 points passed',2500,'star_yellow_lg.png'),
+	(4,0,'Level 3','5000 points passed',5000,'star_red_lg.png'),
+	(5,0,'Level 4','7500 points passed',7500,'star_green_lg.png'),
+	(6,0,'Level 5','10000 points passed: ',10000,'star_blue_lg.png'),
+	(7,0,'Level 6','20000 points passed',20000,'star_black_lg.png'),
+	(8,0,'Level 7','25000 points passed: Accomplished status, Bronze Badge',25000,'star_bronze_lg.png'),
+	(9,0,'Level 8','35000 point passed: Intermediate status, Silver Badge',35000,'star_silver_lg.png'),
+	(10,0,'Level 9','50000 points passed: Advanced status: Gold Badge',50000,'star_gold_lg.png'),
+	(11,0,'Level 10','65000 point passed: Highest Honor: Platinum Badge',65000,'star_platinum_lg.png');
 
 CREATE TABLE `gm_options` (
 `id` int(11) unsigned NOT NULL,

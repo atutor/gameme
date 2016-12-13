@@ -21,8 +21,9 @@ if(isset($_SESSION['member_id'])){
     }else{
         $course_id = 0;
     } 
-    require_once($this_path.'/mods/gameme/GmCallbacksClass.php');
-    require_once($this_path.'/mods/gameme/PHPGamification/PHPGamification.class.php');
+    require_once(AT_INCLUDE_PATH.'../mods/gameme/GmCallbacksClass.php');
+    require_once(AT_INCLUDE_PATH.'../mods/gameme/PHPGamification/PHPGamification.class.php');
+
     $gamification = new PHPGamification();
     $gamification->setDAO(new DAO(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD));
     $gamification->setUserId($_SESSION['member_id'], $course_id);
@@ -31,8 +32,9 @@ if(isset($_SESSION['member_id'])){
     
      ////////
     // LOGIN TO OR ENTER COURSE
+    
+    // SEE MANTIS 5733 FOR DETAILS ON LOGIN EVENT BUG. NEED A NEW TRIGGER
     if(strpos($_SERVER['PHP_SELF'], "bounce.php") && $_REQUEST['course'] >0){
-    //if(strpos($_SERVER['PHP_SELF'], "index.php") && !strpos($_SERVER['PHP_SELF'], "users/index.php") && $_REQUEST['course'] >0){
         $_SESSION['course_id'] = $_REQUEST['course'];
         $gamification->executeEvent('login', array(
                     'user_id'=>$_SESSION['member_id'], 
@@ -42,6 +44,8 @@ if(isset($_SESSION['member_id'])){
                     'contact_email'=>$_config['contact_email'],
                     'badges'=>$gamification->getUserBadges()));
     }
+    
+    // LOGIN TO OR ENTER A COURSE FOR THE FIRST TIME
     if(strpos($_SERVER['PHP_SELF'], "bounce.php")&& $_REQUEST['course'] > 0){
         $_SESSION['course_id'] = $_REQUEST['course'];
         $gamification->executeEvent('welcome', array(
@@ -62,7 +66,8 @@ if(isset($_SESSION['member_id'])){
                     'email'=>$gm_member['email'],
                     'firstname'=>$gm_member['first_name'],
                     'contact_email'=>$_config['contact_email'], 
-                    'course_id'=>$_SESSION['course_id']));
+                    'course_id'=>$_SESSION['course_id'],
+                    'badges'=>$gamification->getUserBadges()));
     }
     
     ////////
@@ -161,16 +166,7 @@ if(isset($_SESSION['member_id'])){
                     'firstname'=>$gm_member['first_name'],
                     'contact_email'=>$_config['contact_email'],
                     'badges'=>$gamification->getUserBadges()));
-        
-        
-       /* , array(
-                    'user_id'=>$_SESSION['member_id'], 
-                    'email'=>$gm_member['email'],
-                    'alias'=>'blog_comment_badge',
-                    'firstname'=>$gm_member['first_name'],
-                    'contact_email'=>$_config['contact_email'],
-                    'badges'=>$gamification->getUserBadges())
-                    */
+
     // View a single blog posts
     } else if(strpos($_SERVER['PHP_SELF'], "blogs/post.php") && isset($_REQUEST['oid']) && isset($_REQUEST['id'])){
         $gamification->executeEvent('blog_post_view');

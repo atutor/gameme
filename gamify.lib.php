@@ -1,11 +1,11 @@
 <?php
-namespace gameme;
+//namespace gameme;
 
 /* Get a list of gameme leaders in a course
 * @$gamificaiton - a PHPGamifcations object
 * @$leader_depth - the number of leaders to display
 */
-function getLeaders(PHPGamification $gamification, $leader_depth){
+function getLeaders($gamification, $leader_depth){
     echo "<h3>"._AT('gm_leaders_top', $leader_depth)."</h3>";
     $leaders = $gamification->getUsersPointsRanking($leader_depth);
     $sql = "SELECT member_id FROM %scourses WHERE course_id = %d";
@@ -82,7 +82,7 @@ function yourPosition($mid){
 
 
 */
-function showUserScores(PHPGamification $gamification){
+function showUserScores($gamification){
     echo "<h3>"._AT('gm_levels_awarded')."</h3>";
     $score = $gamification->getUserScores();
     echo "<table class='data'>";
@@ -98,7 +98,7 @@ function showUserScores(PHPGamification $gamification){
 
 
 */  
-function showUserScore(PHPGamification $gamification, $courseId){
+function showUserScore($gamification){
     $score = $gamification->getUserScores();
     if($score->getPoints() == 0){
         echo '<div style="text-align:center;">'._AT('gm_login_for_points').'</div>';
@@ -121,7 +121,7 @@ function showUserScore(PHPGamification $gamification, $courseId){
 
 
 */ 
-function showUserLevels(PHPGamification $gamification, $course_id)
+function showUserLevels($gamification, $course_id)
 {
     $score = $gamification->getUserScores();
     echo "<h3>"._AT('gm_your_levels_reached')."</h3>";
@@ -133,6 +133,35 @@ function showUserLevels(PHPGamification $gamification, $course_id)
             }
         }
 
+         // Get default levels   
+        $sql = "SELECT * FROM %sgm_levels WHERE course_id = %d AND points <= %d ORDER BY id asc $limit";
+        $levels = queryDB($sql, array(TABLE_PREFIX, 0, $score->getPoints()));
+        $level_ids = array();
+        foreach($levels as $level){
+            array_push($level_ids, $level['id']);
+        }
+        // Get customized course levels
+        $sql = "SELECT * FROM %sgm_levels WHERE course_id = %d AND points <= %d ORDER BY id asc $limit";
+        $course_levels = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id'], $score->getPoints()));
+        $course_level_ids = array();
+    
+        foreach($course_levels as $course_level){
+            array_push($course_level_ids, $course_level['id']);
+        }
+        $this_levels = array();
+        foreach($course_levels as $course_level){
+            if(!in_array($course_level['id'], $this_levels)){
+                array_push($this_levels, $course_level);
+            }
+        }
+
+        foreach($levels as $level){
+            if(!in_array($level['id'], $course_level_ids)){
+                array_push($this_levels, $level);
+            }
+        }
+        usort($this_levels, 'sortByOrder');
+
         echo "<table class='data'>
         <tr>
         <th>"._AT('gm_level')."</th>
@@ -140,24 +169,14 @@ function showUserLevels(PHPGamification $gamification, $course_id)
         <th>"._AT('gm_description')."</th>
         <th>"._AT('gm_points')."</th>
         </tr>";
-        // get a list of course level ids
-        $sql = "SELECT id FROM %sgm_levels WHERE course_id=%d";
-        $course_levels = queryDB($sql, array(TABLE_PREFIX, $course_id));
 
-        $sql = "SELECT * FROM %sgm_levels WHERE points < %d ORDER BY points asc $limit ";
-        $my_levels = queryDB($sql, array(TABLE_PREFIX, $score->getPoints()));
-
-        foreach($my_levels as $level){
-            // check if a level id exists in the list of course level ids, if not then echo default level
-            if(!in_array($level['id'], $course_levels) && $level['course_id'] ==0){
+        foreach($this_levels as $level){
                 echo "<tr>";
                 echo "<td>".showstar($level['points'])."</td>";
                 echo "<td>".$level['title']."</td>";
                 echo "<td>".$level['description']."</td>";
                 echo "<td>".$level['points']."</td>";            
                 echo "</tr>"."\n";
-            }
-            $count++;
         }
         echo "</table>";
     }
@@ -167,7 +186,8 @@ function showUserLevels(PHPGamification $gamification, $course_id)
 
 
 */
-function showUserLevel(PHPGamification $gamification, $courseId){
+function showUserLevel($gamification, $courseId){
+
 $score = $gamification->getUserScores();
 echo "<h3>"._AT('gm_levels_awarded')."</h3>
     <div style='background-color:#f6f6f6; width:100%; padding:.2em;margin-left:auto;margin-right:auto;' >".showstars($score->getPoints())."</div>";
@@ -178,14 +198,17 @@ echo "<h3>"._AT('gm_levels_awarded')."</h3>
 
 
 */
-function showUserProgress(PHPGamification $gamification, $courseId){
+function showUserProgress($gamification, $courseId){
 $score = $gamification->getUserScores();
  return "<br >"._AT('gm_progress_to_next', $score->getProgress())."<hr />";
 }
 
+function sortByOrder($a, $b) {
+     return $a['points'] - $b['points'];
+}
 /*
-
-
+* Strings stars together, laid out in Levels in the sidemenu block
+* @param $points - the user's current points scored
 */
 function showstars($points){
     global $_base_href;
@@ -196,42 +219,68 @@ function showstars($points){
                 $limit = " LIMIT ".$level_max['value'];
             }
         }
+     // Get default levels   
     $sql = "SELECT * FROM %sgm_levels WHERE course_id = %d AND points <= %d ORDER BY id asc $limit";
     $levels = queryDB($sql, array(TABLE_PREFIX, 0, $points));
-    
-    $sql = "SELECT id FROM %sgm_levels WHERE course_id = %d AND points <= %d ORDER BY id asc $limit";
+    $level_ids = array();
+    foreach($levels as $level){
+        array_push($level_ids, $level['id']);
+    }
+    // Get customized course levels
+    $sql = "SELECT * FROM %sgm_levels WHERE course_id = %d AND points <= %d ORDER BY id asc $limit";
     $course_levels = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id'], $points));
+    $course_level_ids = array();
+    
+    foreach($course_levels as $course_level){
+        array_push($course_level_ids, $course_level['id']);
+    }
     
     $this_levels = array();
     foreach($course_levels as $course_level){
-        array_push($this_levels, $course_level['id']);
+        if(!in_array($course_level['id'], $this_levels)){
+            array_push($this_levels, $course_level);
+        }
     }
+
+    foreach($levels as $level){
+        if(!in_array($level['id'], $course_level_ids)){
+            array_push($this_levels, $level);
+        }
+    }
+
+    usort($this_levels, 'sortByOrder');
+
     $content_dir = explode('/',AT_CONTENT_DIR);
     array_pop($content_dir);
-    foreach($levels as $level){
-        $sql = "SELECT icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
+    
+    foreach($this_levels as $level){
+        if(in_array($level, $this_levels)){
+            $course_id = $_SESSION['course_id'];
+        } else{
+            $course_id = 0;
+        }
+        $sql = "SELECT id, icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
         $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],$_SESSION['course_id']), TRUE);
 
         if(!empty($level_image['icon'])){
-            if(file_get_contents($_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'])){
-                $level_file =  $_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'];
-            }else if(file_get_contents($_base_href.'content/0/gameme/levels/'.$level_image['icon'])){
-                $level_file =$_base_href.'content/0/gameme/levels/'.$level_image['icon'];
+            if(is_file(AT_CONTENT_DIR.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'])){
+                 $level_file = $_base_href.'get.php/gameme/levels/'.$level_image['icon'];
+            }else if(is_file(AT_CONTENT_DIR.'0/gameme/levels/'.$level_image['icon'])){
+                $level_file = $_base_href.'mods/gameme/get_level_icon.php?level_id='.$level_image['id'];
             }else {
                 $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
             }
         } else {
             if(!in_array($level['id'] , $course_levels)){
-            $sql = "SELECT icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
-            $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],0), TRUE);
-            
-            if(!file_get_contents($_base_href.'content/0/gameme/levels/'.$level_image['icon'])){
-                $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
-            } else {
-                $content_dir = explode('/',AT_CONTENT_DIR);
-                array_pop($content_dir);
-                $level_file = $_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'];
-            }
+                $sql = "SELECT id, icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
+                $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],0), TRUE);
+                if(!is_file(AT_CONTENT_DIR.'0/gameme/levels/'.$level_image['icon'])){
+                    $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
+                } else {
+                    $content_dir = explode('/',AT_CONTENT_DIR);
+                    array_pop($content_dir);
+                    $level_file = $_base_href.'mods/gameme/get_level_icon.php?level_id='.$level_image['id'];
+                }
             }
         }
         $stars .= '<img src="'.$level_file.'" alt="'.$level_image['title'].'" title="'.$level_image['title'].' '.$level_image['description'].'" style="margin:.2em;"/>'."\n";
@@ -239,57 +288,49 @@ function showstars($points){
     
     return $stars;
 }
+/*
+* Show the star associated with a particular point value
+* @param $points
+* @return html img tag for the star/level
+*/
 function showstar($points){
-    global $_base_href;
-    $sql = "SELECT * FROM %sgm_levels WHERE course_id = %d AND points = %d";
-    $level = queryDB($sql, array(TABLE_PREFIX, 0, $points), TRUE);
-    
-    $sql = "SELECT id FROM %sgm_levels WHERE course_id = %d AND points = %d";
-    $course_levels = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id'], $points), TRUE);
-    
-    $content_dir = explode('/',AT_CONTENT_DIR);
-    array_pop($content_dir);
-    
-    $sql = "SELECT icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
-    $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],$_SESSION['course_id']), TRUE);
-    
-    // this chunk doubles the page load time
+    global $_base_href; 
+    $sql = "SELECT icon, description FROM %sgm_levels WHERE points=%d AND course_id=%d";
+    $level_image = queryDB($sql, array(TABLE_PREFIX, $points,$_SESSION['course_id']), TRUE);
+
     if(!empty($level_image['icon'])){
-        if(file_get_contents($_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'])){
-            $level_file =  $_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'];
-        }else if(file_get_contents($_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'])){
-            $level_file =$_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'];
-        }else {
-            $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
-        }
-    } else {
-        if(!in_array($level['id'] , $course_levels)){
-        $sql = "SELECT icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
-        $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],0), TRUE);
-        if(!file_get_contents($_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'])){
-            $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
+            if(is_file(AT_CONTENT_DIR.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'])){
+                 $level_file = $_base_href.'get.php/gameme/levels/'.$level_image['icon'];
+            }else if(is_file(AT_CONTENT_DIR.'0/gameme/levels/'.$level_image['icon'])){
+                $level_file = $_base_href.'mods/gameme/get_level_icon.php?level_id='.$level_image['id'];
+            }else {
+                $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
+            }
         } else {
-            $content_dir = explode('/',AT_CONTENT_DIR);
-            array_pop($content_dir);
-            $level_file = $_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'];
+            if(!in_array($level['id'] , $course_levels)){
+                $sql = "SELECT id, icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
+                $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],0), TRUE);
+                if(!is_file(AT_CONTENT_DIR.'0/gameme/levels/'.$level_image['icon'])){
+                    $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
+                } else {
+                    $content_dir = explode('/',AT_CONTENT_DIR);
+                    array_pop($content_dir);
+                    $level_file = $_base_href.'mods/gameme/get_level_icon.php?level_id='.$level_image['id'];
+                }
+            }
         }
-        }
-    }
-
-    $star .= '<img src="'.$level_file.'" alt="'.$level['title'].'" title="'.$level_image['title'].' '.$level_image['description'].'" style="margin:.2em;"/>'."\n";
-
-    return $star;
+    
+    return '<img src="'.$level_file.'" alt="'.$star_image['description'].'" title="'.$star_image['description'].'" style="margin:.2em;"/>'."\n"; 
 }
-
 /*
 *
 *
 */
-function showUserBadges(PHPGamification $gamification)
+function showUserBadges($gamification)
 {
     echo "<h3>"._AT('gm_manage_badges')."</h3>";
     $badges = $gamification->getUserBadges();
-    if ($badges){
+    if (!empty($badges)){
         echo "<table class='data'>
         <tr>
         <th>&nbsp;</th>
@@ -300,7 +341,7 @@ function showUserBadges(PHPGamification $gamification)
         </tr>";
         foreach ($badges as $badge) {
             echo "<tr>";
-            echo "<td>".getBadgeImage( $gamification, $badge->getIdBadge())."</td>";
+            echo "<td>".getBadgeImage($badge->getIdBadge())."</td>";
             echo "<td>".$badge->getIdBadge()."</td>";
             echo "<td>".$badge->getBadgeCounter()."</td>";
             echo "<td>".$badge->getBadge()->getAlias()."</td>";
@@ -308,9 +349,11 @@ function showUserBadges(PHPGamification $gamification)
             echo "</tr>"."\n";
         }
         echo "</table>";
+    } else{
+        echo "No badges yet.";
     }
 }
-function showUserBadgesStudents(PHPGamification $gamification)
+function showUserBadgesStudents($gamification)
 {
     echo "<h3>"._AT('gm_your_badges')."</h3>";
     $badges = $gamification->getUserBadges();
@@ -324,7 +367,7 @@ function showUserBadgesStudents(PHPGamification $gamification)
         </tr>";
         foreach ($badges as $badge) {
             echo "<tr>";
-            echo "<td>".getBadgeImage( $gamification, $badge->getIdBadge())."</td>";;
+            echo "<td>".getBadgeImage($badge->getIdBadge())."</td>";;
             //echo "<td>".$badge->getBadgeCounter()."</td>";
             echo "<td>".$badge->getBadge()->getTitle()."</td>";
             echo "<td>".$badge->getBadge()->getDescription()."</td>";            
@@ -337,15 +380,17 @@ function showUserBadgesStudents(PHPGamification $gamification)
 *
 *
 */
-function showUserBadge(PHPGamification $gamification, $course_id)
+function showUserBadge($gamification)
 {
     echo "<h3>"._AT('gm_your_badges')."</h3>";
     $badges = $gamification->getUserBadges();
-    if ($badges){
+    if (!empty($badges)){
         foreach ($badges as $badge) {
-            echo getBadgeImage( $gamification, $badge->getIdBadge(), $course_id);
+            echo getBadgeImage($badge->getIdBadge());
 
         }
+    } else {
+        echo '<p>'._AT('gm_no_badges_earned').'</p>';
     }
     echo "<hr />";
 }
@@ -353,26 +398,50 @@ function showUserBadge(PHPGamification $gamification, $course_id)
 *
 *
 */
-function getBadgeImage(PHPGamification $gamification, $badge_id){
+function getBadgeImage($badge_id){
     global $_base_href; 
     $sql = "SELECT image_url, description FROM %sgm_badges WHERE id=%d AND course_id=%d";
     $badge_image = queryDB($sql, array(TABLE_PREFIX, $badge_id,$_SESSION['course_id']), TRUE);
-    if(empty($badge_image)){
-        $sql = "SELECT image_url, description FROM %sgm_badges WHERE id=%d AND course_id=%d";
-        $badge_image = queryDB($sql, array(TABLE_PREFIX, $badge_id,0), TRUE);
-        $badge_file = $_base_href.$badge_image['image_url'];
-    }
-    else{
-        $badge_file = $_base_href.$badge_image['image_url'];
-    }
     
+    if(strstr($badge_image['image_url'], "content")){
+        $badge_file_array = explode('/',$badge_image['image_url']);
+        if($badge_file_array[1] == 0){
+            $custom_default = TRUE;
+        }
+        array_shift($badge_file_array);
+        $badge_file_stem = implode('/',$badge_file_array);
+        
+        if(is_file(AT_CONTENT_DIR.$badge_file_stem)){
+            if(!$custom_default){
+                $badge_file = $_base_href.'get.php/gameme/badges/'.end($badge_file_array);
+            } else{
+                $badge_file = $_base_href.'mods/gameme/get_badge_icon.php?badge_id='.$badge_id;
+            }
+        }
+    } else{
+        $badge_file = $_base_href.$badge_image['image_url'];
+    // Not a course badge, so check for custom system badge
+        $sql = "SELECT image_url, description FROM %sgm_badges WHERE id=%d AND course_id=%d";
+        $badge_image = queryDB($sql, array(TABLE_PREFIX, $badge_id, 0), TRUE);
+        $badge_file_array = explode('/',$badge_image['image_url']);
+
+        array_shift($badge_file_array);
+
+        // get the custom admin created icon
+        if(is_file(AT_CONTENT_DIR.'0/gameme/badges/'.end($badge_file_array))){
+            $badge_file = $_base_href.'mods/gameme/get_badge_icon.php?badge_id='.$badge_id;
+        } else{
+            // Default Badge
+            $badge_file = $_base_href.$badge_image['image_url'];
+        }
+    }
     return '<img src="'.$badge_file.'" alt="'.$badge_image['description'].'" title="'.$badge_image['description'].'" style="margin:.2em;"/>'."\n"; 
 }
 /*
 *
 *
 */
-function showUserEvents(PHPGamification $gamification){
+function showUserEvents($gamification){
     echo "<h2>"._AT('gm_events')."</h2>";
     $events = $gamification->getUserEvents();
     echo "<ul style='margin-left:1em;line-height:1.8em;'>"."\n";
@@ -386,7 +455,7 @@ function showUserEvents(PHPGamification $gamification){
 *
 *
 */
-function showUserAlerts(PHPGamification $gamification){
+function showUserAlerts($gamification){
  echo "<h3>"._AT('gm_your_alert')."</h3>"."\n";
     $alerts = $gamification->getUserAlerts();
     if ($alerts == null) {
@@ -405,7 +474,7 @@ function showUserAlerts(PHPGamification $gamification){
 *
 *
 */
-function showUserLog(PHPGamification $gamification){
+function showUserLog($gamification){
  echo "<h2>"._AT('gm_your_activity_log')."</h2>";
     $logs = $gamification->getUserLog();
     if ($logs)

@@ -14,12 +14,11 @@ foreach($gm_options as $option => $value){
     $count++;
 }
 
-// this next line is a hack
-$this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$_base_path);
-require_once($this_path.'mods/gameme/gamify.lib.php');
-require_once($this_path.'mods/gameme/PHPGamification/PHPGamification.class.php');
+require_once(AT_INCLUDE_PATH.'../mods/gameme/gamify.lib.php');
+require_once(AT_INCLUDE_PATH.'../mods/gameme/PHPGamification/PHPGamification.class.php');
 
 $gamification = new PHPGamification();
+
 $gamification->setDAO(new DAO(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD));
 $gamification->setUserId($_SESSION['member_id']);
 

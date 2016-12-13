@@ -194,7 +194,18 @@ jQuery(document).ready(function(){
             $("#panel3").attr("aria-hidden","true");
             $("#panel4").attr("aria-hidden","true");
             $("#panel5").attr("aria-hidden","false");
-        });       
+        });     
+    if(Cookies.get('activetab') == ''){ 
+        $("#tab1").addClass("active");
+        $("#panel1").attr("aria-hidden","false");
+        Cookies.set('activetab', 'tab1');
+     } 
+     
+     /*else if(Cookies.get('activetab') != '' && Cookies.get('activetab') != 'tab1'){
+        $("#tab1").removeClass("active");
+        $("#panel1").attr("aria-hidden","true");
+     }  
+     */
         //$(this).attr("aria-selected","true");
         //  $(this).attr("tabindex","0");
         //var tabpanid= $(this).attr("aria-controls");
