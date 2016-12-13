@@ -568,6 +568,8 @@ if(!empty($_POST['member_id'])){
     if(in_array('showposition',$enabled_options)){
         echo yourPosition($_POST['member']);
     }
+    
+    showUserLog($course_game);
 
 }
 
