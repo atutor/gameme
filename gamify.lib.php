@@ -475,7 +475,7 @@ function showUserAlerts($gamification){
 *
 */
 function showUserLog($gamification){
- echo "<h2>"._AT('gm_your_activity_log')."</h2>";
+ echo "<h3>"._AT('gm_your_activity_log')."</h3>";
     $logs = $gamification->getUserLog();
     if ($logs)
         echo "<table class='data'>
@@ -487,6 +487,7 @@ function showUserLog($gamification){
         <th>"._AT('gm_level')."</th>
         </tr>";
         foreach ($logs as $log) {
+            $level = $gamification->getLevel($log->getIdLevel());
             echo "<tr>";
             echo "<td>".$log->getEventDate()."</td><td>".$log->getEvent()->getAlias()."</td>";
             if ($log->getPoints()){
@@ -499,8 +500,8 @@ function showUserLog($gamification){
             }else{
                 echo "<td>&nbsp</td>";
             }
-            if ($log->getIdLevel()){
-                echo "<td>".$log->getIdLevel()."</td>";
+            if ($log->getIdLevel() > 0){
+                echo "<td>".$level->getTitle()."</td>";
             }else{
                 echo "<td>&nbsp</td>";
             }
