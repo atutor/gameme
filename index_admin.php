@@ -2,6 +2,7 @@
 define('AT_INCLUDE_PATH', '../../include/');
 require (AT_INCLUDE_PATH.'vitals.inc.php');
 admin_authenticate(AT_ADMIN_PRIV_GAMEME);
+require_once(AT_INCLUDE_PATH.'../mods/gameme/gamify.lib.php');
 $_custom_css = $_base_path . 'mods/gameme/module.css'; // use a custom stylesheet
 $_custom_head = '<script type="text/javascript" src="'.$_base_path .'jscripts/lib/jquery.1.10.1.min.js"></script>'."\n";
 $_custom_head.= '<script type="text/javascript" src="'.$_base_path .'mods/gameme/gamify.js"></script>'."\n";
@@ -112,7 +113,7 @@ if($_SESSION['inline_edit']){ ?>
 <h3><?php echo _AT('gm_default_events'); ?></h3>
 <?php $msg->printInfos('GM_ENABLE_EDIT_TEXT'); ?>
 <?php //require_once($this_path.'mods/gameme/gamify.lib.php');
-require_once(AT_INCLUDE_PATH.'../mods/gameme/gamify.lib.php');
+//require_once(AT_INCLUDE_PATH.'../mods/gameme/gamify.lib.php');
  ?>
 <table class="table table-hover table-bordered col-sm-12 data" >
 <tr>
@@ -222,7 +223,7 @@ foreach($all_badges as $badge){
 </tr>
 <?php
 //require_once($this_path.'mods/gameme/gamify.lib.php');
-require_once(AT_INCLUDE_PATH.'../mods/gameme/gamify.lib.php');
+//require_once(AT_INCLUDE_PATH.'../mods/gameme/gamify.lib.php');
  if($_SESSION['course_id'] > 0){
     $course_id = $_SESSION['course_id'];
 } else{
@@ -265,45 +266,5 @@ foreach($all_levels as $level){
 </div>
 <script src="<?php echo $_base_href; ?>mods/gameme/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo $_base_path; ?>mods/gameme/inline_edit/jquery-quickedit.js"></script>
-<?php
-if(!empty($_POST)){
-    $json = json_encode($_POST);
-}
-/*
-
-
-*/
-function star_file($id){
-    global $_base_href;
-    $sql = "SELECT * FROM %sgm_levels WHERE id = %d AND course_id=%d";
-    if($_SESSION['course_id'] >0){
-        $level = queryDB($sql, array(TABLE_PREFIX, $id, $_SESSION['course_id']), TRUE);
-        if(empty($level)){
-            $level = queryDB($sql, array(TABLE_PREFIX, $id, 0), TRUE);
-        }
-    }else{
-        $level = queryDB($sql, array(TABLE_PREFIX, $id, 0), TRUE);
-    }
-    $content_dir = explode('/',AT_CONTENT_DIR);
-    array_pop($content_dir);
-    
-    //if(!file_get_contents($_base_href.'mods/gameme/images/'.$level['icon'] )){
-    if(!file_get_contents($_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/images/'.$level['icon'] )){
-            $content_dir = explode('/',AT_CONTENT_DIR);
-            array_pop($content_dir);
-            if(!file_get_contents($_base_href.end($content_dir).'/0/gameme/levels/'.$level['icon'])){
-                $level_file = $_base_href.'mods/gameme/images/'.$level['icon'] ;
-            }else{
-                $level_file = $_base_href.end($content_dir).'/0/gameme/levels/'.$level['icon'] ;
-            }
-    } else{
-            //$level_file = $_base_href.'mods/gameme/images/'.$level['icon'] ;
-           $level_file =  $_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/images/'.$level['icon'];
-    }
-    return $level_file;
-}
-
-?>
-
 
 <?php require (AT_INCLUDE_PATH.'footer.inc.php'); ?>
