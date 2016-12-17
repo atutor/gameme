@@ -60,7 +60,7 @@ class GmCallbacksClass
     static function LogoutReachCallback($params)
     {   
         if ($params['badges']){                                 
-            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
+            $feedback_img = '<div style="float:left;text-align:top;height:5em; width:5em; margin-left:1em; margin-right:1em;margin-top:-.5em;"><img src="'.$_base_href.self::getBadgeFile($params['alias']).'" alt="" style="float:left;"/></div>';  
              $feedback .= '<table>
              <tr><td>'.$feedback_img.'</td><td>'.self::getReachMessage('logout').'</td></tr></table>'; 
              //$feedback = "Congratulations, you have received a new badge for logging out properly, instead of leaving or letting your session timeout, maintaining your privacy and security. ";
@@ -487,7 +487,7 @@ class GmCallbacksClass
 				   $msg->printErrors('SENDING_ERROR');
 				   exit;
 				} else{
-				 //debug_to_log('send success');
+				     //debug_to_log('send success');
 				}
 				unset($mail);
 
@@ -504,19 +504,19 @@ class GmCallbacksClass
     * sent in the email
     */
     public static function getCurrentBadges($badges){
+        global $_base_href;
     	if(!empty($badges)){
-    	    //$current_badges .= '<div style="height:auto; float:left;clear:both;">';
     		$current_badges .='<h3>'._AT('gm_badges_so_far').'</h3>'."\n";                  
             $current_badges .= '<table style="border:1px solid #eeeeee;width:100%;">';     
             foreach ($badges as $badge) {
-                $sql = "SELECT image_url FROM %sgm_badges WHERE id=%d";
+                $sql = "SELECT alias,image_url FROM %sgm_badges WHERE id=%d";
                 $badge_image = queryDB($sql, array(TABLE_PREFIX, $badge->getIdBadge()), TRUE);
-                $current_badges .=  '<tr><td style="background-color:#eeeee;"><img src="'.AT_BASE_HREF.$badge_image['image_url'].'" alt="'.$badge->getBadge()->getTitle().'" style="vertical-align:top"/></td>';
+                $current_badges .=  '<tr><td style="background-color:#eeeee;"><img src="'.self::getBadgeFile($badge->getBadge()->getAlias()).'" alt="'.$badge->getBadge()->getTitle().'" style="vertical-align:top"/></td>';
                 $current_badges .=  '<td style="background-color:#efefef; padding:.3em;"><strong>'.$badge->getBadge()->getTitle().'</strong><br/>'.$badge->getBadge()->getDescription().'</td></tr>'."\n";
+
             }
             $current_badges .= "</table>";
-           // $current_badges .= "</div>";
-    	}
+    	} 
     	return $current_badges;
     }
     /* Gets the details for the badge just earned
@@ -529,14 +529,6 @@ class GmCallbacksClass
         	$new_badge .='<div style="width:auto;padding-left: 2em;border:1px solid #cccccc;background-color:#f6f4da;"><h2>'.$_SESSION['course_title'].'</h2></div>';
             $new_badge .= '<p> Hi '.$params['firstname']."!</p>\n\n";
             $new_badge .= "<p>".$feedback." <br /></p>" ;
-            //$new_badge .= '<table  style="border:1px solid #eeeeee;width:97%;float:left;clear:both;">'."\n";
-            //$new_badge.='</table><br /><br />'."\n"; 
-            
-            //$new_badge .= '<table  style="border:1px solid #eeeeee;width:97%;float:left;clear:both;">'."\n";
-            //$new_badge .= '<tr><td style="background-color:#eeeee;"><img src="'.$earned_badge['image_url'].'" alt ="'.$earned_badge['title'].'" /></td>
-            //        <td style="background-color:#efefef; padding:.3em;"><strong>'.$earned_badge['title'].'</strong><br/>'.$earned_badge['description'].'</td></tr>'."\n";
-            //$new_badge.='</table><br /><br />'."\n"; 
-            
             return $new_badge;
     }
     
@@ -550,30 +542,34 @@ class GmCallbacksClass
     */    
     public static function getBadgeFile($alias){
         global $_base_href;
-        if($_SESSION['course_id'] > 0){
-            $is_course = " AND course_id=".$_SESSION['course_id'];
-        } else{
-            $is_course = " AND course_id=0";
-        }
+        $sql = "SELECT id, alias, image_url, description FROM %sgm_badges WHERE alias='%s' AND course_id=%d";
+        $badge_image = queryDB($sql, array(TABLE_PREFIX, $alias,$_SESSION['course_id']), TRUE);
         
-        $sql = "SELECT * from %sgm_badges WHERE alias = '%s' $is_course";
-        if($badge = queryDB($sql, array(TABLE_PREFIX, $alias), TRUE)){
-            // all good
-        }else{
-            // course badge does not exist so get the system default
-            $sql = "SELECT * from %sgm_badges WHERE alias = '%s' AND course_id=0";
-            $badge = queryDB($sql, array(TABLE_PREFIX, $alias), TRUE);
-        }
-
-        if(!file_get_contents($_base_href.$badge['image_url'])){
-            $content_dir = explode('/',AT_CONTENT_DIR);
-            array_pop($content_dir);
-            $badge_file_name = explode("/",$badge['image_url']);
-            $badge_file = end($content_dir).'/0/gameme/badges/'.end($badge_file_name);
+        if(!empty($badge_image)){
+            // Course badge
+            $badge_file_array = explode('/',$badge_image['image_url']);
+            array_shift($badge_file_array);
+            array_shift($badge_file_array);
+            $badge_file_stem = implode('/',$badge_file_array);
+            
+            if(is_file(AT_CONTENT_DIR.$badge_file_stem)){
+                $badge_file = $_base_href.'get.php'.$badge_file_stem;
+            } 
         } else{
-            $badge_file = $_base_href.$badge['image_url'];
+            // Not a course badge, so check for default badge
+            $sql = "SELECT id, alias, image_url, description FROM %sgm_badges WHERE alias='%s' AND course_id=%d";
+            $badge_image_default = queryDB($sql, array(TABLE_PREFIX, $alias, 0), TRUE);
+            
+            if(strstr($badge_image_default['image_url'], "content")){
+                // Custom default badge
+                $badge_file = $_base_href.'mods/gameme/get_badge_icon.php?badge_id='.$badge_image_default['id'];
+           
+            }else{
+                // Default badge
+                $badge_file = $_base_href.$badge_image_default['image_url'];
+            }
         }
-            return $badge_file;
+         return $badge_file;
     }
     
     /* Gets the badge details from the database, either
@@ -585,6 +581,7 @@ class GmCallbacksClass
     * and passed from the events.php file 
     */
     public static function getBadge($alias){
+        global $_base_href;
         if($_SESSION['course_id'] > 0){
             $is_course = " AND course_id=".$_SESSION['course_id'];
         } else{
@@ -598,7 +595,7 @@ class GmCallbacksClass
             $sql = "SELECT * from %sgm_badges WHERE alias = '%s' AND course_id=0";
             $badge = queryDB($sql, array(TABLE_PREFIX, $alias), TRUE);
         }
-        $badge['image_url']= self::getBadgeFile($badge['alias']);
+        $badge['image_url']= $_base_href.self::getBadgeFile($badge['alias']);
         return $badge;
     }
 	 /* Gets the message to display for the reach email alert, either
