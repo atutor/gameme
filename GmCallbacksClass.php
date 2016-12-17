@@ -551,19 +551,19 @@ class GmCallbacksClass
             array_shift($badge_file_array);
             array_shift($badge_file_array);
             $badge_file_stem = implode('/',$badge_file_array);
-            
-            if(is_file(AT_CONTENT_DIR.$badge_file_stem)){
-                $badge_file = $_base_href.'get.php'.$badge_file_stem;
+
+            if(is_file(AT_CONTENT_DIR.$_SESSION['course_id'].'/'.$badge_file_stem)){
+                $badge_file = $_base_href.'mods/gameme/get_course_icon.php?badge_id='.$badge_image['id'].SEP.'course_id='.$_SESSION['course_id'];
             } 
+
         } else{
             // Not a course badge, so check for default badge
             $sql = "SELECT id, alias, image_url, description FROM %sgm_badges WHERE alias='%s' AND course_id=%d";
             $badge_image_default = queryDB($sql, array(TABLE_PREFIX, $alias, 0), TRUE);
-            
+
             if(strstr($badge_image_default['image_url'], "content")){
                 // Custom default badge
                 $badge_file = $_base_href.'mods/gameme/get_badge_icon.php?badge_id='.$badge_image_default['id'];
-           
             }else{
                 // Default badge
                 $badge_file = $_base_href.$badge_image_default['image_url'];
