@@ -24,7 +24,14 @@ if (isset($_POST['submit_no'])) {
     // remove the badge file
     $sql = "SELECT image_url FROM %sgm_badges WHERE course_id = %d AND id=%d";
     $badge_file = queryDB($sql, array(TABLE_PREFIX,  $course_id, $_POST['badge_id']), TRUE);
-    unlink($_SERVER["DOCUMENT_ROOT"].$_base_path.$badge_file['image_url']);
+    
+    $badge_file_array = explode('/',$badge_file['image_url']);
+
+    array_shift($badge_file_array);
+    $badge_file_stem = implode('/',$badge_file_array);
+
+    unlink(AT_CONTENT_DIR.$badge_file_stem);
+    
     // remove the badge from the DB
     $sql = "DELETE FROM %sgm_badges WHERE id=%d AND course_id = %d LIMIT 1";
     queryDB($sql, array(TABLE_PREFIX, $_POST['badge_id'], $course_id));
@@ -42,7 +49,6 @@ require (AT_INCLUDE_PATH.'header.inc.php');
 
 unset($hidden_vars);
 $hidden_vars['badge_id'] = intval($_GET['id']);
-//$hidden_vars['course_id'] = intval($_SESSION['course_id']);
 
 $msg->addConfirm(array('GM_DELETE_BADGE'), $hidden_vars);
 
