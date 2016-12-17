@@ -24,8 +24,7 @@ if (isset($_POST['submit_no'])) {
     // remove the level icon file
     $sql = "SELECT icon FROM %sgm_levels WHERE course_id = %d AND id=%d";
     $level_file = queryDB($sql, array(TABLE_PREFIX,  $course_id, $_POST['level_id']), TRUE);
-    unlink($_SERVER["DOCUMENT_ROOT"].$_base_path.'content/'.$course_id.'/gameme/levels/'.$level_file['icon']);
-    
+    unlink(AT_CONTENT_DIR.$course_id.'/gameme/levels/'.$level_file['icon']);    
     $sql = "DELETE FROM %sgm_levels WHERE id=%d AND course_id = %d LIMIT 1";
     queryDB($sql, array(TABLE_PREFIX, $_POST['level_id'], $course_id));
     $msg->addFeedback('GM_LEVEL_REMOVED');
