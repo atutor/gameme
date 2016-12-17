@@ -295,8 +295,23 @@ function showstars($points){
 */
 function showstar($points){
     global $_base_href; 
-    $sql = "SELECT icon, description FROM %sgm_levels WHERE points=%d AND course_id=%d";
+    $sql = "SELECT id, icon, description FROM %sgm_levels WHERE points=%d AND course_id=%d";
     $level_image = queryDB($sql, array(TABLE_PREFIX, $points,$_SESSION['course_id']), TRUE);
+    //$level_file = star_file($level_image['id']);
+        if(!empty($level_image['icon'])){
+             $level_file = star_file($level_image['id']);
+        } else {
+            $sql = "SELECT id, icon, description FROM %sgm_levels WHERE points=%d AND course_id=%d";
+            $level_image = queryDB($sql, array(TABLE_PREFIX, $points,0), TRUE);
+            $level_file = star_file($level_image['id']);
+        }
+    return '<img src="'.$level_file.'" alt="'.$level_image['description'].'" title="'.$level_image['description'].'" style="margin:.2em;"/>'."\n"; 
+}
+
+function star_file($id){
+    global $_base_href;
+    $sql = "SELECT icon, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
+    $level_image = queryDB($sql, array(TABLE_PREFIX,$id,$_SESSION['course_id']), TRUE);
 
         if(!empty($level_image['icon'])){
             if(is_file(AT_CONTENT_DIR.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'])){
@@ -306,19 +321,20 @@ function showstar($points){
                 $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
             }
         } else {
-            $sql = "SELECT id, icon, description FROM %sgm_levels WHERE points=%d AND course_id=%d";
-            $level_image = queryDB($sql, array(TABLE_PREFIX, $points,0), TRUE);
+            $sql = "SELECT icon, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
+            $level_image = queryDB($sql, array(TABLE_PREFIX, $id,0), TRUE);
 
             if(is_file(AT_CONTENT_DIR.'0/gameme/levels/'.$level_image['icon'])){
                 // Custom default level
-                $level_file = $_base_href.'mods/gameme/get_badge_icon.php?badge_id='.$$level_image['id'];
+                $level_file = $_base_href.'mods/gameme/get_level_icon.php?level_id='.$id;
             } else{
                 // Default Level
                 $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
             }
         }
-    return '<img src="'.$level_file.'" alt="'.$star_image['description'].'" title="'.$star_image['description'].'" style="margin:.2em;"/>'."\n"; 
+    return $level_file;
 }
+
 /*
 *
 *
@@ -543,4 +559,5 @@ function get_reach_message($alias){
         }
         return $reach_message['reach_message'];
     }
+    
 ?>

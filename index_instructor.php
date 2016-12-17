@@ -6,6 +6,7 @@ define('AT_INCLUDE_PATH', '../../include/');
 require (AT_INCLUDE_PATH.'vitals.inc.php');
 authenticate(AT_PRIV_GAMEME);
 require_once(AT_INCLUDE_PATH.'../mods/gameme/gamify.lib.php');
+
 global $_base_path;
 $_custom_css = $_base_path . 'mods/gameme/module.css'; // use a custom stylesheet
 $_custom_head.= '<script type="text/javascript" src="'.$_base_path .'mods/gameme/gamify.js"></script>'."\n";
@@ -393,20 +394,13 @@ $all_levels = queryDB($sql, array(TABLE_PREFIX, 0));
 
 foreach($all_levels as $level){
     $levels_crs_exists ='';
-    if(!file_exists($_base_href.'mods/gameme/image/'.$level['icon'])){
-        $content_dir = explode('/',AT_CONTENT_DIR);
-        array_pop($content_dir);
-        $level_file_name = explode("/",$level['icon']);
-        $level_file = end($content_dir).'/0/gameme/levels/'.end($level_file_name);
-    } else{
-        $level_file = $_base_href.'mods/gameme/image/'.$level['icon'];
-    }
+
     $sql = "SELECT * from %sgm_levels WHERE id = %d AND course_id=%d";
     $level_crs_exists = queryDB($sql, array(TABLE_PREFIX, $level['id'], $_SESSION['course_id']), TRUE);
-
+    
     if(empty($level_crs_exists)){
     echo '<tr>
-        <td>'.showstars_lg($level['points']).'</td>
+        <td>'.showstar($level['points']).'</td>
         <td>'.$level['title'].'</td>
         <td>'.$level['description'].'</td>
         <td>'.$level['points'].'</td>';
@@ -576,114 +570,10 @@ if(!empty($_POST['member_id'])){
 ?>
 </div>
 <?php
-
-
-/*
-
-
-*/
-
-function showstars_lg($points){
-    global $_base_href;
-    $sql = "SELECT * FROM %sgm_levels WHERE points = %d AND course_id=%d";
-    if($_SESSION['course_id'] >0){
-        $level = queryDB($sql, array(TABLE_PREFIX, $points, $_SESSION['course_id']), TRUE);
-        if(empty($level)){
-            $level = queryDB($sql, array(TABLE_PREFIX, $points, 0), TRUE);
-        }
-    }else{
-        $level = queryDB($sql, array(TABLE_PREFIX, $points, 0), TRUE);
-    }
-    $content_dir = explode('/',AT_CONTENT_DIR);
-    array_pop($content_dir);
-   // This block is used repeatedly to find the right level/badge icon. Should be refactored and reused
-   if(!empty($level['icon'])){
-        if(file_get_contents($_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level['icon'])){
-            $level_file =  $_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level['icon'];
-        }else if(file_get_contents($_base_href.end($content_dir).'/0/gameme/levels/'.$level['icon'])){
-            $level_file =$_base_href.end($content_dir).'/0/gameme/levels/'.$level['icon'];
-        }else {
-            $level_file = $_base_href.'mods/gameme/images/'.$level['icon'];
-        }
-    } else {
-        if(!in_array($level['id'] , $course_levels)){
-            $sql = "SELECT icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
-            $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],0), TRUE);
-
-            if(!file_exists($_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'])){
-                $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
-            } else {
-                $level_file = $_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'];
-            }
-        }
-    }
-   $stars .= '<img src="'.$level_file.'" alt="'.$level['title'].': '.$level['description'].'" title="'.$level['title'].': '.$level['description'].'" style="vertical-align:middle;margin-left:.2em;"/>'; 
-    return $stars;
-}
-/*
-
-
-*/
-function star_file($id){
-    global $_base_href;
-    $sql = "SELECT * FROM %sgm_levels WHERE course_id = %d AND id = %d";
-    $level = queryDB($sql, array(TABLE_PREFIX, 0, $id), TRUE);
-    
-    $sql = "SELECT id FROM %sgm_levels WHERE course_id = %d AND id = %d";
-    $course_levels = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id'], $id), TRUE);
-    
-    $content_dir = explode('/',AT_CONTENT_DIR);
-    array_pop($content_dir);
-    
-    $sql = "SELECT icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
-    $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],$_SESSION['course_id']), TRUE);
-    
-    // this chunk doubles the page load time
-    if(!empty($level_image['icon'])){
-        if(file_exists($_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'])){
-            $level_file =  $_base_href.end($content_dir).'/'.$_SESSION['course_id'].'/gameme/levels/'.$level_image['icon'];
-        }else if(file_exists($_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'])){
-            $level_file =$_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'];
-        }else {
-            $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
-        }
-    } else {
-        if(!in_array($level['id'] , $course_levels)){
-        $sql = "SELECT icon, title, description FROM %sgm_levels WHERE id=%d AND course_id=%d";
-        $level_image = queryDB($sql, array(TABLE_PREFIX, $level['id'],0), TRUE);
-        if(!file_exists($_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'])){
-            $level_file = $_base_href.'mods/gameme/images/'.$level_image['icon'];
-        } else {
-            $content_dir = explode('/',AT_CONTENT_DIR);
-            array_pop($content_dir);
-            $level_file = $_base_href.end($content_dir).'/0/gameme/levels/'.$level_image['icon'];
-        }
-        }
-    }
-    return $level_file;
-}
-
-if(!empty($_POST)){
-    $json = json_encode($_POST);
-}
-function get_reach_message($alias){
-         if($_SESSION['course_id'] > 0){
-            $is_course = " AND course_id=".$_SESSION['course_id'];
-        } else{
-            $is_course = " AND course_id=0";
-        }
-        
-        $sql = "SELECT reach_message from %sgm_events WHERE alias = '%s' $is_course";
-        
-        if($reach_message = queryDB($sql, array(TABLE_PREFIX, $alias), TRUE)){
-            // all good
-        }else{
-            // reach message does not exist so get the system default
-            $sql = "SELECT reach_message from %sgm_events WHERE alias = '%s' AND course_id=0";
-            $reach_message = queryDB($sql, array(TABLE_PREFIX, $alias), TRUE);
-        }
-        return $reach_message['reach_message'];
-    }
+// not sure what this is doing here
+//if(!empty($_POST)){
+    //$json = json_encode($_POST);
+//}
 
 ?>
 
