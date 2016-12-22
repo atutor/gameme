@@ -73,21 +73,7 @@ class GmCallbacksClass
         }
         return true;
     }
-    /*
-    static function ProfilePictureCallback($params)
-    { 
-        if ($params['badges']){     
-            $feedback = self::getReachMessage('logout');                   
-            $feedback = "Congratulations, you have received a new badge for updating your profile picture. Updating your profile picture now and again earns you bonus points. ";
-            $message .= self::getNewBadge($params, $feedback);
-            $message .= self::getCurrentBadges($params['badges']);
-        } 
-        if(!empty($message)){
-        	self::SendMail($params, $message);
-        }
-        return true;
-    }
-    */
+
     static function ProfileViewReachCallback($params)
     {
         if ($params['badges']){ 
@@ -374,7 +360,6 @@ class GmCallbacksClass
         if(!empty($message)){
         	self::SendMail($params, $message);
         	$_GET['fb'] = $feedback;
-        	//$msg->addfeedback('Congratulations, you have received a new badge for uploading a good collection of photos. Continue adding photos to earn more points. Create additional folders to organize your photos for ponus points.');
         }
         return true;
     }
@@ -471,7 +456,7 @@ class GmCallbacksClass
             require_once($this_path.'mods/gameme/gamify.lib.php');
             $from_email = $_config['contact_email'];
         
-        if ($to_email != '') {
+            if ($to_email != '') {
 				$tmp_message = '<div style="width:98%; background-color:#eeeeee;padding:1em;"><div style="width:80%; margin-left:auto;margin-right:auto;border:thin solid #cccccc;padding:.5em;background-color:#ffffff;">'.$message.'</div></div>';
 				require($this_path.'mods/gameme/atutormailer.class.php');
 
@@ -486,11 +471,8 @@ class GmCallbacksClass
 					//echo 'There was an error sending the message';
 				   $msg->printErrors('SENDING_ERROR');
 				   exit;
-				} else{
-				     //debug_to_log('send success');
-				}
+				} 
 				unset($mail);
-
 			} else {
 			    $msg->addError('no email provided');
 			}

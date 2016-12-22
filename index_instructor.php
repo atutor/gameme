@@ -83,7 +83,6 @@ require (AT_INCLUDE_PATH.'header.inc.php');
 global $_base_path;
 $this_path =  preg_replace ('#/get.php#','',$_SERVER['DOCUMENT_ROOT'].$_base_path);
 
-//$active = " active";
 ?>
 
 <ul class="tablist " role="tablist" id="subnavlist">

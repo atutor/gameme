@@ -222,8 +222,7 @@ foreach($all_badges as $badge){
 <th></th>
 </tr>
 <?php
-//require_once($this_path.'mods/gameme/gamify.lib.php');
-//require_once(AT_INCLUDE_PATH.'../mods/gameme/gamify.lib.php');
+
  if($_SESSION['course_id'] > 0){
     $course_id = $_SESSION['course_id'];
 } else{

@@ -19,13 +19,7 @@ $_user_location	= 'public';
 
 require(AT_INCLUDE_PATH . 'vitals.inc.php');
 require(AT_INCLUDE_PATH . 'lib/mime.inc.php');
-/*
-if($_SESSION['course_id'] >0){
-    $course_id=$_SESSION['course_id'];
-}else{
-    $course_id=0;
-}
-*/
+
 $course_id=0;
 $badge_id= intval($_GET['badge_id']);
 $content_dir = explode('/',AT_CONTENT_DIR);
