@@ -201,52 +201,8 @@ jQuery(document).ready(function(){
         Cookies.set('activetab', 'tab1');
      } 
      
-     /*else if(Cookies.get('activetab') != '' && Cookies.get('activetab') != 'tab1'){
-        $("#tab1").removeClass("active");
-        $("#panel1").attr("aria-hidden","true");
-     }  
-     */
-        //$(this).attr("aria-selected","true");
-        //  $(this).attr("tabindex","0");
-        //var tabpanid= $(this).attr("aria-controls");
-        //var tabpan = $("#"+tabpanid);
-        //$("div[role='tabpanel']:not(tabpan)").attr("aria-hidden","true");
-        //$("div[role='tabpanel']:not(tabpan)").addClass("hidden");
 
-        //tabpan.removeClass("hidden");
-        //tabpan.className = "panel";
-        //tabpan.attr("aria-hidden","false");		
-      });
-  
-      //This adds keyboard accessibility by adding the enter key to the basic click event.
-/*
-      $("li[role='tab']").keydown(function(ev) {
-        if (ev.which ==13) {
-            $(this).click();
-            }
-        }); 
-        */
-/* 
-      //This adds keyboard function that pressing an arrow left or arrow right from the tabs toggel the tabs. 
-       $("li[role='tab']").keydown(function(ev) {
-            if ((ev.which ==39)||(ev.which ==37))  {
-                var selected= $(this).attr("aria-selected");
-                    if  (selected =="true"){
-                        $("li[aria-selected='false']").attr("aria-selected","true").focus() ;
-                        $(this).attr("aria-selected","false");
 
-                        var tabpanid= $("li[aria-selected='true']").attr("aria-controls");
-                        var tabpan = $("#"+tabpanid);
-                        $("div[role='tabpanel']:not(tabpan)").attr("aria-hidden","true");
-                        $("div[role='tabpanel']:not(tabpan)").addClass("hidden");
-
-                        tabpan.attr("aria-hidden","false");
-                        tabpan.removeClass("hidden");
-                        //tabpan.className = "panel";
-                }
-            }
-    }); 
-    */
     // go back to previously select tab panel
     
     var tab = getUrlVars()["tab"];
@@ -279,4 +235,4 @@ jQuery(document).ready(function(){
             }        
         });
     }
-//}); 
+    });

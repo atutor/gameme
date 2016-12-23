@@ -73,21 +73,7 @@ class GmCallbacksClass
         }
         return true;
     }
-    /*
-    static function ProfilePictureCallback($params)
-    { 
-        if ($params['badges']){     
-            $feedback = self::getReachMessage('logout');                   
-            $feedback = "Congratulations, you have received a new badge for updating your profile picture. Updating your profile picture now and again earns you bonus points. ";
-            $message .= self::getNewBadge($params, $feedback);
-            $message .= self::getCurrentBadges($params['badges']);
-        } 
-        if(!empty($message)){
-        	self::SendMail($params, $message);
-        }
-        return true;
-    }
-    */
+
     static function ProfileViewReachCallback($params)
     {
         if ($params['badges']){ 
@@ -374,7 +360,6 @@ class GmCallbacksClass
         if(!empty($message)){
         	self::SendMail($params, $message);
         	$_GET['fb'] = $feedback;
-        	//$msg->addfeedback('Congratulations, you have received a new badge for uploading a good collection of photos. Continue adding photos to earn more points. Create additional folders to organize your photos for ponus points.');
         }
         return true;
     }
@@ -471,7 +456,7 @@ class GmCallbacksClass
             require_once($this_path.'mods/gameme/gamify.lib.php');
             $from_email = $_config['contact_email'];
         
-        if ($to_email != '') {
+            if ($to_email != '') {
 				$tmp_message = '<div style="width:98%; background-color:#eeeeee;padding:1em;"><div style="width:80%; margin-left:auto;margin-right:auto;border:thin solid #cccccc;padding:.5em;background-color:#ffffff;">'.$message.'</div></div>';
 				require($this_path.'mods/gameme/atutormailer.class.php');
 
@@ -486,11 +471,8 @@ class GmCallbacksClass
 					//echo 'There was an error sending the message';
 				   $msg->printErrors('SENDING_ERROR');
 				   exit;
-				} else{
-				     //debug_to_log('send success');
-				}
+				} 
 				unset($mail);
-
 			} else {
 			    $msg->addError('no email provided');
 			}
@@ -509,8 +491,6 @@ class GmCallbacksClass
     		$current_badges .='<h3>'._AT('gm_badges_so_far').'</h3>'."\n";                  
             $current_badges .= '<table style="border:1px solid #eeeeee;width:100%;">';     
             foreach ($badges as $badge) {
-                $sql = "SELECT alias,image_url FROM %sgm_badges WHERE id=%d";
-                $badge_image = queryDB($sql, array(TABLE_PREFIX, $badge->getIdBadge()), TRUE);
                 $current_badges .=  '<tr><td style="background-color:#eeeee;"><img src="'.self::getBadgeFile($badge->getBadge()->getAlias()).'" alt="'.$badge->getBadge()->getTitle().'" style="vertical-align:top"/></td>';
                 $current_badges .=  '<td style="background-color:#efefef; padding:.3em;"><strong>'.$badge->getBadge()->getTitle().'</strong><br/>'.$badge->getBadge()->getDescription().'</td></tr>'."\n";
 
@@ -576,7 +556,7 @@ class GmCallbacksClass
     * 1. a badge created by the instructor for a particular course
     * 2. a custom badge create by the administrator
     * 3. the default badge that come with the module
-    * -in that order, whichever come first-
+    * -in that order, whichever comes first-
     * @$alias the alias for the badge defined in the gm_badges table, 
     * and passed from the events.php file 
     */
