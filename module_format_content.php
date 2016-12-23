@@ -1,4 +1,11 @@
 <?php
+/*
+Disabled in GameMe 1.0. Look into using format_content to create
+within page content event triggers
+*/
+
+
+
 /*******
  * This file extends the content string manipulation. 
  * It affects the output of course content and news content at course home page.
@@ -10,12 +17,12 @@
 /*******
  * Global input string. DO NOT CHANGE.
  */
-global $_input;
+//global $_input;
 
 /*******
  * Example, replace special tag "[black][/black]" with html
  */
-$_input = str_replace('[black]','<span style="color: black;">',$_input);
-$_input = str_replace('[/black]','</span>',$_input);
+//$_input = str_replace('[black]','<span style="color: black;">',$_input);
+//$_input = str_replace('[/black]','</span>',$_input);
 
 ?>
