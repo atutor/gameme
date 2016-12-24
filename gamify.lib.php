@@ -160,8 +160,8 @@ function showUserLevels($gamification, $course_id)
                 array_push($this_levels, $level);
             }
         }
-        usort($this_levels, 'sortByOrder');
-
+        //usort($this_levels, 'sortByOrder');
+        krsort($this_levels);
         echo "<table class='data'>
         <tr>
         <th>"._AT('gm_level')."</th>
@@ -247,8 +247,8 @@ function showstars($points){
             array_push($this_levels, $level);
         }
     }
-
-    usort($this_levels, 'sortByOrder');
+    krsort($this_levels);
+    //usort($this_levels, 'sortByOrder');
 
     $content_dir = explode('/',AT_CONTENT_DIR);
     array_pop($content_dir);
