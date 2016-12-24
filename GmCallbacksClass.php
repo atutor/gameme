@@ -534,7 +534,9 @@ class GmCallbacksClass
 
             if(is_file(AT_CONTENT_DIR.$_SESSION['course_id'].'/'.$badge_file_stem)){
                 $badge_file = $_base_href.'mods/gameme/get_course_icon.php?badge_id='.$badge_image['id'].SEP.'course_id='.$_SESSION['course_id'];
-            } 
+            } else {
+                $badge_file = $_base_href.$badge_image['image_url'];
+            }
 
         } else{
             // Not a course badge, so check for default badge
