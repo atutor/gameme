@@ -17,7 +17,6 @@ https://github.com/atutor/gameme
 
 * Create and maintain game elements: levels, events, and badges
 * Enable/Disable instructor game element creation
-* Review user and course level partcipation and accomplishments
 
 ### Instructor
 
@@ -28,79 +27,77 @@ https://github.com/atutor/gameme
 ### Student
 
 #### Collect badges for accomplishments per course
-* 1 profile_view_badge  reach10  
-* 2 profile_viewed_badge reach 25 
-* 3 profile_pic_upload_badge reach 1
-* 4 prefs_update_badge each 1
-* 5 read_page_badge reach 25
-* 6 new_folder_badge reach 5
-* 7 upload_file_badge reach 5
-* 8 create_file_badge reach 2
-* 9 forum_view_badge reach 50
-* 10 forum_post_badge reach 10
-* 11 forum_reply_badge reach 10
-* 12 blog_add_badge reach 10
-* 13 blog_comment_badge reach 5
-* 14 chat_login_badge reach 10 
-* 15 chat_post_badge reach 10
-* 16 link_add_badge reach 5
-* 17 photo_create_album_badge each 1
-* 18 photo_create_album_badge reach 3
-* 19 photo_upload_badge reach 15
-* 20 photo_comment_badge reach 5
-* 21 photo_album_comment reach 5
-* 22 photo_description_badge reach 5
-* 23 photo_alt_text reach 5
-* 24 login_badge reach 25
-* 25 logout_badge reach 5
-* 26 welcome_badge reach 1
+* 1 profile_view_badge    
+* 2 profile_viewed_badge  
+* 3 profile_pic_upload_badge 
+* 4 prefs_update_badge 
+* 5 read_page_badge
+* 6 new_folder_badge 
+* 7 upload_file_badge 
+* 8 create_file_badge 
+* 9 forum_view_badge 
+* 10 forum_post_badge 
+* 11 forum_reply_badge 
+* 12 blog_add_badge
+* 13 blog_comment_badge 
+* 14 chat_login_badge 
+* 15 chat_post_badge
+* 16 link_add_badge
+* 17 photo_create_album_badge 
+* 18 photo_create_album_badge
+* 19 photo_upload_badge 
+* 20 photo_comment_badge 
+* 21 photo_album_comment 
+* 22 photo_description_badge 
+* 23 photo_alt_text 
+* 24 login_badge
+* 25 logout_badge
+* 26 welcome_badge
 
 #### Advance through levels with course participation
-* logins  DONE
-* logouts  DONE
-* forum views DONE
-* forum posts DONE
-* forum replies DONE
-* blog posts DONE
-* blog comment DONE
-* blog view DONE
-* content page views DONE
-* content page duration DONE
-* chat login DONE
-* chat post DONE
-* link add  DONE
-* link view DONE
-* poll responses  DONE
-* photo gallery create album DONE
-* photo gallery view album  DONE
-* photo gallery view image  DONE
-* photo gallery view image   DONE
-* photo gallery add photo comment   DONE
-* photo gallery add photo alt text   DONE
-* photo gallery add photo description   DONE
-* photo gallery add album comment DONE (one comment per session only)
+* logins  
+* logouts  
+* forum views 
+* forum posts 
+* forum replies 
+* blog posts 
+* blog comment 
+* blog view 
+* content page views 
+* content page duration 
+* chat login 
+* chat post 
+* link add  
+* link view 
+* poll responses  
+* photo gallery create album 
+* photo gallery view album  
+* photo gallery view image  
+* photo gallery view image   
+* photo gallery add photo comment   
+* photo gallery add photo alt text   
+* photo gallery add photo description   
+* photo gallery add album comment  (one comment per session only)
 * calendar events added XXXXX (Waiting on Herat)
-* profile views of others DONE
-* others view of your profile DONE
-* add a profile picture DONE
-* private messages send (inbox) DONE
-* view reading list item DONE
-* files uploaded to file storage DONE
-* new file created with file storage DONE
-* comment on file in file storage DONE
-* file descriptioon for file in file storage DONE
-* update personal preferences DONE
+* profile views of others 
+* others view of your profile 
+* add a profile picture 
+* private messages send (inbox) 
+* view reading list item 
+* files uploaded to file storage 
+* new file created with file storage 
+* comment on file in file storage 
+* file descriptioon for file in file storage 
+* update personal preferences 
 
 #### See who are the most active, and most accomplished
-* leaderboard showing the top contributors (sidemenu, progress tab) DONE
+* leaderboard showing the top contributors (sidemenu, progress tab) 
 
-#### See your progress to the next level (sidemenu, progress tab) DONE
+#### See your progress to the next level (sidemenu, progress tab) 
 
 #### Badge and level icon default max file sizes
 $max_levelicon_size = 15000;  // maximum file size for  level icon in bytes
 $max_height = 95;
 $max_width = 95;
 
-#### Monitor personal activity and accomplishments (sidemenu, progress tab)
-* numbers displayed the available activities and accomplishments (profile page)
-* badges collected.
+
