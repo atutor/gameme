@@ -9,14 +9,10 @@
         </maintainer>
     </maintainers> 
     <url>https://atutor.ca</url>
-    <private>
-        <subsite>greg2.atutorspaces.com</subsite>
-        <subsite>atsp.atutorspaces.com</subsite>
-    </private>
     <license>BSD</license> 
 	<release> 
         <version>1.0</version> 
-        <date>2016-28-08</date> 
+        <date>2016-26-12</date> 
         <state>Stable</state> 
         <notes>Once installed and enabled, see the administrator handbook, linked from the top right when the GameMe manager is open, for details on customising game elements for your particular ATutor system.</notes> 
     </release> 
