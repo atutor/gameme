@@ -18,7 +18,7 @@ $gamification = new PHPGamification();
 $gamification->setDAO(new DAO(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD));
 $gamification->setUserId($_SESSION['member_id']);
 
-$sql = "SELECT `option`, `value` FROM %sgm_options WHERE course_id=%d";
+$sql = "SELECT `gm_option`, `value` FROM %sgm_options WHERE course_id=%d";
 $gm_options = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']));
 $this_options = array();
 foreach($gm_options as $gm_option){

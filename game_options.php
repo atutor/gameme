@@ -14,7 +14,7 @@ foreach($_POST as $option=>$value){
     } else if($value == 'off'){
         $value = 0;
     }
-    $sql = "INSERT into %sgm_options(`id`,`course_id`, `option`, `value`) VALUES ('',%d, '%s',%d)";
+    $sql = "INSERT into %sgm_options(`id`,`course_id`, `gm_option`, `value`) VALUES ('',%d, '%s',%d)";
     if(queryDB($sql, array(TABLE_PREFIX,$_SESSION['course_id'], $option, $value))){
         // do nothing
     } else {

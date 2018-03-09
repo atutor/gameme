@@ -396,7 +396,7 @@ VALUES
 CREATE TABLE `gm_options` (
 `id` int(11) unsigned NOT NULL,
   `course_id` int(11) unsigned NOT NULL,
-  `option` varchar(25) NOT NULL DEFAULT '',
+  `gm_option` varchar(25) NOT NULL DEFAULT '',
   `value` int(11) unsigned DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -450,8 +450,9 @@ ALTER TABLE `gm_levels`
  ADD PRIMARY KEY (`id`,`course_id`);
 */
 ALTER TABLE `gm_options`
- ADD PRIMARY KEY (`course_id`,`option`), ADD KEY `id` (`id`);
-
+ ADD PRIMARY KEY (`course_id`,`gm_option`), ADD KEY `id` (`id`);
+ALTER TABLE `gm_options`
+ CHANGE `option` `gm_option` VARCHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 
 ALTER TABLE `gm_user_badges`
  ADD PRIMARY KEY (`id_user`,`id_badge`,`course_id`);
 

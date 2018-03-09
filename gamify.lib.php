@@ -126,7 +126,7 @@ function showUserLevels($gamification, $course_id)
     $score = $gamification->getUserScores();
     echo "<h3>"._AT('gm_your_levels_reached')."</h3>";
     if ($score){
-        $sql = "SELECT `value` from %sgm_options WHERE `course_id`=%d AND `option`='%s'";
+        $sql = "SELECT `value` from %sgm_options WHERE `course_id`=%d AND `gm_option`='%s'";
         if($level_max = queryDB($sql, array(TABLE_PREFIX, $course_id, "level_count"),TRUE)){
             if($level_max['value']  >0){
                 $limit = " LIMIT ".$level_max['value'];
@@ -213,7 +213,7 @@ function sortByOrder($a, $b) {
 function showstars($points){
     global $_base_href;
     
-    $sql = "SELECT `value` from %sgm_options WHERE `course_id`=%d AND `option`='%s'";
+    $sql = "SELECT `value` from %sgm_options WHERE `course_id`=%d AND `gm_option`='%s'";
         if($level_max = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id'], "level_count"),TRUE)){
             if($level_max['value']  >0){
                 $limit = " LIMIT ".$level_max['value'];
@@ -523,12 +523,12 @@ function showUserLog($gamification){
         echo "</table>";
 }
 function get_leader_count(){
-        $sql = "SELECT * FROM %sgm_options WHERE `course_id`=%d and `option` = 'showleader_count'";
+        $sql = "SELECT * FROM %sgm_options WHERE `course_id`=%d and `gm_option` = 'showleader_count'";
         $this_count = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']), TRUE);
         return $this_count['value'];
 }        
 function show_instructor(){
-    $sql = 'SELECT value FROM %sgm_options WHERE `option` = "%s" AND `course_id` = %d';
+    $sql = 'SELECT value FROM %sgm_options WHERE `gm_option` = "%s" AND `course_id` = %d';
     $show_instructor = queryDB($sql, array(TABLE_PREFIX, 'showinstructor', $_SESSION['course_id']), TRUE);
     return $show_instructor['value'];
 }  

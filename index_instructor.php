@@ -381,7 +381,7 @@ if(!empty($all_levels)){
 
 </tr>
 <?php
-$sql = "SELECT `value` from %sgm_options WHERE `course_id`=%d AND `option`='%s'";
+$sql = "SELECT `value` from %sgm_options WHERE `course_id`=%d AND `gm_option`='%s'";
 if($level_max = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id'], "level_count"),TRUE)){
     if($level_max['value']  >0){
         $limit = " LIMIT ".$level_max['value'];
@@ -484,7 +484,7 @@ foreach($all_levels as $level){
     </div>
 <?php
 function get_option($option, $course_id){
-    $sql = "SELECT * FROM %sgm_options WHERE `course_id` = %d AND `option` = '%s'";
+    $sql = "SELECT * FROM %sgm_options WHERE `course_id` = %d AND `gm_option` = '%s'";
     $option_set = queryDB($sql, array(TABLE_PREFIX, $course_id, $option), TRUE);
     
     if(!empty($option_set) && $option_set['value'] >0){
