@@ -23,7 +23,7 @@ $gm_options = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']));
 $this_options = array();
 foreach($gm_options as $gm_option){
     if($gm_option['value'] ==1){
-    $this_options[] = $gm_option['option'];
+    $this_options[] = $gm_option['gm_option'];
     }
 }
 ?>
