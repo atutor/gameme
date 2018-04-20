@@ -2,7 +2,7 @@
 /* each table to be backed up. includes the sql entry and fields */
 
 $dirs = array();
-if(file_exists(AT_CONTENT_DIR . $_SESSION['course_id'].'/gameme'){
+if(file_exists(AT_CONTENT_DIR . $_SESSION['course_id'].'/gameme')){
     $dirs['gameme/'] = AT_CONTENT_DIR . $_SESSION['course_id'].'/gameme' . DIRECTORY_SEPARATOR;
 }
 $sql = array();
