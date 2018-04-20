@@ -10,7 +10,7 @@ $gm_options = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']));
 
 $count = 0;
 foreach($gm_options as $option => $value){
-    $enabled_options[$count] = $value['option'];
+    $enabled_options[$count] = $value['gm_option'];
     $count++;
 }
 

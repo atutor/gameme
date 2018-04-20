@@ -443,7 +443,7 @@ foreach($all_levels as $level){
             $gm_course_options = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']));
 
             foreach($gm_course_options as $option=>$value){
-                if($value['option'] == "showleader_count"){
+                if($value['gm_option'] == "showleader_count"){
                     $option_selected = $value['value'];
                 }
             }
@@ -464,7 +464,7 @@ foreach($all_levels as $level){
             $gm_course_options = queryDB($sql, array(TABLE_PREFIX, $_SESSION['course_id']));
             
             foreach($gm_course_options as $option=>$value){
-                if($value['option'] == "level_count"){
+                if($value['gm_option'] == "level_count"){
                     $option_selected = $value['value'];
                 }
             }
