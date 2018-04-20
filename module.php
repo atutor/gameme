@@ -106,7 +106,8 @@ function gamemeEnabled(){
     }
 }
 // Run gameme events if a valid user is logged in, and a course_id is set
-if($_SESSION['valid_user'] == 1 && ($_SESSION['course_id'] > 0 || $_REQUEST['course'] >0) && gamemeEnabled()){
+//if($_SESSION['valid_user'] || $_SESSION['valid_user'] == 1 && ($_SESSION['course_id'] > 0 || $_REQUEST['course'] >0) && gamemeEnabled()){
+if($_SESSION['valid_user'] && gamemeEnabled()){
     global $_base_path;
     include(AT_INCLUDE_PATH.'../mods/gameme/events.php');
     // limit gameme to within courses (BREAKS LOGIN EVENT)
