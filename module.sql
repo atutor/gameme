@@ -2,6 +2,7 @@
 INSERT INTO `language_text` VALUES ('en', '_module', 'gameme', 'GameMe',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module', 'gameme-master', 'GameMe',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module', 'gm_gameme', 'GameMe',NOW(),'');
+INSERT INTO `language_text` VALUES ('en', '_module', 'gm_gameme_text', 'Review your progress.',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_leaders_top','Leaders (Top %s)',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_id','ID',NOW(),'');
 INSERT INTO `language_text` VALUES ('en', '_module','gm_points','Points',NOW(),'');
