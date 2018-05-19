@@ -1,4 +1,6 @@
 # ATutor Gamification Module
+*This module is for ATutor versions 2.2.3 or less. As of ATutor 2.2.4, it included with ATutor as a standard module
+
 This module provides tools for creating gamification elements, adding them to courses, and monitoring student behaviour. It can be used to motivate students, as they collect points and badges, with tailored rewards for actions taken and milestone accomplishments met.
 
 ## Gamification Base
